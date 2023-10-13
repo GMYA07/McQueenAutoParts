@@ -6,45 +6,60 @@
                 template="/templates/plantillaIndex.xhtml">
     <ui:define name="content">
         <div class="row" style="margin-top: 2%;">
-            <h3 class="text-center">Entradas de blog</h3>
+            <h1 class="text-center">Bienvenido Administrador</h1>
                 <div class="col-sm-3">
                     <h:form>
-                        <b:container styleClass="contenedorTargeta" fluid="true">
+                        <br/>
+                        <b:container styleClass="tituloBienvenida">
+                            <h3 class="text-center">Somos McQueenAutoParts uno de los mejores sitios de servicio automotriz, ahora en este lugar tu administrador podras llevar el control de todos los movimientos en la empresa.</h3>
+                        </b:container>
+                        <b:container styleClass="contenedorTargeta">
                             <b:row>
-                                <b:column styleClass="targeta" span="2">
+                                <b:column styleClass="targeta" span="3">
+
                                     <h:outputText value="Productos"/>
+                                    <br/>
+                                    <br/>
                                     <b:button value="Administrar" look="primary"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/productosDeCarro.png"/>
                                 </b:column>
-                                <b:column styleClass="targeta" span="2">
+                                <b:column styleClass="targeta" span="3">
                                     <h:outputText value="Mecanicos"/>
+                                    <br/>
+                                    <br/>
                                     <b:button value="Administrar" look="primary"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/mecanico.jpg"/>
                                 </b:column>
-                                <b:column styleClass="targeta" span="2">
-                                    <h:outputText value="Clientes"/>
+                                <b:column styleClass="targeta" span="3">
+                                    <h:outputText value="Tabla de Clientes"/>
+                                    <br/>
+                                    <br/>
                                     <b:button value="Administrar" look="primary"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/Clientes.png"/>
                                 </b:column>
-                                <b:column styleClass="targeta" span="2">
+                                <b:column styleClass="targeta" span="3">
                                     <h:outputText value="Empleados"/>
+                                    <br/>
+                                    <br/>
                                     <b:button value="Administrar" look="primary"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/empleados.jpeg"/>
+                                </b:column>
+                                <b:column styleClass="targeta" span="3">
+                                    <h:outputText value="Carros en venta"/>
+                                    <br/>
+                                    <br/>
+                                    <b:button value="Administrar" look="primary"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/ventaCarros.jpg"/>
+                                </b:column>
+                                <b:column styleClass="targeta" span="3">
+                                    <h:outputText value="Carros en Renta"/>
+                                    <br/>
+                                    <br/>
+                                    <b:button value="Administrar" look="primary"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/rentaCarros.jpg"/>
                                 </b:column>
                             </b:row>
                         </b:container>
-                       <b:container>
-                           <b:row>
-                               <b:column styleClass="targeta" span="2">
-                                   <h:outputText value="Carros"/>
-                                   <b:button value="Administrar" look="primary"/>
-                               </b:column>
-                               <b:column styleClass="targeta" span="2">
-                                   <h:outputText value="Ventas de Carros"/>
-                                   <b:button value="Administrar" look="primary"/>
-                               </b:column>
-                               <b:column styleClass="targeta" span="2">
-                                   <h:outputText value="Rentas de Carros"/>
-                                   <b:button value="Administrar" look="primary"/>
-                               </b:column>
-                           </b:row>
-                       </b:container>
                     </h:form>
                 </div>
         </div>

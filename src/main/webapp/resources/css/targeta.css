@@ -1,3 +1,7 @@
-targeta{
+.contenedorTargeta{
+    width: 1000px;
+    border: red 3px solid;
+}
+.targeta{
     border: aqua 2px solid;
 }

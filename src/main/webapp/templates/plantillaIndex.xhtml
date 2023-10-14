@@ -4,13 +4,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <h:outputStylesheet name="css/targeta.css"/>
+        <h:outputStylesheet name="css/crud.css"/>
     </h:head>
     <h:body>
+        <p:menubar style="background: black ;height: 80px;width: 100%;" >
+            <p:menuitem outcome="indexAdministrador">
+                <b:image name="/img/logo.png" style=" height: 50px;"></b:image>
+            </p:menuitem>
+
+
+            <ul style=" float: left;">
+                <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles"  style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+                <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Repuestos" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+                <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Cerrar Sesion" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            </ul>
+        </p:menubar>
         <div class="container">
-            <ui:insert name="content">Content</ui:insert>
+            <ui:insert name="contenidoAdministrador">todo contenido de administrador</ui:insert>
         </div>
     </h:body>
 </html>

@@ -1,0 +1,26 @@
+.contendorCrudPadre{
+    display: flex;
+    flex-grow: 1;
+}
+.contendorCrud{
+    flex: 1; /* Hace que los contenedores hijos se expandan para llenar el espacio disponible */
+    padding: 10px; /* Añade espaciado interior para separar los contenedores */
+    margin-right: 10px;
+}
+.formularioModi{
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    background-color: black;
+    width: 40vh;
+    padding: 15px;
+    margin-left: 100px;
+}
+.formularioModi > input{
+    width: 100%;
+    color: black;
+}
+
+.formularioModi > button{
+    width: 60%;
+}

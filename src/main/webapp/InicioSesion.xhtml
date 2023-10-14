@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+    <h:outputStylesheet  name="css/inicioRegistro.css"/>
+
+    <title>Facelet Title</title>
+</h:head>
+<h:body styleClass="body">
+    <h:form>
+        <div class="login-wrap" >
+            <div class="login-html2" >
+
+                <div class="login-form">
+
+                    <b:image name="img/logo.png" styleClass="imagen"></b:image>
+
+                        <div class="group">
+                            <h:outputLabel for="IncioSession:correo" value="Correo electronico:"></h:outputLabel>
+                            <b:inputText placeholder="Correo Electronico:" value="#{inputTextBean.text}"  id="correo" name="correo" styleClass="input"/>
+
+                        </div>
+                        <div class="group">
+                            <h:outputLabel for="IncioSession:contra" value="contraseña:"></h:outputLabel>
+                            <b:inputText placeholder="Contraseña:"  value="#{inputTextBean.text}"  id="contra" name="contra" styleClass="input" />
+                        </div>
+                        <div class="group">
+                            <h:commandButton  action="#{bean}" type="submit" name="inicioSesion" class="button" value="Iniciar Sesion">
+                            </h:commandButton>
+                        </div>
+                        <div class="hr"></div>
+                        <div class="foot-lnk">
+                            <a href="#forgot">Registrarse</a>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+
+</html>
+
+
+
+
+

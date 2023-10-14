@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/plantillaIndex.xhtml">
+    <ui:define name="contenidoAdministrador">
+        <h1 class="text-center">Tabla de Carros</h1>
+        <br/>
+        <br/>
+        <b:container styleClass="contendorCrudPadre">
+            <b:container styleClass="contendorCrud">
+                <b:dataTable value="#{null}" var="productos"
+                             id="productosTable"
+                             styleClass="table table-striped table-bordered">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre del Carro" />
+                        </f:facet>
+                        <h:outputText value="#{null}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Precio del Carro" />
+                        </f:facet>
+                        <h:outputText value="#{null}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Año del Carro" />
+                        </f:facet>
+                        <h:outputText value="#{null}" />
+                    </h:column>
+                </b:dataTable>
+            </b:container>
+            <b:container styleClass="contendorCrud">
+
+                <h:form styleClass="formularioModi">
+                    <h2>Modificar Producto</h2>
+                    <h:outputLabel value="Nombre del Carro"/>
+                    <br/>
+                    <h:inputText value=""/>
+                    <br/>
+                    <h:outputLabel value="Precio del Carro"/>
+                    <br/>
+                    <h:inputText/>
+                    <br/>
+                    <h:outputLabel value="Año del Carro"/>
+                    <br/>
+                    <h:inputText/>
+                    <br/>
+                    <br/>
+                    <b:button look="danger" value="Modificar"/>
+                </h:form>
+            </b:container>
+        </b:container>
+    </ui:define>
+</ui:composition>

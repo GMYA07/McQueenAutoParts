@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="../templates/plantillaEmpleado.xhtml">>
+
+
+    <ui:define name="content">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Registro de Automoviles de agencia</h2>
+                    <h:form id="miFormulario">
+
+                        <h:panelGrid columns="4" styleClass="table">
+
+                            <h:outputLabel for="Marcanew" value="Marca de Automovil:"/>
+                            <h:inputText id="Marcanew" styleClass="form-control"
+                                         value="#{inputTextBean.text}"
+                                         required="true">
+                                <f:validateRegex pattern="[A-Z]{2}[0-9]{6}"/>
+                            </h:inputText>
+                            <h:outputLabel for="anio" value="Año de Automovil:"/>
+                            <b:dateTimePicker id="anio" format="DD.MM.YYYY"
+                                              />
+                            <h:outputLabel for="precio" value="Precio de automovil:"/>
+                            <h:inputText id="precio" styleClass="form-control"
+                                         value="#{inputTextBean.text}"
+                                         required="true"
+                            />
+                            <h:outputLabel for="cantidad" value="Cantidad de Automoviles Disponibles:"/>
+                            <h:inputText id="cantidad" value="#{inputTextBean.text}"
+                                         required="true" styleClass="form-control">
+
+                            </h:inputText>
+
+
+                            <h:outputLabel for="img" value="Ingrese imagenes de referencia:"/>
+                            <p:fileUpload id="img" value="#{fileUploadBean.file}" mode="simple"/>
+
+
+
+
+
+
+
+
+                        </h:panelGrid>
+                        <h:commandButton value="Almacenar" styleClass="btn btn-success"
+                                         action="#{inputTextBean.text}" style="margin-right:15px; margin-bottom: 20px"/>
+                    </h:form>
+                </div>
+            </div>
+            <div class="row">
+                <h:form >
+                    <h:dataTable styleClass="table" value="#{inputTextBean.text}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="IMG"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Marca"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Año"/>
+
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Precio"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Cantidad Existencia"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Operacion"/>
+                            </f:facet>
+                            <h:commandButton value="Modificar" styleClass="btn btn-danger"
+                                             action="#{inputTextBean.text}">
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

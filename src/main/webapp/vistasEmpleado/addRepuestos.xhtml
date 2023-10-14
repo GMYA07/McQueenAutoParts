@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="../templates/plantillaEmpleado.xhtml">>
+
+
+    <ui:define name="content">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Registro de Repuestos automovilisticos</h2>
+                    <h:form id="miFormulario">
+
+                        <h:panelGrid columns="4" styleClass="table">
+                            <h:outputLabel for="categoria" value="Categoria:"/>
+                            <h:selectOneMenu id="categoria" styleClass="form-control"
+                                             value="#{inputTextBean.text}">
+                                <f:selectItem itemValue="Suspension y direccion"/>
+                                <f:selectItem itemValue="Sistema de frenos"/>
+                                <f:selectItem itemValue="Partes de motor"/>
+                                <f:selectItem itemValue="Sistema de enfriamiento"/>
+                                <f:selectItem itemValue="Electrico"/>
+                                <f:selectItem itemValue="Filtracion"/>
+                            </h:selectOneMenu>
+                            <h:outputLabel for="Nombre" value="Nombre dde repuesto:"/>
+                            <h:inputText id="Nombre" styleClass="form-control"
+                                         value="#{inputTextBean.text}"
+                                         required="true">
+                                <f:validateRegex pattern="[A-Z]{2}[0-9]{6}"/>
+                            </h:inputText>
+                            <h:outputLabel for="Precio" value="Precio de respuesto:"/>
+                            <h:inputText id="Precio" styleClass="form-control"
+                                         value="#{inputTextBean.text}"
+                                         required="true"/>
+                            <h:outputLabel for="Cantidad" value="Cantidad de respuestos:"/>
+                            <h:inputText id="Cantidad" styleClass="form-control"
+                                         value="#{inputTextBean.text}"
+                                         required="true"
+                                         />
+                            <h:outputLabel for="Marca" value="Marca a la ue corresponde el respuesto:"/>
+                            <h:inputText id="Marca" value="#{inputTextBean.text}"
+                                         required="true" styleClass="form-control"
+                                         >
+
+                            </h:inputText>
+
+                            <h:outputLabel for="imagen" value="Imagen de repuesto:"/>
+                            <p:fileUpload id="imagen" value="#{fileUploadBean.file}" mode="simple"/>
+
+
+
+                        </h:panelGrid>
+                        <h:commandButton value="Almacenar" styleClass="btn btn-success"
+                                         action="#{inputTextBean.text}" style="margin-right:15px; margin-bottom: 20px"/>
+                    </h:form>
+                </div>
+            </div>
+            <div class="row">
+                <h:form >
+                    <h:dataTable styleClass="table" value="#{inputTextBean.text}">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="IMG"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Categoria"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Nombre"/>
+
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Precio"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Cantidad Existencia"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Marca"/>
+                            </f:facet>
+                            <h:outputText value="#{inputTextBean.text}"/>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Operaciones"/>
+                            </f:facet>
+                            <h:commandButton value="Modificar" styleClass="btn btn-danger"
+                                             action="#{inputTextBean.text}">
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

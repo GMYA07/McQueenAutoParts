@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:h="http://java.sun.com/jsf/html"
+       xmlns:b="http://bootsfaces.net/ui"
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <h:outputStylesheet name="css/bootstrap.min.css"/>
+    <h:outputStylesheet name="css/indexC.css"/>
+</h:head>
+<h:body>
+    <p:menubar style="    background: black ;height: 80px;width: 100%;" >
+
+
+        <p:menuitem >
+            <b:image outcome="indexCliente" name="img/logo.png" style=" height: 50px;"></b:image>
+        </p:menuitem>
+
+
+        <ul style=" float: left;">
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles" outcome="AutomovilesUsados"  style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Repuestos" outcome="Repuestos" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles de agencia" outcome="AutomovilesAgencia" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Carrito de compras"  outcome="carrito" style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Solicitar Venta de carro" outcome="SolicitarVenta" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Alquiler de vehiculos" outcome="FAlquiler" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Cerrar sesión" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+        </ul>
+
+
+    </p:menubar>
+
+    <div class="col-md-11 col-sm-11">
+        <ui:insert name="menu">Aqui ira contenido de todo usuario no logeado</ui:insert>
+    </div>
+</h:body>
+</html>

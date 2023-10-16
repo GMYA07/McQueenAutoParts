@@ -7,7 +7,8 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
-        template="/templates/plantillaIndexPublic.xhtml">
+        template="/templates/PlantillaIndexCliente.xhtml">
+
     <ui:define name="menu">
         <b:carousel id="tiovivo" style="width:100%" interval="2300">
             <b:carouselItem >
@@ -36,6 +37,7 @@
             <div class="container2">
 
                 <div class="card">
+
                     <h:graphicImage library="img" name="alternadorl200.jpg" alt="" />
                     <h4>Alternador Mitsubishi</h4>
                     <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
@@ -56,7 +58,6 @@
                     <b:button value="Comprar" look="primary"/>
                 </div>
                 <br/>
-
                 <div class="contenedor3">
                     <div class="card">
                         <b:carousel id="parque2" style="width:400px" disabled="true">
@@ -122,4 +123,4 @@
             </div>
         </div>
     </ui:define>
-    </ui:composition>
+</ui:composition>

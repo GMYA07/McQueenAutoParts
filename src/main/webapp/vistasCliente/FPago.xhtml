@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: crist
+  Date: 14/10/2023
+  Time: 13:49
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:head>
+    <title>Formulario de pago</title>
+    <h:outputStylesheet name="css/Fpagos.css"/>
+    <h:outputScript library="js" name="Fpago.js" target="head"/>
+</h:head>
+
+<h:body>
+    <div class="container">
+        <div class="card-container">
+
+            <div class="front">
+                <div class="image">
+                    <h:graphicImage library="img" name="chip.png" alt=""/>
+                    <h:graphicImage library="img" name="visa.png" alt=""/>
+
+                </div>
+
+                <div class="card-number-box">################</div>
+                <div class="flexbox">
+                    <div class="box">
+                        <span>Número de tarjeta</span>
+                        <div class="card-holder-name">Nombre completo</div>
+                    </div>
+                    <div class="box">
+                        <span>Fecha de expiración</span>
+                        <div class="expiration">
+                            <span class="exp-month">mm</span>
+                            <span class="exp-year">yy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back">
+                <div class="stripe"></div>
+                <div class="box">
+                    <span>cvv</span>
+                    <div class="cvv-box"></div>
+                    <h:graphicImage library="img" name="visa.png" alt=""/>
+                </div>
+            </div>
+        </div>
+
+        <h:form action="">
+            <div class="inputBox">
+                <span>Número de tarjeta</span>
+                <h:inputText maxlength="16" class="card-holder-input" />
+            </div>
+            <div class="inputBox">
+                <span>Nombre de tarjeta</span>
+                <h:inputText class="card-holder-input"></h:inputText>
+            </div>
+            <div class="flexbox">
+                <div class="inputBox">
+                    <span>Fecha de expiración</span>
+                    <h:selectOneMenu name="" id="mes" class="month-input">
+                        <f:selectItem itemValue="Mes" itemLabel="Mes"/>
+                        <f:selectItem itemValue="01" itemLabel="01"/>
+                        <f:selectItem itemValue="02" itemLabel="02"/>
+                        <f:selectItem itemValue="03" itemLabel="03"/>
+                        <f:selectItem itemValue="04" itemLabel="04"/>
+                        <f:selectItem itemValue="05" itemLabel="05"/>
+                        <f:selectItem itemValue="06" itemLabel="06"/>
+                        <f:selectItem itemValue="07" itemLabel="07"/>
+                        <f:selectItem itemValue="08" itemLabel="08"/>
+                        <f:selectItem itemValue="09" itemLabel="09"/>
+                        <f:selectItem itemValue="10" itemLabel="10"/>
+                        <f:selectItem itemValue="11" itemLabel="11"/>
+                        <f:selectItem itemValue="12" itemLabel="12"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="inputBox">
+                    <span>expiration yy</span>
+                    <h:selectOneMenu name="" id="ano" class="year-input">
+                        <f:selectItem itemValue="Año" itemLabel="Año"/>
+                        <f:selectItem itemValue="2022" itemLabel="2022"/>
+                        <f:selectItem itemValue="2023" itemLabel="2023"/>
+                        <f:selectItem itemValue="2024" itemLabel="2024"/>
+                        <f:selectItem itemValue="2025" itemLabel="2025"/>
+                        <f:selectItem itemValue="2026" itemLabel="2026"/>
+                        <f:selectItem itemValue="2027" itemLabel="2027"/>
+                        <f:selectItem itemValue="2028" itemLabel="2028"/>
+                        <f:selectItem itemValue="2029" itemLabel="2029"/>
+                        <f:selectItem itemValue="2030" itemLabel="2030"/>
+                        <f:selectItem itemValue="2031" itemLabel="2031"/>
+                        <f:selectItem itemValue="2032" itemLabel="2032"/>
+                    </h:selectOneMenu>
+                </div>
+                <div class="inputBox">
+                    <span>cvv</span>
+                    <h:inputText maxlength="4" class="cvv-input"/>
+                </div>
+            </div>
+            <h:button type="submit" value="Pagar" class="submit-btn"></h:button>
+
+        </h:form>
+
+    </div>
+
+
+
+</h:body>
+
+</html>

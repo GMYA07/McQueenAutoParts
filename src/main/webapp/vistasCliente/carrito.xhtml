@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: crist
+  Date: 15/10/2023
+  Time: 19:51
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Carrito</title>
+    <h:outputStylesheet library="css" name="carrito.css"/>
+</h:head>
+
+<h:body>
+    <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                    xmlns:h="http://xmlns.jcp.org/jsf/html"
+                    xmlns:f="http://xmlns.jcp.org/jsf/core"
+                    template="../templates/Carrito.xhtml">
+        <ui:define name="content">
+            <div id="carrito">
+                <h2>Tu Carrito de Compras</h2>
+                <ul>
+                    <li>
+                        <h:graphicImage library="img" name="producto2.jpg" alt="Repuesto 1" style="max-width: 100px; max-height: 100px;margin-right: 10px;"/>
+                        <span>Descripcion</span>
+                        <span>$00.00</span>
+                        <b:button class="agregar" value="Agregar"/>
+                        <b:button class="eliminar" value="Eliminar"/>
+                    </li>
+                    <li>
+                        <h:graphicImage library="img" name="produc1.jpg" alt="Repuesto 1" style="max-width: 100px; max-height: 100px;margin-right: 10px;"/>
+                        <span>Descripcion</span>
+                        <span>$00.00</span>
+                        <b:button class="agregar" value="Agregar"/>
+                        <b:button class="eliminar" value="Eliminar"/>
+                    </li>
+                    <li>
+                        <h:graphicImage library="img" name="produc4.jpg" alt="Repuesto 1" style="max-width: 100px; max-height: 100px;margin-right: 10px;"/>
+                        <span>Descripcion</span>
+                        <span>$00.00</span>
+                        <b:button class="agregar" value="Agregar"/>
+                        <b:button class="eliminar" value="Eliminar"/>
+                    </li>
+                </ul>
+
+                <div id="total">
+                    <span>Total:</span>
+                    <span id="total-precio">$00.00</span>
+                </div>
+
+
+                <b:button outcome="FPago" id="checkout" value="Pagar"/>
+            </div>
+
+
+        </ui:define>
+
+    </ui:composition>
+
+
+
+
+
+
+</h:body>
+
+</html>

@@ -14,45 +14,21 @@
     <p:menubar style="    background: black ;height: 80px;width: 100%;" >
 
 
-        <p:menuitem outcome="indexmenu">
+        <p:menuitem outcome="index">
             <b:image name="img/logo.png" style=" height: 50px;"></b:image>
         </p:menuitem>
 
 
         <ul style=" float: left;">
-            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles" outcome="AutomovilesUsados"  style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
-            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Repuestos" outcome="Repuestos" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
-            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles de agencia" outcome="AutomovilesAgencia" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles" outcome="/vistasCliente/AutomovilesUsados"  style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Repuestos" outcome="/vistasCliente/Repuestos" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles de agencia" outcome="/vistasCliente/AutomovilesAgencia" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Iniciar sesión"  style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Registrarse" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
         </ul>
 
 
     </p:menubar>
-
-    <b:carousel id="tiovivo" style="width:100%" interval="2300">
-        <b:carouselItem >
-            <h:graphicImage library="img" name="carrusel2.jpg" alt="Valladolid" style="width: 100%; height: 700px" />
-            <b:carouselCaption>
-                <h2 style="font-size:40px">Bienvenido a McQueenAutoParts!!</h2>
-                <p style="font-size:25px">Donde se compran los mejores repuestos y vehículos de alta gama.</p>
-            </b:carouselCaption>
-        </b:carouselItem>
-        <b:carouselItem caption="Puedes alquilar vehiculos de todo tipo!!" style="font-size:60px">
-            <h:graphicImage library="img" name="carrusel1.jpg" alt="Valladolid" style="width: 100%; height: 700px" />
-        </b:carouselItem>
-        <b:carouselItem caption="Tendrás la mejor atención posible" style="font-size:60px">
-            <h:graphicImage library="img" name="carrusel3.jpg" alt="Valladolid" style="width: 100%; height: 700px" />
-        </b:carouselItem>
-        <b:carouselItem>
-            <h:graphicImage library="img" name="carrusel4.jpg" alt="Valladolid" style="width: 100%; height: 700px" />
-            <b:carouselCaption>
-                <h2 style="font-size:40px">Visita nuestras sucursales </h2>
-                <p style="font-size:25px">Muy pronto abriremos!!!</p>
-            </b:carouselCaption>
-        </b:carouselItem>
-    </b:carousel>
-
     <div class="col-md-11 col-sm-11">
         <ui:insert name="menu">Aqui ira contenido de todo usuario no logeado</ui:insert>
     </div>

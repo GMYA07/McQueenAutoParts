@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: crist
+  Date: 12/10/2023
+  Time: 18:29
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+    <title>Solicitud de Venta de Vehículo</title>
+    <style type="">
+
+        body {
+            background: linear-gradient(to bottom, #68a3de, #ffffff); /* Fondo celeste y blanco en degradado */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #645e5e; /* Fondo gris claro del formulario */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            color: #ffffff;
+        }
+
+        .form-group inputText,
+        .form-group select,
+        .form-group inputTextarea {
+            width: 92%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            margin: 5px 0;
+            opacity: 0.5;
+        }
+
+        .form-group inputText[type="file"] {
+            width: 92%;
+        }
+
+        .form-group inputText:focus,
+        .form-group select:focus,
+        .form-group inputTextarea:focus {
+            border: 1px solid #007bff;
+            opacity: 1;
+        }
+
+        button {
+            background-color: #007bff;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 15px;
+            width: 98%;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0ab9b9;
+            color: #1a1e21;
+            font-weight: bold;
+        }
+
+        .titulo {
+            color: #ffffff;
+        }
+
+
+    </style>
+
+
+</h:head>
+
+<h:body>
+
+    <div class="container">
+        <h1 class="titulo">Solicitud de Alquiler</h1>
+        <h:graphicImage library="img" name="logo.png" style="max-width: 100%; margin: 10px auto; display: block;"/>
+
+
+        <h:form>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <b:inputText value="" placeholder="Nombre:" id="nombre" name="nombre"/>
+            </div>
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <b:inputText value="" placeholder="Apellido:" id="apellido" name="apellido"/>
+            </div>
+            <div class="form-group">
+                <label for="dui">DUI:</label>
+                <b:inputText value="" placeholder="12345678-9" id="dui" name="dui"/>
+            </div>
+            <div class="form-group">
+                <label for="licencia">Licencia:</label>
+                <b:inputText type="file" name="licencia" id="licencia" />
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="foto">Comprobante salarial:</label>
+                <b:inputText type="file" name="foto" id="foto" />
+            </div>
+            <br/>
+            <b:button type="submit" value="Enviar Solicitud"></b:button>
+        </h:form>
+    </div>
+</h:body>
+</html>

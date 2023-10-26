@@ -5,5 +5,28 @@
              version="3.0">
   <persistence-unit name="default">
 
+      <class>sv.empresa.mcqueen.www.entities.AdministradoresEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.AutomovilesEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.CitasmecEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.EmpleadosEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.MecanicosEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.RentasEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.RepuestosEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.UsuarioEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.VentasautoEntity</class>
+      <properties>
+          <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/mcqueenautoparts"/>
+          <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+          <property name="toplink.jdbc.user" value="root"/>
+          <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/mcqueenautoparts"/>
+          <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+          <property name="hibernate.connection.username" value="root"/>
+          <property name="openjpa.ConnectionURL" value="jdbc:mysql://localhost:3306/mcqueenautoparts"/>
+          <property name="openjpa.ConnectionDriverName" value="com.mysql.cj.jdbc.Driver"/>
+          <property name="openjpa.ConnectionUserName" value="root"/>
+          <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/mcqueenautoparts"/>
+          <property name="eclipselink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+          <property name="eclipselink.jdbc.user" value="root"/>
+      </properties>
   </persistence-unit>
 </persistence>

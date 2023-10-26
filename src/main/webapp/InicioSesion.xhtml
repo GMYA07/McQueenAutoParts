@@ -14,38 +14,38 @@
 </h:head>
 <h:body styleClass="body">
     <h:form>
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages />
+        </h:panelGroup>
+        <br/>
         <div class="login-wrap" >
             <div class="login-html2" >
 
                 <div class="login-form">
-
                     <b:image name="img/logo.png" styleClass="imagen"></b:image>
 
                         <div class="group">
                             <h:outputLabel for="IncioSession:correo" value="Correo electronico:"></h:outputLabel>
-                            <b:inputText placeholder="Correo Electronico:" value="#{inputTextBean.text}"  id="correo" name="correo" styleClass="input"/>
-
+                            <b:inputText placeholder="Correo Electronico:" value="#{iniciarSesionBean.correoUsuario}"  id="correo" name="correo" styleClass="input"/>
                         </div>
                         <div class="group">
                             <h:outputLabel for="IncioSession:contra" value="contraseña:"></h:outputLabel>
-                            <b:inputText placeholder="Contraseña:"  value="#{inputTextBean.text}"  id="contra" name="contra" styleClass="input" />
+                            <b:inputText placeholder="Contraseña:"  value="#{iniciarSesionBean.passUsuario}"  id="contra" name="contra" styleClass="input" />
                         </div>
                         <div class="group">
-                            <h:commandButton  action="#{bean}" type="submit" name="inicioSesion" class="button" value="Iniciar Sesion">
+                            <h:commandButton  action="#{iniciarSesionBean.iniciarSesion()}" type="submit" name="inicioSesion" class="button" value="Iniciar Sesion">
                             </h:commandButton>
                         </div>
                         <div class="hr"></div>
                         <div class="foot-lnk">
                             <b:link outcome="Registro">Registrarse</b:link>
                         </div>
-
-
                 </div>
             </div>
         </div>
     </h:form>
 </h:body>
-
 </html>
 
 

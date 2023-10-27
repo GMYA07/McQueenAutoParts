@@ -11,10 +11,20 @@ import java.util.List;
 @RequestScoped
 public class UsuarioBean {
 
-    UsuarioEntity usuario ;
-    UsuariosModel modeloUsuario = new UsuariosModel();
+    public UsuarioEntity usuario ;
+    private UsuariosModel modeloUsuario = new UsuariosModel();
     List<UsuarioEntity> listaUsuarios;
     public UsuarioBean(){usuario = new UsuarioEntity();}
+
+    public String registarUsuario(){
+
+        if (modeloUsuario.verificarCorreoExist(usuario.getCorreo()) == 0){
+            return "InicioSesion";
+        }else {
+            return "index";
+        }
+
+    }
 
 
     //GETTER AND SETTER

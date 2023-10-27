@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "ventasauto", schema = "mcqueenautoparts", catalog = "")
 public class VentasautoEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idVenta", nullable = false, length = 6)
     private String idVenta;

@@ -2,9 +2,8 @@ package sv.empresa.mcqueen.www.managedbeans;
 
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
-
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;
 
 @ManagedBean
@@ -18,10 +17,10 @@ public class UsuarioBean {
 
     public String registarUsuario(){
         String email = usuario.getCorreo();
-        if (modeloUsuario.verificarCorreoExist(email) == 0){
-            return "InicioSesion";
-        }else {
+        if (modeloUsuario.insertarUsuario(usuario) != 1){
             return "index";
+        }else {
+            return "InicioSesion";
         }
 
     }

@@ -7,7 +7,6 @@ import java.util.Collection;
 @Entity
 @Table(name = "mecanicos", schema = "mcqueenautoparts", catalog = "")
 public class MecanicosEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "dui", nullable = false, length = 10)
     private String dui;

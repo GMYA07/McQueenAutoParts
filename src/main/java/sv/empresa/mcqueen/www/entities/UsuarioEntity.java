@@ -5,9 +5,8 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "usuario", schema = "mcqueenautoparts")
+@Table(name = "usuario", schema = "mcqueenautoparts", catalog = "")
 public class UsuarioEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "dui", nullable = false, length = 10)
     private String dui;
@@ -27,8 +26,6 @@ public class UsuarioEntity {
     private Collection<CitasmecEntity> citasmecsByDui;
     @OneToMany(mappedBy = "usuarioByIdCliente")
     private Collection<RentasEntity> rentasByDui;
-    @OneToMany(mappedBy = "usuarioByIdCliente")
-    private Collection<VentasautoEntity> ventasautosByDui;
 
     public String getDui() {
         return dui;
@@ -75,13 +72,13 @@ public class UsuarioEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UsuarioEntity that = (UsuarioEntity) o;
+        UsuarioEntity usuario = (UsuarioEntity) o;
 
-        if (dui != null ? !dui.equals(that.dui) : that.dui != null) return false;
-        if (licencia != null ? !licencia.equals(that.licencia) : that.licencia != null) return false;
-        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
-        if (correo != null ? !correo.equals(that.correo) : that.correo != null) return false;
-        if (pass != null ? !pass.equals(that.pass) : that.pass != null) return false;
+        if (dui != null ? !dui.equals(usuario.dui) : usuario.dui != null) return false;
+        if (licencia != null ? !licencia.equals(usuario.licencia) : usuario.licencia != null) return false;
+        if (nombre != null ? !nombre.equals(usuario.nombre) : usuario.nombre != null) return false;
+        if (correo != null ? !correo.equals(usuario.correo) : usuario.correo != null) return false;
+        if (pass != null ? !pass.equals(usuario.pass) : usuario.pass != null) return false;
 
         return true;
     }
@@ -110,13 +107,5 @@ public class UsuarioEntity {
 
     public void setRentasByDui(Collection<RentasEntity> rentasByDui) {
         this.rentasByDui = rentasByDui;
-    }
-
-    public Collection<VentasautoEntity> getVentasautosByDui() {
-        return ventasautosByDui;
-    }
-
-    public void setVentasautosByDui(Collection<VentasautoEntity> ventasautosByDui) {
-        this.ventasautosByDui = ventasautosByDui;
     }
 }

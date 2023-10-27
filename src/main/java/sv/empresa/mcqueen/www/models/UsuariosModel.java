@@ -1,10 +1,10 @@
 package sv.empresa.mcqueen.www.models;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
-
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;
 
 public class UsuariosModel {
@@ -34,6 +34,21 @@ public class UsuariosModel {
         }catch (Exception e){
             entyManager.close();
             return existe;
+        }
+    }
+
+    public int insertarUsuario(UsuarioEntity newUsuario){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        try{
+            tran.begin();
+            em.persist(newUsuario);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch (Exception e){
+            em.close();
+            return 0;
         }
     }
 }

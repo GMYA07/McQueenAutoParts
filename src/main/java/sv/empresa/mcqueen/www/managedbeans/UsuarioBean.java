@@ -17,8 +17,8 @@ public class UsuarioBean {
     public UsuarioBean(){usuario = new UsuarioEntity();}
 
     public String registarUsuario(){
-
-        if (modeloUsuario.verificarCorreoExist(usuario.getCorreo()) == 0){
+        String email = usuario.getCorreo();
+        if (modeloUsuario.verificarCorreoExist(email) == 0){
             return "InicioSesion";
         }else {
             return "index";

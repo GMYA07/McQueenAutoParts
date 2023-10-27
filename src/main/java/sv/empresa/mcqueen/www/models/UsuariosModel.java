@@ -18,7 +18,6 @@ public class UsuariosModel {
         int existe = 0;
         EntityManager entyManager = JpaUtil.getEntityManager();
         try {
-
             Query consulta = entyManager.createQuery("SELECT e.dui FROM UsuarioEntity e WHERE e.correo = :email");
             consulta.setParameter("email",correo);
 

@@ -3,6 +3,7 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
+import sv.empresa.mcqueen.www.entities.AdministradoresEntity;
 
 public class AdministradorModel {
     //Funcion para poder Un administrador
@@ -38,7 +39,7 @@ public class AdministradorModel {
             consulta.setParameter("correo",correoAdmin);
             consulta.setParameter("pass",passAdmin);
 
-            if (consulta != null){
+            if (!consulta.getResultList().isEmpty()){
                idAdmin = (Integer) consulta.getSingleResult(); //Con "getSingleResult" Obtenemos solo 1 resultado de lo q desesmos
                entyManager.close();
                return idAdmin;

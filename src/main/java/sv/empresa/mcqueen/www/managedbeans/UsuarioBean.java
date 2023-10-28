@@ -3,7 +3,7 @@ package sv.empresa.mcqueen.www.managedbeans;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
-
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;
 
 @ManagedBean
@@ -16,11 +16,15 @@ public class UsuarioBean {
     public UsuarioBean(){usuario = new UsuarioEntity();}
 
     public String registarUsuario(){
-        String email = usuario.getCorreo();
-        if (modeloUsuario.insertarUsuario(usuario) != 1){
-            return "index";
+
+        if (modeloUsuario.verificarCorreoExist(usuario.getCorreo()) != 1){
+            if (modeloUsuario.insertarUsuario(usuario) != 1){
+                return "index"; // no se puedo insertar el usuario
+            }else {
+                return "InicioSesion"; // se inserto el usuario exitosamente
+            }
         }else {
-            return "InicioSesion";
+            return "index";
         }
 
     }

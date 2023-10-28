@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
-
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;
 
 public class UsuariosModel {
@@ -21,7 +21,7 @@ public class UsuariosModel {
             Query consulta = entyManager.createQuery("SELECT e.dui FROM UsuarioEntity e WHERE e.correo = :email");
             consulta.setParameter("email",correo);
 
-            if (consulta == null){
+            if (consulta.getFirstResult() == 0){
                 existe = 0;
                 entyManager.close();
                 return existe;

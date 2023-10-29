@@ -54,10 +54,49 @@ public class IniciarSesionBean {
             session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
 
             return "vistasCliente/indexCliente";
+        }else if (!modeloEmpleado.iniciarSesionEmpleado(correoUsuario,passUsuario).equals("")) {
+            // Obtener el contexto de JSF actual el cual es el que nos posibilita acceso a la funcionalidad y la información específica de JSF en el entorno de una solicitud web.
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            // Obtener el contexto externo que proporciona acceso a los objetos subyacentes de Servlet, en otras palabra obtenemos funcionalidades de servlets
+            ExternalContext externalContext = context.getExternalContext();
+
+            // Obtener la sesión actual del usuario; si no existe una sesión, devuelve null (false)
+            HttpSession session = (HttpSession) externalContext.getSession(false);
+            session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
+
+            return "vistasEmpleado/IndexEmpleado";
+
+        }else if (!modeloMecanico.iniciarSesionMecanico(correoUsuario,passUsuario).equals("")) {
+            // Obtener el contexto de JSF actual el cual es el que nos posibilita acceso a la funcionalidad y la información específica de JSF en el entorno de una solicitud web.
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            // Obtener el contexto externo que proporciona acceso a los objetos subyacentes de Servlet, en otras palabra obtenemos funcionalidades de servlets
+            ExternalContext externalContext = context.getExternalContext();
+
+            // Obtener la sesión actual del usuario; si no existe una sesión, devuelve null (false)
+            HttpSession session = (HttpSession) externalContext.getSession(false);
+            session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
+
+            return "vistasMecanico/indexMecanico";
         }else {
             JsfUtil.setErrorMessage("","Error no se pudo iniciar Sesion");
             return "InicioSesion";
         }
+    }
+
+    public String cerrarSesion(){
+        // Obtener el contexto de JSF actual el cual es el que nos posibilita acceso a la funcionalidad y la información específica de JSF en el entorno de una solicitud web.
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        // Obtener el contexto externo que proporciona acceso a los objetos subyacentes de Servlet, en otras palabra obtenemos funcionalidades de servlets
+        ExternalContext externalContext = context.getExternalContext();
+
+        // Obtener la sesión actual del usuario; si no existe una sesión, devuelve devuelve algo (true)
+        HttpSession session = (HttpSession) externalContext.getSession(true);
+        session.setAttribute("idUsuario","");
+
+        return "index";
     }
 
 

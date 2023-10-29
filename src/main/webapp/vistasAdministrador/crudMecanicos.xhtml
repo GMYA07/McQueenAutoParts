@@ -6,6 +6,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/templates/plantillaIndex.xhtml">
     <ui:define name="contenidoAdministrador">
+
         <h1 class="text-center">Tabla de Mecanicos</h1>
         <br/>
         <br/>
@@ -33,6 +34,10 @@
                         <h:outputText value="#{null}" />
                     </h:column>
                 </b:dataTable>
+                <br/>
+                <h:form>
+                    <b:button value="Añadir nuevo Mecanico" look="primary" outcome="registroMecanico"/>
+                </h:form>
             </b:container>
             <b:container styleClass="contendorCrud">
 
@@ -54,6 +59,7 @@
                     <b:button look="danger" value="Modificar"/>
                 </h:form>
             </b:container>
+
         </b:container>
     </ui:define>
 </ui:composition>

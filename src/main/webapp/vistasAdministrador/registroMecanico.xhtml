@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/plantillaIndex.xhtml">
+    <ui:define name="contenidoAdministrador">
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages />
+        </h:panelGroup>
+        <h1 class="text-center">Registro de Mecanicos</h1>
+        <br/>
+        <br/>
+        <b:container styleClass="contendorCrudPadre" style="margin-left:250px;">
+            <b:container styleClass="contendorCrud">
+                <h:form styleClass="formularioModi">
+                    <h2>Nuevo Mecanico</h2>
+                    <p:outputLabel value="DUI del Mecanico"/>
+                    <br/>
+                    <p:inputText value="#{mecanicoBean.mecanico.dui}"/>
+                    <br/>
+                    <p:outputLabel value="Nombre Completo del Mecanico"/>
+                    <br/>
+                    <p:inputText value="#{mecanicoBean.mecanico.nombre}"/>
+                    <br/>
+                    <p:outputLabel value="Correo del Mecanico"/>
+                    <br/>
+                    <p:inputText value="#{mecanicoBean.mecanico.correo}"/>
+                    <br/>
+                    <p:outputLabel value="Contraseña del Mecanico"/>
+                    <br/>
+                    <p:inputText value="#{mecanicoBean.mecanico.pass}"/>
+                    <br/>
+                    <br/>
+                    <b:commandButton action="#{mecanicoBean.registrarMecanico()}" look="danger" value="Insertar Mecanico"/>
+                </h:form>
+            </b:container>
+        </b:container>
+    </ui:define>
+</ui:composition>

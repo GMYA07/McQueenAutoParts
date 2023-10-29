@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        template="../templates/PlantillaMecanico.xhtml">
+
+
+   <ui:define name="content">
+
+      <div class="container" style="    width: 70%;padding: 20px;background-color: #ffffff;border-radius: 5px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);text-align: center; justify-content: center; margin-top: 10px;">
+         <h1 style="font-size: 24px;color: #1a1e21;">Bienvenido</h1>
+         <p style="   font-size: 18px;color: #1a1e21;">Tienes la tarea de agregar respuestos y automoviles de agencia</p>
+
+
+         <b:carousel id="tiovivo" style="width:800px" interval="2500">
+            <b:carouselItem >
+               <h:graphicImage  name="img/carousel.jpg" alt="Valladolid" style="width: 800px; height: 500px" />
+               <b:carouselCaption>
+                  <h2>Confiamos en tu labor!</h2>
+               </b:carouselCaption>
+
+            </b:carouselItem>
+            <b:carouselItem >
+               <h:graphicImage  name="img/carousel2.jpeg" alt="Valladolid" style="width: 800px; height: 500px" />
+            </b:carouselItem >
+
+         </b:carousel>
+
+      </div>
+
+
+   </ui:define>
+
+</ui:composition>

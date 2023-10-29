@@ -4,6 +4,8 @@ import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
+import sv.empresa.mcqueen.www.utils.JsfUtil;
+
 import java.util.List;
 
 @ManagedBean
@@ -17,14 +19,21 @@ public class UsuarioBean {
 
     public String registarUsuario(){
 
-        if (modeloUsuario.verificarCorreoExist(usuario.getCorreo()) != 1){
-            if (modeloUsuario.insertarUsuario(usuario) != 1){
-                return "index"; // no se puedo insertar el usuario
+        if(modeloUsuario.verificarDui(usuario.getDui()) != 1){
+            if (modeloUsuario.verificarCorreoExist(usuario.getCorreo()) != 1){
+                if (modeloUsuario.insertarUsuario(usuario) != 1){
+                    JsfUtil.setErrorMessage("","Error: No se inserto el usuario");
+                    return "Registro";
+                }else {
+                    return "InicioSesion"; // se inserto el usuario exitosamente
+                }
             }else {
-                return "InicioSesion"; // se inserto el usuario exitosamente
+                JsfUtil.setErrorMessage("","Error: el correo ya existe en la plataforma");
+                return "Registro";
             }
         }else {
-            return "index";
+            JsfUtil.setErrorMessage("","Error: el dui ya existe en la plataforma");
+            return "Registro";
         }
 
     }

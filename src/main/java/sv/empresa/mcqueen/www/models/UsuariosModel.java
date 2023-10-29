@@ -21,7 +21,7 @@ public class UsuariosModel {
             Query consulta = entyManager.createQuery("SELECT e.dui FROM UsuarioEntity e WHERE e.correo = :email");
             consulta.setParameter("email",correo);
 
-            if (consulta.getFirstResult() == 0){
+            if (consulta.getResultList().isEmpty()){
                 existe = 0;
                 entyManager.close();
                 return existe;
@@ -35,6 +35,54 @@ public class UsuariosModel {
             entyManager.close();
             return existe;
         }
+    }
+
+    public int verificarDui(String dui){
+        int existe = 0;
+        EntityManager entyManager = JpaUtil.getEntityManager();
+        try {
+            Query consulta = entyManager.createQuery("SELECT e.correo FROM UsuarioEntity e WHERE e.dui = :dui");
+            consulta.setParameter("dui",dui);
+
+            if (consulta.getResultList().isEmpty()){
+                existe = 0;
+                entyManager.close();
+                return existe;
+            }else {
+                existe = 1;
+                entyManager.close();
+                return existe;
+            }
+
+        }catch (Exception e){
+            entyManager.close();
+            return existe;
+        }
+    }
+
+    public String iniciarSesionUsuario(String correoUsuario,String passUsuario){
+        //declaramos una entyManager para manejar las consultas y un idAdmin que regresaremos
+        EntityManager entyManager = JpaUtil.getEntityManager();
+        String idUsuario = "";
+        try {
+            Query consulta = entyManager.createQuery("SELECT e.dui FROM UsuarioEntity e WHERE e.correo = :correo AND e.pass = :pass ");
+            consulta.setParameter("correo",correoUsuario);
+            consulta.setParameter("pass",passUsuario);
+
+            if (!consulta.getResultList().isEmpty()){
+                idUsuario = (String) consulta.getSingleResult(); //Con "getSingleResult" Obtenemos solo 1 resultado de lo q desesmos
+                entyManager.close();
+                return idUsuario;
+            }else {
+                entyManager.close();
+                return idUsuario;
+            }
+
+        }catch (Exception e){
+            entyManager.close();
+            return idUsuario;
+        }
+
     }
 
     public int insertarUsuario(UsuarioEntity newUsuario){

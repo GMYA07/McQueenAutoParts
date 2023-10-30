@@ -40,6 +40,9 @@ public class AutomovilesEntity {
     @Basic
     @Column(name = "estado", nullable = true)
     private Integer estado;
+    @ManyToOne
+    @JoinColumn(name = "idClienteVenta", referencedColumnName = "dui")
+    private UsuarioEntity usuarioByIdClienteVenta;
     @OneToMany(mappedBy = "automovilesByIdCarro")
     private Collection<RentasEntity> rentasByIdAutomovil;
     @OneToMany(mappedBy = "automovilesByIdCarro")
@@ -178,6 +181,14 @@ public class AutomovilesEntity {
         result = 31 * result + (cantidad != null ? cantidad.hashCode() : 0);
         result = 31 * result + (estado != null ? estado.hashCode() : 0);
         return result;
+    }
+
+    public UsuarioEntity getUsuarioByIdClienteVenta() {
+        return usuarioByIdClienteVenta;
+    }
+
+    public void setUsuarioByIdClienteVenta(UsuarioEntity usuarioByIdClienteVenta) {
+        this.usuarioByIdClienteVenta = usuarioByIdClienteVenta;
     }
 
     public Collection<RentasEntity> getRentasByIdAutomovil() {

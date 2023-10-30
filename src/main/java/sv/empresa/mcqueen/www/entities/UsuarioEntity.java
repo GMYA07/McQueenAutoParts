@@ -22,6 +22,8 @@ public class UsuarioEntity {
     @Basic
     @Column(name = "pass", nullable = false, length = 25)
     private String pass;
+    @OneToMany(mappedBy = "usuarioByIdClienteVenta")
+    private Collection<AutomovilesEntity> automovilesByDui;
     @OneToMany(mappedBy = "usuarioByIdCliente")
     private Collection<CitasmecEntity> citasmecsByDui;
     @OneToMany(mappedBy = "usuarioByIdCliente")
@@ -93,6 +95,14 @@ public class UsuarioEntity {
         result = 31 * result + (correo != null ? correo.hashCode() : 0);
         result = 31 * result + (pass != null ? pass.hashCode() : 0);
         return result;
+    }
+
+    public Collection<AutomovilesEntity> getAutomovilesByDui() {
+        return automovilesByDui;
+    }
+
+    public void setAutomovilesByDui(Collection<AutomovilesEntity> automovilesByDui) {
+        this.automovilesByDui = automovilesByDui;
     }
 
     public Collection<CitasmecEntity> getCitasmecsByDui() {

@@ -85,6 +85,19 @@ public class UsuariosModel {
 
     }
 
+    public UsuarioEntity obtenerUsuario(String dui){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            // Recupero el objeto desde la BD a través del método find
+            UsuarioEntity usuario = em.find(UsuarioEntity.class, dui);
+            em.close();
+            return usuario;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+
     public int insertarUsuario(UsuarioEntity newUsuario){
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction tran = em.getTransaction();

@@ -102,45 +102,59 @@
 
 
             <div class="container">
+                <h:panelGroup layout="block" styleClass="alert alert-danger"
+                              rendered="#{not empty facesContext.messageList}">
+                    <h:messages />
+                </h:panelGroup>
                 <h1 class="titulo">Solicitud de Venta</h1>
                 <h:graphicImage library="img" name="logo.png" style="max-width: 100%; margin: 10px auto; display: block;"/>
 
 
-                <h:form>
+                <h:form enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="dui">Dui de la persona Solicitante:</label>
+                        <b:inputText value="#{automovilBean.duiSolicitante}" placeholder="12345678-9" id="dui" name="dui"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="placa">Placa:</label>
+                        <b:inputText value="#{automovilBean.automovil.placaAutomovil}" placeholder="555-443" id="placa" name="placa"/>
+                    </div>
                     <div class="form-group">
                         <label for="marca">Marca:</label>
-                        <b:inputText value="" placeholder="Toyota" id="marca" name="marca"/>
+                        <b:inputText value="#{automovilBean.automovil.marcaAutomovil}" placeholder="Toyota" id="marca" name="marca"/>
                     </div>
                     <div class="form-group">
-                        <label for="ano">Año del vehículo:</label>
-                        <b:inputText value="" placeholder="2020" id="ano" name="ano"/>
+                        <label for="modelo">Modelo del vehículo:</label>
+                        <b:inputText value="#{automovilBean.automovil.modeloAutomovil}" placeholder="Sentra" id="modelo" name="modelo"/>
                     </div>
                     <div class="form-group">
-                        <label for="color">Color:</label>
-                        <b:inputText value="" placeholder="Blanco, negro ...etc" id="color" name="color"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="cantidad">Cantidad:</label>
-                        <b:inputText value="" placeholder="1" id="cantidad" name="cantidad"/>
+                        <label for="year">Año del vehículo:</label>
+                        <b:inputText value="#{automovilBean.automovil.yearAutomovil}" placeholder="Sentra" id="year" name="year"/>
                     </div>
                     <div class="form-group">
                         <label for="descripcion">Descripción del vehículo:</label>
-                        <b:inputTextarea rows="4" id="descripcion" name="descripcion" placeholder="Descripción de vehiculo"/>
+                        <b:inputTextarea rows="4" id="descripcion" name="descripcion" placeholder="Descripción de vehiculo" value="#{automovilBean.automovil.especificaciones}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="color">Color:</label>
+                        <b:inputText value="#{automovilBean.automovil.colorAutomovil}" placeholder="Blanco, negro ...etc" id="color" name="color"/>
                     </div>
                     <div class="form-group">
                         <label for="precio">Precio del vehiculo:</label>
                         <b:inputText id="precio" name="precio" placeholder="15,000">
                             <f:facet name="prepend">
-                                <h:outputText value="$" />
+                                <h:outputText value="#{automovilBean.automovil.precioAutomovil}" />
                             </f:facet>
                         </b:inputText>
                     </div>
                     <div class="form-group">
-                        <label for="foto">Fotos del vehículo:</label>
-                        <b:inputText type="file" name="foto" id="foto" />
+                        <label for="foto">Foto del vehículo:</label>
+                        <h:inputFile value="#{automovilBean.imagen}" name="foto" id="foto" />
                     </div>
                     <br/>
-                    <b:button type="submit" value="Enviar Solicitud"></b:button>
+                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico">
+                        <f:param name="tipoAuto" value="solicitud"/>
+                    </b:commandButton>
                 </h:form>
             </div>
 

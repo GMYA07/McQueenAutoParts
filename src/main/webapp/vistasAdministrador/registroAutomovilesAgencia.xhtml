@@ -15,7 +15,7 @@
         <br/>
         <b:container styleClass="contendorCrudPadre" style="margin-left:250px;">
             <b:container styleClass="contendorCrud">
-                <h:form styleClass="formularioModi">
+                <h:form styleClass="formularioModi" enctype="multipart/form-data">
                     <h2>Nuevos Automoviles de Agencia</h2>
                     <p:outputLabel value="Marca de los Automoviles"/>
                     <br/>
@@ -43,14 +43,16 @@
                     <br/>
                     <p:outputLabel value="Imagen de los Automoviles"/>
                     <br/>
-                    <p:inputText type="file" value="#{automovilBean.automovil.fotoAutomovil}"/>
+                    <h:inputFile value="#{automovilBean.imagen}"/>
                     <br/>
                     <p:outputLabel value="Cantidad del Automoviles"/>
                     <br/>
                     <p:inputText id="cantidad" value="#{automovilBean.automovil.cantidad}" />
                     <br/>
                     <br/>
-                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico"/>
+                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico">
+                        <f:param name="tipoAuto" value="agencia"/>
+                    </b:commandButton>
                 </h:form>
             </b:container>
         </b:container>

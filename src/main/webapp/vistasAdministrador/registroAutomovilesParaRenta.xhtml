@@ -10,12 +10,12 @@
                       rendered="#{not empty facesContext.messageList}">
             <h:messages />
         </h:panelGroup>
-        <h1 class="text-center">Registro de Nuevos Automoviles de Agencia</h1>
+        <h1 class="text-center">Registro de Nuevos Automoviles para Rentar</h1>
         <br/>
         <br/>
         <b:container styleClass="contendorCrudPadre" style="margin-left:250px;">
             <b:container styleClass="contendorCrud">
-                <h:form styleClass="formularioModi">
+                <h:form styleClass="formularioModi" enctype="multipart/form-data">
                     <h2>Nuevo Automovil para Rentar</h2>
                     <p:outputLabel value="Marca del Automovil"/>
                     <br/>
@@ -43,14 +43,16 @@
                     <br/>
                     <p:outputLabel value="Imagen del Automovil"/>
                     <br/>
-                    <p:inputText type="file" value="#{automovilBean.automovil.fotoAutomovil}"/>
+                    <h:inputFile value="#{automovilBean.imagen}"/>
                     <br/>
                     <p:outputLabel value="Placa del Automovil"/>
                     <br/>
                     <p:inputText value="#{automovilBean.automovil.placaAutomovil}" />
                     <br/>
                     <br/>
-                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico"/>
+                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico">
+                        <f:param name="tipoAuto" value="renta"/>
+                    </b:commandButton>
                 </h:form>
             </b:container>
         </b:container>

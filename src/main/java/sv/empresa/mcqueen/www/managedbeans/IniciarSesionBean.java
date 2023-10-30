@@ -42,6 +42,7 @@ public class IniciarSesionBean {
             session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
 
             return "vistasAdministrador/indexAdministrador";
+
         } else if (!modeloUsuario.iniciarSesionUsuario(correoUsuario,passUsuario).equals("")) {
             // Obtener el contexto de JSF actual el cual es el que nos posibilita acceso a la funcionalidad y la información específica de JSF en el entorno de una solicitud web.
             FacesContext context = FacesContext.getCurrentInstance();
@@ -54,6 +55,7 @@ public class IniciarSesionBean {
             session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
 
             return "vistasCliente/indexCliente";
+
         }else if (!modeloEmpleado.iniciarSesionEmpleado(correoUsuario,passUsuario).equals("")) {
             // Obtener el contexto de JSF actual el cual es el que nos posibilita acceso a la funcionalidad y la información específica de JSF en el entorno de una solicitud web.
             FacesContext context = FacesContext.getCurrentInstance();

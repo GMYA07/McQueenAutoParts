@@ -3,9 +3,9 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-import sv.empresa.mcqueen.www.entities.MecanicosEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import java.util.List;
+import sv.empresa.mcqueen.www.entities.MecanicosEntity;
 
 public class MecanicosModel {
     public List<MecanicosEntity> listarMecanicos(){

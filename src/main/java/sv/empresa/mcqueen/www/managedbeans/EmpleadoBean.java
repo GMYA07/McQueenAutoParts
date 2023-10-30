@@ -5,6 +5,7 @@ import jakarta.faces.bean.RequestScoped;
 import sv.empresa.mcqueen.www.models.EmpleadosModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
 import sv.empresa.mcqueen.www.entities.EmpleadosEntity;
+
 import java.util.List;
 
 @ManagedBean

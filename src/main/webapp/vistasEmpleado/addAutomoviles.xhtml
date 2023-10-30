@@ -8,57 +8,14 @@
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
-        template="../templates/plantillaEmpleado.xhtml">>
+        template="../templates/plantillaEmpleado.xhtml">
 
 
     <ui:define name="content">
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
-                    <h2>Registro de Automoviles de agencia</h2>
-                    <h:form id="miFormulario">
-
-                        <h:panelGrid columns="4" styleClass="table">
-
-                            <h:outputLabel for="Marcanew" value="Marca de Automovil:"/>
-                            <h:inputText id="Marcanew" styleClass="form-control"
-                                         value="#{inputTextBean.text}"
-                                         required="true">
-                                <f:validateRegex pattern="[A-Z]{2}[0-9]{6}"/>
-                            </h:inputText>
-                            <h:outputLabel for="anio" value="Año de Automovil:"/>
-                            <b:dateTimePicker id="anio" format="DD.MM.YYYY"
-                                              />
-                            <h:outputLabel for="precio" value="Precio de automovil:"/>
-                            <h:inputText id="precio" styleClass="form-control"
-                                         value="#{inputTextBean.text}"
-                                         required="true"
-                            />
-                            <h:outputLabel for="cantidad" value="Cantidad de Automoviles Disponibles:"/>
-                            <h:inputText id="cantidad" value="#{inputTextBean.text}"
-                                         required="true" styleClass="form-control">
-
-                            </h:inputText>
-
-
-                            <h:outputLabel for="img" value="Ingrese imagenes de referencia:"/>
-                            <p:fileUpload id="img" value="#{fileUploadBean.file}" mode="simple"/>
-
-
-
-
-
-
-
-
-                        </h:panelGrid>
-                        <h:commandButton value="Almacenar" styleClass="btn btn-success"
-                                         action="#{inputTextBean.text}" style="margin-right:15px; margin-bottom: 20px"/>
-                    </h:form>
-                </div>
-            </div>
-            <div class="row">
+                <h2>Tabla de los Automoviles</h2>
                 <h:form >
                     <h:dataTable styleClass="table" value="#{inputTextBean.text}">
                         <h:column>

@@ -47,7 +47,7 @@ public class AutomovilBean {
                 return "registroAutomovilesAgencia";
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                    return "crudCarrosVenta";
+                    return "addRepuestos";
                 }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
                     return "registroAutomovilesAgencia";
@@ -57,10 +57,10 @@ public class AutomovilBean {
             crearIDAutomovil(0);
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevo Automovil de Renta");
-                return "registroAutomovilesAgencia";
+                return "registroAutomovilesParaRenta";
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                    return "crudCarrosRenta";
+                    return "addRepuestos";
                 }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
                     return "registroAutomovilesParaRenta";
@@ -81,7 +81,7 @@ public class AutomovilBean {
                         return "indexCliente";
                     }else {
                         JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
-                        return "indexCliente";
+                        return "SolicitarVenta";
                     }
                 }
             }else {

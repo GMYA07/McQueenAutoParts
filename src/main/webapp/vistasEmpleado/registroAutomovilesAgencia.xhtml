@@ -4,54 +4,54 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/templates/plantillaIndex.xhtml">
-    <ui:define name="contenidoAdministrador">
+                template="../templates/plantillaEmpleado.xhtml">
+    <ui:define name="content">
         <h:panelGroup layout="block" styleClass="alert alert-danger"
                       rendered="#{not empty facesContext.messageList}">
             <h:messages />
         </h:panelGroup>
-        <h1 class="text-center">Registro de Nuevos Automoviles para Rentar</h1>
+        <h1 class="text-center">Registro de Nuevos Automoviles de Agencia</h1>
         <br/>
         <br/>
         <b:container styleClass="contendorCrudPadre" style="margin-left:250px;">
             <b:container styleClass="contendorCrud">
                 <h:form styleClass="formularioModi" enctype="multipart/form-data">
-                    <h2>Nuevo Automovil para Rentar</h2>
-                    <p:outputLabel value="Marca del Automovil"/>
+                    <h2>Nuevos Automoviles de Agencia</h2>
+                    <p:outputLabel value="Marca de los Automoviles"/>
                     <br/>
                     <p:inputText value="#{automovilBean.automovil.marcaAutomovil}"/>
                     <br/>
-                    <p:outputLabel value="Modelo del Automovil"/>
+                    <p:outputLabel value="Modelo de los Automoviles"/>
                     <br/>
                     <p:inputText value="#{automovilBean.automovil.modeloAutomovil}"/>
                     <br/>
-                    <p:outputLabel value="Año del Automovil"/>
+                    <p:outputLabel value="Año de los Automoviles"/>
                     <br/>
                     <p:inputText value="#{automovilBean.automovil.yearAutomovil}"/>
                     <br/>
-                    <p:outputLabel value="Especificaciones del Automovil"/>
+                    <p:outputLabel value="Especificaciones de los Automoviles"/>
                     <br/>
                     <p:inputTextarea value="#{automovilBean.automovil.especificaciones}"/>
                     <br/>
-                    <p:outputLabel value="Color del Automovil"/>
+                    <p:outputLabel value="Color de los Automoviles"/>
                     <br/>
                     <p:inputText value="#{automovilBean.automovil.colorAutomovil}"/>
                     <br/>
-                    <p:outputLabel value="Precio del Automovil"/>
+                    <p:outputLabel value="Precio de los Automoviles"/>
                     <br/>
                     <p:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
                     <br/>
-                    <p:outputLabel value="Imagen del Automovil"/>
+                    <p:outputLabel value="Imagen de los Automoviles"/>
                     <br/>
                     <h:inputFile value="#{automovilBean.imagen}"/>
                     <br/>
-                    <p:outputLabel value="Placa del Automovil"/>
+                    <p:outputLabel value="Cantidad del Automoviles"/>
                     <br/>
-                    <p:inputText value="#{automovilBean.automovil.placaAutomovil}" />
+                    <p:inputText id="cantidad" value="#{automovilBean.automovil.cantidad}" />
                     <br/>
                     <br/>
                     <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico">
-                        <f:param name="tipoAuto" value="renta"/>
+                        <f:param name="tipoAuto" value="agencia"/>
                     </b:commandButton>
                 </h:form>
             </b:container>

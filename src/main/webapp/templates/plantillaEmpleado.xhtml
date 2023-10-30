@@ -8,7 +8,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
     <h:outputStylesheet name="css/bootstrap.min.css"/>
-
+    <h:outputStylesheet name="css/crud.css"/>
 </h:head>
 
 <h:body>
@@ -19,15 +19,15 @@
         <p:menuitem outcome="IndexEmpleado">
             <b:image name="img/logo.png" style=" height: 50px;"></b:image>
         </p:menuitem>
-
-
         <ul style=" float: left;">
-            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles" outcome="addAutomoviles" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <p:submenu label="Automoviles" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;">
+                <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Tabla de todos los Automoviles" outcome="addAutomoviles" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+                <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles Agencia" outcome="registroAutomovilesAgencia" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+                <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Automoviles Renta" outcome="registroAutomovilesParaRenta" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            </p:submenu>
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem value="Repuestos" outcome="addRepuestos" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem action="#{iniciarSesionBean.cerrarSesion()}" value="Cerrar Sesion" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
         </ul>
-
-
     </p:menubar>
     <div class="col-md-11 col-sm-11">
         <ui:insert name="content">

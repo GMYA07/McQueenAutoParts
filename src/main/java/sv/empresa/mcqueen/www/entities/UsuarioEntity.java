@@ -74,13 +74,13 @@ public class UsuarioEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UsuarioEntity usuario = (UsuarioEntity) o;
+        UsuarioEntity that = (UsuarioEntity) o;
 
-        if (dui != null ? !dui.equals(usuario.dui) : usuario.dui != null) return false;
-        if (licencia != null ? !licencia.equals(usuario.licencia) : usuario.licencia != null) return false;
-        if (nombre != null ? !nombre.equals(usuario.nombre) : usuario.nombre != null) return false;
-        if (correo != null ? !correo.equals(usuario.correo) : usuario.correo != null) return false;
-        if (pass != null ? !pass.equals(usuario.pass) : usuario.pass != null) return false;
+        if (dui != null ? !dui.equals(that.dui) : that.dui != null) return false;
+        if (licencia != null ? !licencia.equals(that.licencia) : that.licencia != null) return false;
+        if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
+        if (correo != null ? !correo.equals(that.correo) : that.correo != null) return false;
+        if (pass != null ? !pass.equals(that.pass) : that.pass != null) return false;
 
         return true;
     }

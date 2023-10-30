@@ -3,7 +3,7 @@ package sv.empresa.mcqueen.www.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ventasauto", schema = "mcqueenautoparts", catalog = "")
+@Table(name = "ventasauto", schema = "mcqueenautoparts")
 public class VentasautoEntity {
     @Id
     @Column(name = "idVenta", nullable = false, length = 6)

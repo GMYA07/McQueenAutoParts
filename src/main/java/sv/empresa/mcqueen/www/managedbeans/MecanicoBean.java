@@ -2,10 +2,9 @@ package sv.empresa.mcqueen.www.managedbeans;
 
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
-import sv.empresa.mcqueen.www.entities.MecanicosEntity;
 import sv.empresa.mcqueen.www.models.MecanicosModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
-
+import sv.empresa.mcqueen.www.entities.MecanicosEntity;
 import java.util.List;
 
 @ManagedBean

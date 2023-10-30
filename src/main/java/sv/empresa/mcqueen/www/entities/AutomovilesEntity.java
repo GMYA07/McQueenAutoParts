@@ -11,6 +11,9 @@ public class AutomovilesEntity {
     @Column(name = "idAutomovil", nullable = false, length = 6)
     private String idAutomovil;
     @Basic
+    @Column(name = "placaAutomovil", nullable = true, length = 8)
+    private String placaAutomovil;
+    @Basic
     @Column(name = "marcaAutomovil", nullable = false, length = 30)
     private String marcaAutomovil;
     @Basic
@@ -48,6 +51,14 @@ public class AutomovilesEntity {
 
     public void setIdAutomovil(String idAutomovil) {
         this.idAutomovil = idAutomovil;
+    }
+
+    public String getPlacaAutomovil() {
+        return placaAutomovil;
+    }
+
+    public void setPlacaAutomovil(String placaAutomovil) {
+        this.placaAutomovil = placaAutomovil;
     }
 
     public String getMarcaAutomovil() {
@@ -132,6 +143,8 @@ public class AutomovilesEntity {
         if (yearAutomovil != that.yearAutomovil) return false;
         if (Double.compare(precioAutomovil, that.precioAutomovil) != 0) return false;
         if (idAutomovil != null ? !idAutomovil.equals(that.idAutomovil) : that.idAutomovil != null) return false;
+        if (placaAutomovil != null ? !placaAutomovil.equals(that.placaAutomovil) : that.placaAutomovil != null)
+            return false;
         if (marcaAutomovil != null ? !marcaAutomovil.equals(that.marcaAutomovil) : that.marcaAutomovil != null)
             return false;
         if (modeloAutomovil != null ? !modeloAutomovil.equals(that.modeloAutomovil) : that.modeloAutomovil != null)
@@ -153,6 +166,7 @@ public class AutomovilesEntity {
         int result;
         long temp;
         result = idAutomovil != null ? idAutomovil.hashCode() : 0;
+        result = 31 * result + (placaAutomovil != null ? placaAutomovil.hashCode() : 0);
         result = 31 * result + (marcaAutomovil != null ? marcaAutomovil.hashCode() : 0);
         result = 31 * result + (modeloAutomovil != null ? modeloAutomovil.hashCode() : 0);
         result = 31 * result + yearAutomovil;

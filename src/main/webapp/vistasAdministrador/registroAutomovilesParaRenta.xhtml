@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/plantillaIndex.xhtml">
+    <ui:define name="contenidoAdministrador">
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages />
+        </h:panelGroup>
+        <h1 class="text-center">Registro de Nuevos Automoviles de Agencia</h1>
+        <br/>
+        <br/>
+        <b:container styleClass="contendorCrudPadre" style="margin-left:250px;">
+            <b:container styleClass="contendorCrud">
+                <h:form styleClass="formularioModi">
+                    <h2>Nuevo Automovil para Rentar</h2>
+                    <p:outputLabel value="Marca del Automovil"/>
+                    <br/>
+                    <p:inputText value="#{automovilBean.automovil.marcaAutomovil}"/>
+                    <br/>
+                    <p:outputLabel value="Modelo del Automovil"/>
+                    <br/>
+                    <p:inputText value="#{automovilBean.automovil.modeloAutomovil}"/>
+                    <br/>
+                    <p:outputLabel value="Año del Automovil"/>
+                    <br/>
+                    <p:inputText value="#{automovilBean.automovil.yearAutomovil}"/>
+                    <br/>
+                    <p:outputLabel value="Especificaciones del Automovil"/>
+                    <br/>
+                    <p:inputTextarea value="#{automovilBean.automovil.especificaciones}"/>
+                    <br/>
+                    <p:outputLabel value="Color del Automovil"/>
+                    <br/>
+                    <p:inputText value="#{automovilBean.automovil.colorAutomovil}"/>
+                    <br/>
+                    <p:outputLabel value="Precio del Automovil"/>
+                    <br/>
+                    <p:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
+                    <br/>
+                    <p:outputLabel value="Imagen del Automovil"/>
+                    <br/>
+                    <p:inputText type="file" value="#{automovilBean.automovil.fotoAutomovil}"/>
+                    <br/>
+                    <p:outputLabel value="Placa del Automovil"/>
+                    <br/>
+                    <p:inputText value="#{automovilBean.automovil.placaAutomovil}" />
+                    <br/>
+                    <br/>
+                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico"/>
+                </h:form>
+            </b:container>
+        </b:container>
+    </ui:define>
+</ui:composition>

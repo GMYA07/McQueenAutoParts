@@ -22,7 +22,7 @@ import java.util.Random;
 @RequestScoped
 public class AutomovilBean {
 
-    public AutomovilesEntity automovil;
+    private AutomovilesEntity automovil;
     public String duiSolicitante;
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
     private UsuariosModel modeloUsuario = new UsuariosModel();
@@ -47,7 +47,7 @@ public class AutomovilBean {
                 return "registroAutomovilesAgencia";
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                    return "addRepuestos";
+                    return "addAutomoviles";
                 }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
                     return "registroAutomovilesAgencia";
@@ -60,7 +60,7 @@ public class AutomovilBean {
                 return "registroAutomovilesParaRenta";
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                    return "addRepuestos";
+                    return "addAutomoviles";
                 }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
                     return "registroAutomovilesParaRenta";

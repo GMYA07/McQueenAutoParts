@@ -11,7 +11,7 @@ import java.util.List;
 @ManagedBean
 @RequestScoped
 public class MecanicoBean {
-    public MecanicosEntity mecanico;
+    private MecanicosEntity mecanico;
     private MecanicosModel modeloMecanico = new MecanicosModel();
     List<MecanicosEntity> listaMecanicos;
 

@@ -3,7 +3,7 @@ package sv.empresa.mcqueen.www.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "repuestos", schema = "mcqueenautoparts", catalog = "")
+@Table(name = "repuestos", schema = "mcqueenautoparts")
 public class RepuestosEntity {
     @Id
     @Column(name = "idRepuesto", nullable = false, length = 6)
@@ -11,6 +11,9 @@ public class RepuestosEntity {
     @Basic
     @Column(name = "categorias", nullable = false, length = 30)
     private String categorias;
+    @Basic
+    @Column(name = "imagenRepuesto", nullable = false, length = 50)
+    private String imagenRepuesto;
     @Basic
     @Column(name = "nombre", nullable = false, length = 50)
     private String nombre;
@@ -38,6 +41,14 @@ public class RepuestosEntity {
 
     public void setCategorias(String categorias) {
         this.categorias = categorias;
+    }
+
+    public String getImagenRepuesto() {
+        return imagenRepuesto;
+    }
+
+    public void setImagenRepuesto(String imagenRepuesto) {
+        this.imagenRepuesto = imagenRepuesto;
     }
 
     public String getNombre() {
@@ -83,6 +94,8 @@ public class RepuestosEntity {
         if (cantidad != that.cantidad) return false;
         if (idRepuesto != null ? !idRepuesto.equals(that.idRepuesto) : that.idRepuesto != null) return false;
         if (categorias != null ? !categorias.equals(that.categorias) : that.categorias != null) return false;
+        if (imagenRepuesto != null ? !imagenRepuesto.equals(that.imagenRepuesto) : that.imagenRepuesto != null)
+            return false;
         if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
         if (marca != null ? !marca.equals(that.marca) : that.marca != null) return false;
 
@@ -95,6 +108,7 @@ public class RepuestosEntity {
         long temp;
         result = idRepuesto != null ? idRepuesto.hashCode() : 0;
         result = 31 * result + (categorias != null ? categorias.hashCode() : 0);
+        result = 31 * result + (imagenRepuesto != null ? imagenRepuesto.hashCode() : 0);
         result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
         temp = Double.doubleToLongBits(precio);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

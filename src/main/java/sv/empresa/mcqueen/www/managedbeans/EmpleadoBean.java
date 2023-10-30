@@ -11,7 +11,7 @@ import java.util.List;
 @ManagedBean
 @RequestScoped
 public class EmpleadoBean {
-    public EmpleadosEntity empleado;
+    private EmpleadosEntity empleado;
     private EmpleadosModel modeloEmpleado = new EmpleadosModel();
     List<EmpleadosEntity> listaEmpleados;
 

@@ -2,27 +2,28 @@
 
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
         xmlns:b="http://bootsfaces.net/ui"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
         template="../templates/plantillaEmpleado.xhtml">>
 
 
     <ui:define name="content">
-
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages />
+        </h:panelGroup>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <h2>Registro de Repuestos automovilisticos</h2>
-                    <h:form id="miFormulario">
-
+                    <h:form id="miFormulario" enctype="multipart/form-data">
                         <h:panelGrid columns="4" styleClass="table">
                             <h:outputLabel for="categoria" value="Categoria:"/>
-                            <h:selectOneMenu id="categoria" styleClass="form-control"
-                                             value="#{inputTextBean.text}">
+                            <h:selectOneMenu id="categoria" styleClass="form-control" value="#{repuestoBean.repuesto.categorias}">
                                 <f:selectItem itemValue="Suspension y direccion"/>
                                 <f:selectItem itemValue="Sistema de frenos"/>
                                 <f:selectItem itemValue="Partes de motor"/>
@@ -32,34 +33,27 @@
                             </h:selectOneMenu>
                             <h:outputLabel for="Nombre" value="Nombre dde repuesto:"/>
                             <h:inputText id="Nombre" styleClass="form-control"
-                                         value="#{inputTextBean.text}"
+                                         value="#{repuestoBean.repuesto.nombre}"
                                          required="true">
-                                <f:validateRegex pattern="[A-Z]{2}[0-9]{6}"/>
                             </h:inputText>
                             <h:outputLabel for="Precio" value="Precio de respuesto:"/>
                             <h:inputText id="Precio" styleClass="form-control"
-                                         value="#{inputTextBean.text}"
+                                         value="#{repuestoBean.repuesto.precio}"
                                          required="true"/>
                             <h:outputLabel for="Cantidad" value="Cantidad de respuestos:"/>
                             <h:inputText id="Cantidad" styleClass="form-control"
-                                         value="#{inputTextBean.text}"
+                                         value="#{repuestoBean.repuesto.cantidad}"
                                          required="true"
                                          />
                             <h:outputLabel for="Marca" value="Marca a la ue corresponde el respuesto:"/>
-                            <h:inputText id="Marca" value="#{inputTextBean.text}"
-                                         required="true" styleClass="form-control"
-                                         >
-
+                            <h:inputText id="Marca" value="#{repuestoBean.repuesto.marca}" required="true" styleClass="form-control">
                             </h:inputText>
 
                             <h:outputLabel for="imagen" value="Imagen de repuesto:"/>
-                            <p:fileUpload id="imagen" value="#{fileUploadBean.file}" mode="simple"/>
-
-
+                            <h:inputFile id="imagen" value="#{repuestoBean.imagen}" mode="simple"/>
 
                         </h:panelGrid>
-                        <h:commandButton value="Almacenar" styleClass="btn btn-success"
-                                         action="#{inputTextBean.text}" style="margin-right:15px; margin-bottom: 20px"/>
+                        <h:commandButton value="Almacenar" styleClass="btn btn-success" action="#{repuestoBean.registrarRepuestos()}" style="margin-right:15px; margin-bottom: 20px"/>
                     </h:form>
                 </div>
             </div>

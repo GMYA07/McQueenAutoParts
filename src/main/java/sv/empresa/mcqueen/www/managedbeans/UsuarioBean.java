@@ -11,7 +11,7 @@ import java.util.List;
 @RequestScoped
 public class UsuarioBean {
 
-    public UsuarioEntity usuario ;
+    private UsuarioEntity usuario ;
     private UsuariosModel modeloUsuario = new UsuariosModel();
     List<UsuarioEntity> listaUsuarios;
     public UsuarioBean(){usuario = new UsuarioEntity();}

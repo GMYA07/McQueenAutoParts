@@ -4,13 +4,14 @@
     padding: 15px;
 }
 .targeta{
+    width: 100%;
     background-color: black;
     color: white;
     padding: 25px;
     text-align: center;
     height: 325px;
     margin-top: 25px;
-    margin-left: 75px;
+    margin-left: 60px;
     border: black 4px solid;
     border-radius: 5px;
     font-size: 20px;

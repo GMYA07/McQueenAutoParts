@@ -6,46 +6,108 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/templates/plantillaIndex.xhtml">
     <ui:define name="contenidoAdministrador">
-        <h1 class="text-center">Tabla de registro de rentas</h1>
+        <h1 class="text-center">Tabla de Registro de Carros Para Poder Rentar</h1>
         <br/>
         <br/>
-        <b:container styleClass="contendorCrudPadre">
-            <b:container styleClass="contendorCrud">
-                <b:dataTable value="#{null}" var="productos"
-                             id="productosTable"
-                             styleClass="table table-striped table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Carro Rentado" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Persona que renta" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tiempo de Renta" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                </b:dataTable>
-            </b:container>
-            <b:container styleClass="contendorCrud">
-                <h:form styleClass="formularioModi">
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form>
+                    <b:dataTable value="#{automovilBean.listaAutomovilesRentar}" var="car" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.idAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Clientes" />
+                            </f:facet>
+                            <h:outputText value="#{car.usuarioByIdClienteVenta.dui}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Placa de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.placaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.marcaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modelo de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Año del Carro" />
+                            </f:facet>
+                            <h:outputText value="#{car.yearAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Especifiaciones de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.especificaciones}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Color de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.colorAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.precioAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Foto de los Automoviles" />
+                            </f:facet>
+                            <p:graphicImage value="/resources/imgAutomoviles/#{car.fotoAutomovil}" style="width: 200px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de los Automoviles" />
+                            </f:facet>
+                            <ui:fragment rendered="#{car.estado == 0}">
+                                <h:outputText value="Disponible para Rentar" />
+                            </ui:fragment>
+                            <ui:fragment rendered="#{car.estado == 1}">
+                                <h:outputText value="Esta Rentado Actuamente" />
+                            </ui:fragment>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Accion" />
+                            </f:facet>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Automovil"/>
+                            <br/>
+                            <br/>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Automovil"/>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+                <br/>
+                <br/>
+                <h:form styleClass="formularioModi" style="margin-left: 750px">
                     <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Carro Rentado"/>
+                    <h:outputLabel value="Nombre del Carro"/>
                     <br/>
                     <h:inputText value=""/>
                     <br/>
-                    <h:outputLabel value="Persona que renta"/>
+                    <h:outputLabel value="Precio del Carro"/>
                     <br/>
                     <h:inputText/>
                     <br/>
-                    <h:outputLabel value="Tiempo de Renta"/>
+                    <h:outputLabel value="Año del Carro"/>
                     <br/>
                     <h:inputText/>
                     <br/>

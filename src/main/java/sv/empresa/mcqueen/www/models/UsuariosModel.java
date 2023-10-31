@@ -3,6 +3,7 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import sv.empresa.mcqueen.www.entities.EmpleadosEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;
@@ -10,9 +11,21 @@ import java.util.List;
 public class UsuariosModel {
 
     public List<UsuarioEntity> listarUsuarios(){
-        List<UsuarioEntity> lista = null;
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM UsuarioEntity e");
 
-        return lista;
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<UsuarioEntity> lista = consulta.getResultList();
+
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
     }
     public int verificarCorreoExist(String correo){
         int existe = 0;

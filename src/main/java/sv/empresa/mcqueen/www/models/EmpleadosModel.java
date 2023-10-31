@@ -3,14 +3,28 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.EmpleadosEntity;
 import java.util.List;
 
 public class EmpleadosModel {
     public List<EmpleadosEntity> listarEmpleados(){
-        List<EmpleadosEntity> lista = null;
-        return lista;
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM EmpleadosEntity e");
+
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<EmpleadosEntity> lista = consulta.getResultList();
+
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
     }
 
     public String iniciarSesionEmpleado(String correoUsuario,String passUsuario){

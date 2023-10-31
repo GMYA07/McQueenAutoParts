@@ -6,9 +6,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/templates/plantillaIndex.xhtml">
     <ui:define name="contenidoAdministrador">
-        <div class="row" style="margin-top: 2%;">
             <h1 class="text-center">Bienvenido Administrador</h1>
-                <div class="col-sm-3">
                     <h:form>
                         <br/>
                         <b:container styleClass="tituloBienvenida">
@@ -16,7 +14,7 @@
                         </b:container>
                         <b:container styleClass="contenedorTargeta">
                             <b:row>
-                                <b:column styleClass="targeta" span="3">
+                                <b:column styleClass="targeta" span="3" >
 
                                     <h:outputText value="Productos"/>
                                     <br/>
@@ -73,10 +71,15 @@
                                     <b:button value="Administrar Citas" look="primary" outcome="crudCitas"/>
                                     <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/carroRentado.jpg"/>
                                 </b:column>
+                                <b:column styleClass="targeta" span="3">
+                                    <h:outputText value="Registro de rentas"/>
+                                    <br/>
+                                    <br/>
+                                    <b:button value="Administrar Citas" look="primary" outcome="crudCitas"/>
+                                    <h:graphicImage styleClass="imagenesTargetas" value="/resources/img/renta.png"/>
+                                </b:column>
                             </b:row>
                         </b:container>
                     </h:form>
-                </div>
-        </div>
     </ui:define>
 </ui:composition>

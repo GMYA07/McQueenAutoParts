@@ -9,77 +9,81 @@
         <h1 class="text-center">Tabla de Productos</h1>
         <br/>
         <br/>
-       <b:container styleClass="contendorCrudPadre">
-           <b:container styleClass="contendorCrud">
-               <b:dataTable value="#{null}" var="productos"
-                            id="productosTable"
-                            styleClass="table table-striped table-bordered">
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Nombre del Producto" />
-                       </f:facet>
-                       <h:outputText value="#{null}" />
-                   </h:column>
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Precio del producto" />
-                       </f:facet>
-                       <h:outputText value="#{null}" />
-                   </h:column>
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Precio del producto" />
-                       </f:facet>
-                       <h:outputText value="#{null}" />
-                   </h:column>
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Precio del producto" />
-                       </f:facet>
-                       <h:outputText value="#{null}" />
-                   </h:column>
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Precio del producto" />
-                       </f:facet>
-                       <h:outputText value="#{null}" />
-                   </h:column>
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Precio del producto" />
-                       </f:facet>
-                       <h:outputText value="#{null}" />
-                   </h:column>
-                   <h:column>
-                       <f:facet name="header">
-                           <h:outputText value="Fecha de vencimiento" />
-                       </f:facet>
-                       <h:outputFormat value="#{null}">
-                           <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                       </h:outputFormat>
-                   </h:column>
-               </b:dataTable>
-           </b:container>
-           <b:container styleClass="contendorCrud">
-
-               <h:form styleClass="formularioModi">
-                   <h2>Modificar Producto</h2>
-                   <h:outputLabel value="Nombre del Producto"/>
-                   <br/>
-                   <h:inputText value=""/>
-                   <br/>
-                   <h:outputLabel value="Precio del Producto"/>
-                   <br/>
-                   <h:inputText/>
-                   <br/>
-                   <h:outputLabel value="Fecha de vencimiento"/>
-                   <br/>
-                   <h:inputText/>
-                   <br/>
-                   <br/>
-                   <b:button look="danger" value="Modificar"/>
-               </h:form>
-           </b:container>
-       </b:container>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form>
+                    <b:dataTable value="#{repuestoBean.listaRepuestos}" var="repuesto" id="productosTable" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id del Repuesto" />
+                            </f:facet>
+                            <h:outputText value="#{repuesto.idRepuesto}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre del repuesto" />
+                            </f:facet>
+                            <h:outputText value="#{repuesto.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Categoria del repuesto" />
+                            </f:facet>
+                            <h:outputText value="#{repuesto.categorias}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca del repuesto" />
+                            </f:facet>
+                            <h:outputText value="#{repuesto.marca}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio del repuesto" />
+                            </f:facet>
+                            <h:outputText value="#{repuesto.precio}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cantidad del repuesto" />
+                            </f:facet>
+                            <h:outputText value="#{repuesto.cantidad}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Foto del repuesto" />
+                            </f:facet>
+                            <p:graphicImage value="/resources/imgRepuestos/#{repuesto.imagenRepuesto}" style="width:200px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones" />
+                            </f:facet>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Repuesto"/>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Repuesto"/>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+                <br/>
+                <br/>
+                <h:form styleClass="formularioModi"  style="margin-left: 700px">
+                    <h2>Modificar Producto</h2>
+                    <h:outputLabel value="Nombre del Empleado"/>
+                    <br/>
+                    <h:inputText value=""/>
+                    <br/>
+                    <h:outputLabel value="Apellidos del Empleado"/>
+                    <br/>
+                    <h:inputText/>
+                    <br/>
+                    <h:outputLabel value="Edad del Empleado"/>
+                    <br/>
+                    <h:inputText/>
+                    <br/>
+                    <br/>
+                    <b:button look="danger" value="Modificar"/>
+                </h:form>
+            </b:container>
+        </b:container>
     </ui:define>
 </ui:composition>

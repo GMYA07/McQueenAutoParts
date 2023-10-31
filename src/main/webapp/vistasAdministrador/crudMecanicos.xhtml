@@ -10,48 +10,65 @@
         <h1 class="text-center">Tabla de Mecanicos</h1>
         <br/>
         <br/>
-        <b:container styleClass="contendorCrudPadre">
-            <b:container styleClass="contendorCrud">
-                <b:dataTable value="#{null}" var="productos"
-                             id="productosTable"
-                             styleClass="table table-striped table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nombre del Mecanico" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Apellidos del Mecanico" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Edad del Mecanico" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                </b:dataTable>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form>
+                    <b:dataTable value="#{mecanicoBean.listaMecanicos}" var="meca" id="productosTable" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="DUI del Mecanico" />
+                            </f:facet>
+                            <h:outputText value="#{meca.dui}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre del Mecanico" />
+                            </f:facet>
+                            <h:outputText value="#{meca.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Correo del Mecanico" />
+                            </f:facet>
+                            <h:outputText value="#{meca.correo}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Disponibilidad de los Mecanico" />
+                            </f:facet>
+                            <ui:fragment rendered="#{meca.estado == 0}">
+                                <h:outputText value="Disponible" />
+                            </ui:fragment>
+                            <ui:fragment rendered="#{meca.estado == 1}">
+                                <h:outputText value="En Cita" />
+                            </ui:fragment>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones" />
+                            </f:facet>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Empleado"/>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Empleado"/>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
                 <br/>
                 <h:form>
                     <b:button value="Añadir nuevo Mecanico" look="primary" outcome="registroMecanico"/>
                 </h:form>
-            </b:container>
-            <b:container styleClass="contendorCrud">
-
-                <h:form styleClass="formularioModi">
+                <br/>
+                <br/>
+                <h:form styleClass="formularioModi"  style="margin-left: 700px">
                     <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Mecanico"/>
+                    <h:outputLabel value="Nombre del Empleado"/>
                     <br/>
                     <h:inputText value=""/>
                     <br/>
-                    <h:outputLabel value="Apellidos del Mecanico"/>
+                    <h:outputLabel value="Apellidos del Empleado"/>
                     <br/>
                     <h:inputText/>
                     <br/>
-                    <h:outputLabel value="Edad del Mecanico"/>
+                    <h:outputLabel value="Edad del Empleado"/>
                     <br/>
                     <h:inputText/>
                     <br/>
@@ -59,7 +76,6 @@
                     <b:button look="danger" value="Modificar"/>
                 </h:form>
             </b:container>
-
         </b:container>
     </ui:define>
 </ui:composition>

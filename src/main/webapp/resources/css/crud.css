@@ -5,7 +5,7 @@
 .contendorCrud{
     flex: 1; /* Hace que los contenedores hijos se expandan para llenar el espacio disponible */
     padding: 10px; /* Añade espaciado interior para separar los contenedores */
-    margin-right: 10px;
+    margin-right: 100px;
 }
 .formularioModi{
     text-align: center;

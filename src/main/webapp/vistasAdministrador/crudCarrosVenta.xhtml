@@ -9,37 +9,159 @@
         <h1 class="text-center">Tabla de Registro de Carros en Venta</h1>
         <br/>
         <br/>
-        <b:container styleClass="contendorCrudPadre">
-            <b:container styleClass="contendorCrud">
-                <b:dataTable value="#{null}" var="productos"
-                             id="productosTable"
-                             styleClass="table table-striped table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nombre del Carro" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Precio del Carro" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Año del Carro" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                </b:dataTable>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
                 <h:form>
-                    <b:button value="Añadir nuevo Automovil" look="primary" outcome="registroAutomovilesAgencia"/>
+                    <b:dataTable value="#{automovilBean.listaAutomovilesAgencia}" var="car" id="productosTable" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.idAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.marcaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modelo de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Año del Carro" />
+                            </f:facet>
+                            <h:outputText value="#{car.yearAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Especifiaciones de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.especificaciones}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Color de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.colorAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.precioAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Foto de los Automoviles" />
+                            </f:facet>
+                            <p:graphicImage value="/resources/imgAutomoviles/#{car.fotoAutomovil}" style="width: 200px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cantidad de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.cantidad}" />
+                        </h:column>
+                    </b:dataTable>
                 </h:form>
+                <br/>
+                <br/>
             </b:container>
-            <b:container styleClass="contendorCrud">
-
-                <h:form styleClass="formularioModi">
+        </b:container>
+        <br/>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form>
+                    <h2 class="text-center">Tabla de Registro de Carros en Venta de Usuarios</h2>
+                    <b:dataTable value="#{automovilBean.listaAutomovilesUsuarios}" var="car" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.idAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Clientes" />
+                            </f:facet>
+                            <h:outputText value="#{car.usuarioByIdClienteVenta.dui}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Placa de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.placaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.marcaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modelo de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Año del Carro" />
+                            </f:facet>
+                            <h:outputText value="#{car.yearAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Especifiaciones de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.especificaciones}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Color de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.colorAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.precioAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Foto de los Automoviles" />
+                            </f:facet>
+                            <p:graphicImage value="/resources/imgAutomoviles/#{car.fotoAutomovil}" style="width:200px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de los Automoviles" />
+                            </f:facet>
+                            <ui:fragment rendered="#{car.estado == 0}">
+                                <h:outputText value="En espera de aprobacion" />
+                            </ui:fragment>
+                            <ui:fragment rendered="#{car.estado == 1}">
+                                <h:outputText value="Aprobado para vender" />
+                            </ui:fragment>
+                        </h:column>
+                        <h:column>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Aceptar Solicitud"/>
+                            <br/>
+                            <br/>
+                            
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Rechazar Solicitud"/>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+                <br/>
+                <br/>
+                <h:form styleClass="formularioModi" style="margin-left: 350px">
                     <h2>Modificar Producto</h2>
                     <h:outputLabel value="Nombre del Carro"/>
                     <br/>

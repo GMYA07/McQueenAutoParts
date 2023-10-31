@@ -27,6 +27,8 @@ public class AutomovilBean {
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
     private UsuariosModel modeloUsuario = new UsuariosModel();
     List<AutomovilesEntity> listaAutomoviles;
+    private List<AutomovilesEntity> listaAutomovilesAgencia;
+    private List<AutomovilesEntity> listaAutomovilesUsuarios;
 
     //Variables para guardar la img
     private Part imagen;
@@ -133,10 +135,17 @@ public class AutomovilBean {
 
     //GETTER AND SETTER
 
+    public List<AutomovilesEntity> getListaAutomovilesUsuarios() {
+        return modeloAutomovil.listarAutomovilesUsuarios();
+    }
+
     public List<AutomovilesEntity> getListaAutomoviles() {
         return modeloAutomovil.listarAutomoviles();
     }
 
+    public List<AutomovilesEntity> getListaAutomovilesAgencia() {
+        return modeloAutomovil.listarAutomovilesAgencia();
+    }
 
     public AutomovilesEntity getAutomovil() {
         return automovil;

@@ -1,7 +1,9 @@
 package sv.empresa.mcqueen.www.managedbeans;
 
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
@@ -44,7 +46,11 @@ public class AutomovilBean {
         automovil.setFotoAutomovil(imagen.getSubmittedFileName());
 
         if (tipoAuto.equals("agencia")){
+            //Usamos Funcion para crear el ID del Automovil
             crearIDAutomovil(1);
+            //le colocamos un estado al Carro para poder saber su disponiblidad
+            automovil.setEstado(11);
+            //ACCIONES PARA INSERTARLO EN LA BDD
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevos Automoviles de Agencia");
                 return "registroAutomovilesAgencia";
@@ -57,7 +63,11 @@ public class AutomovilBean {
                 }
             }
         }else if (tipoAuto.equals("renta")){
+            //Usamos Funcion para crear el ID del Automovil
             crearIDAutomovil(0);
+            //le colocamos un estado al Carro para poder saber su disponiblidad
+            automovil.setEstado(21);
+            //ACCIONES PARA INSERTARLO EN LA BDD
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevo Automovil de Renta");
                 return "registroAutomovilesParaRenta";
@@ -72,10 +82,14 @@ public class AutomovilBean {
 
         }else {
             if (modeloUsuario.verificarDui(duiSolicitante) == 1){
+                //Usamos Funcion para crear el ID del Automovil
                 crearIDAutomovil(2);
+                //Buscamos el usuario solicitante
                 UsuarioEntity userSolicitante = modeloUsuario.obtenerUsuario(duiSolicitante);
-                automovil.setEstado(0);
                 automovil.setUsuarioByIdClienteVenta(userSolicitante);
+                //le colocamos un estado al Carro para poder saber su disponiblidad
+                automovil.setEstado(0);
+                //ACCIONES PARA INSERTARLO EN LA BDD
                 if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                     JsfUtil.setErrorMessage("","Error: No se inserto los nuevo Automovil de Renta");
                     return "SolicitarVenta";
@@ -93,6 +107,27 @@ public class AutomovilBean {
             }
         }
 
+    }
+
+    public void cambiarEstadoAuto(AutomovilesEntity auto){
+        String estadoAccion = JsfUtil.getRequest().getParameter("estadoAccion");
+       if (auto.getEstado() == 0){
+           //evaluamos si aceptaremos rechazaremos
+           if (estadoAccion.equals("11")){
+               auto.setEstado(1);
+           }else {
+               auto.setEstado(2);
+           }
+
+           if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
+               FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+           }
+       }else if(auto.getEstado() == 1){
+           auto.setEstado(2);
+           if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
+               FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+           }
+       }
     }
 
     //FUNCIONES PARA UTILIDADES

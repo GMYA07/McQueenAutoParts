@@ -67,6 +67,21 @@ public class AutomovilesModel {
         }
     }
 
+    public int cambiarEstadoAutomovil(AutomovilesEntity autoCambiarEstado){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        try {
+            trans.begin();
+            em.merge(autoCambiarEstado);
+            trans.commit();
+            em.close();
+            return 1;
+        }catch (Exception e){
+            em.close();
+            return 0;
+        }
+    }
+
     public int insertarAutomovil(AutomovilesEntity newAutomovil){
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction tran = em.getTransaction();

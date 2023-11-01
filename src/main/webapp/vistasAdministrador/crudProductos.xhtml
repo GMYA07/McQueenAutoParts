@@ -11,8 +11,8 @@
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
-                <h:form>
-                    <b:dataTable value="#{repuestoBean.listaRepuestos}" var="repuesto" id="productosTable" styleClass="table table-striped table-bordered">
+                <h:form id="productosTable">
+                    <b:dataTable value="#{repuestoBean.listaRepuestos}" var="repuesto" id="tablaPro" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Id del Repuesto" />
@@ -59,31 +59,44 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones" />
                             </f:facet>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Repuesto"/>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Repuesto"/>
+                            <b:commandButton onclick="$('.formValidationModalClass').modal('show')" value="Modificar Producto" look="primary"
+                                             action="#{repuestoBean.settearTodoElProducto(repuesto.nombre,repuesto.precio,repuesto.cantidad,repuesto.categorias,repuesto.marca,repuesto.imagenRepuesto,repuesto.idRepuesto)}">
+                                <f:ajax render="contenidoParaActualizar" execute="@form" />
+                            </b:commandButton>
+                            <b:commandButton action="#{repuestoBean.eliminarRepuesto(repuesto.idRepuesto)}" look="danger" value="Eliminar Repuesto" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
                         </h:column>
                     </b:dataTable>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
                 </h:form>
                 <br/>
                 <br/>
-                <h:form styleClass="formularioModi"  style="margin-left: 700px">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Empleado"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Apellidos del Empleado"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Edad del Empleado"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
-                </h:form>
             </b:container>
         </b:container>
+        <b:modal title="Modificar Producto" styleClass="formValidationModalClass" closable="false" closeOnEscape="true" >
+            <b:form id="contenidoParaActualizar">
+                <b:inputText type="hidden" value="#{repuestoBean.repuesto.idRepuesto}"/>
+                <b:inputText type="hidden" value="#{repuestoBean.repuesto.categorias}"/>
+                <b:inputText type="hidden" value="#{repuestoBean.repuesto.marca}"/>
+                <b:inputText type="hidden" value="#{repuestoBean.repuesto.imagenRepuesto}"/>
+                <h:outputText value="Nombre del repuesto" />
+                <b:inputText value="#{repuestoBean.repuesto.nombre}" />
+                <h:outputText value="Cantidad del repuesto" />
+                <b:inputText value="#{repuestoBean.repuesto.cantidad}" />
+                <h:outputText value="Precio del repuesto" />
+                <b:inputText value="#{repuestoBean.repuesto.precio}" />
+                <b:row>
+                    <b:column>
+                        <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                        <b:commandButton action="#{repuestoBean.modificarRepuesto()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass').modal('hide') } ">
+                            <f:ajax render="productosTable" execute="@form"  />
+                        </b:commandButton>
+                    </b:column>
+                </b:row>
+                <b:fetchBeanInfos />
+                <b:messages />
+            </b:form>
+        </b:modal>
     </ui:define>
 </ui:composition>

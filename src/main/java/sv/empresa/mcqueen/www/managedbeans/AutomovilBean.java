@@ -28,10 +28,12 @@ public class AutomovilBean {
     public String duiSolicitante;
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
     private UsuariosModel modeloUsuario = new UsuariosModel();
+    //Listas de diferentes tipos para cada crud que sea necesario
     List<AutomovilesEntity> listaAutomoviles;
     private List<AutomovilesEntity> listaAutomovilesAgencia;
     private List<AutomovilesEntity> listaAutomovilesUsuarios;
     private List<AutomovilesEntity> listaAutomovilesRentar;
+    private List<AutomovilesEntity> listaAutomovilesMisAutos; //esta lista es para un usuario especifico
 
     //Variables para guardar la img
     private Part imagen;
@@ -170,6 +172,10 @@ public class AutomovilBean {
     }
 
     //GETTER AND SETTER
+
+    public List<AutomovilesEntity> getListaAutomovilesMisAutos(String duiU) {
+        return modeloAutomovil.listarAutomovilesMisAutosUser(modeloUsuario.obtenerUsuario(duiU));
+    }
 
     public List<AutomovilesEntity> getListaAutomovilesRentar() {
         return modeloAutomovil.listarAutomovilesRentar();

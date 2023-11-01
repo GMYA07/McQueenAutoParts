@@ -52,7 +52,7 @@ public class IniciarSesionBean {
 
             // Obtener la sesión actual del usuario; si no existe una sesión, devuelve null (false)
             HttpSession session = (HttpSession) externalContext.getSession(false);
-            session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
+            session.setAttribute("idUsuario", modeloUsuario.iniciarSesionUsuario(correoUsuario, passUsuario));
 
             return "vistasCliente/indexCliente";
 
@@ -65,7 +65,7 @@ public class IniciarSesionBean {
 
             // Obtener la sesión actual del usuario; si no existe una sesión, devuelve null (false)
             HttpSession session = (HttpSession) externalContext.getSession(false);
-            session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
+            session.setAttribute("idUsuario", modeloEmpleado.iniciarSesionEmpleado(correoUsuario, passUsuario));
 
             return "vistasEmpleado/IndexEmpleado";
 
@@ -78,7 +78,7 @@ public class IniciarSesionBean {
 
             // Obtener la sesión actual del usuario; si no existe una sesión, devuelve null (false)
             HttpSession session = (HttpSession) externalContext.getSession(false);
-            session.setAttribute("idUsuario", modeloAdministrador.iniciarSesionAdmin(correoUsuario, passUsuario));
+            session.setAttribute("idUsuario", modeloMecanico.iniciarSesionMecanico(correoUsuario, passUsuario));
 
             return "vistasMecanico/indexMecanico";
         }else {

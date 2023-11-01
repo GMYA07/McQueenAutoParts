@@ -42,4 +42,39 @@ public class RepuestosModel {
             return 0;
         }
     }
+    public int modificarRepuestos(RepuestosEntity actuRepuesto){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        try {
+            tran.begin();
+            em.merge(actuRepuesto);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch (Exception e){
+            em.close();
+            return  0;
+        }
+    }
+    public int eliminarRepuesto(String idRep){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        int filasBorradas = 0;
+        try {
+            // Recuperando el objeto a eliminar
+            RepuestosEntity repuesto = em.find(RepuestosEntity.class,idRep);
+            if (repuesto != null){
+                tran.begin();
+                em.remove(repuesto);
+                tran.commit();
+                em.close();
+                filasBorradas = 1;
+            }
+            return filasBorradas;
+        }catch (Exception e){
+            em.close();
+            return 0;
+        }
+    }
+
 }

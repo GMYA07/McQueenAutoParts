@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 public class AutomovilesModel {
@@ -59,6 +60,22 @@ public class AutomovilesModel {
             // la lista de resultados de una consulta de selección
             List<AutomovilesEntity> lista = consulta.getResultList();
 
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+    public List<AutomovilesEntity> listarAutomovilesMisAutosUser(UsuarioEntity dui){
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM AutomovilesEntity e WHERE e.usuarioByIdClienteVenta = :dui ");
+            consulta.setParameter("dui",dui);
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<AutomovilesEntity> lista = consulta.getResultList();
             em.close(); // Cerrando el EntityManager
             return lista;
         } catch (Exception e) {

@@ -1,7 +1,9 @@
 package sv.empresa.mcqueen.www.managedbeans;
 
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import sv.empresa.mcqueen.www.entities.RepuestosEntity;
@@ -27,20 +29,30 @@ public class RepuestoBean {
     //Variables para guardar la img
     private Part imagen;
 
-    public String registrarRepuestos() throws IOException {
+    public void registrarRepuestos() throws IOException {
         crearIDRepuestos();
         repuesto.setImagenRepuesto(imagen.getSubmittedFileName());
         if (modeloRepuestos.insertarRepuestos(repuesto) != 1){
             JsfUtil.setErrorMessage("","Error: No se inserto el nuevo Repuesto");
-            return "addRepuestos";
         }else {
             if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                return "addRepuestos";
+                repuesto = null;
+                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Producto Exitosamente", "Actualizado"));
             }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
-                    return "registroAutomovilesAgencia";
             }
 
+        }
+    }
+
+    public void modificarRepuesto(){
+        if (modeloRepuestos.modificarRepuestos(repuesto) > 0){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Producto Exitosamente", "Actualizado"));
+        }
+    }
+    public void eliminarRepuesto(String idRep){
+        if (modeloRepuestos.eliminarRepuesto(idRep) > 0){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "El Producto Fue Eliminado", "Actualizado"));
         }
     }
 
@@ -50,6 +62,16 @@ public class RepuestoBean {
         int numeroAleatorio = rand.nextInt(900) + 100;
         repuesto.setIdRepuesto("RPT" + numeroAleatorio);
 
+    }
+    //Esta funcion realizar el llenado para el formulario de actualizar
+    public void settearTodoElProducto(String nombre, double precio, int cantidad, String categoria, String marca, String foto, String idRep){
+        repuesto.setIdRepuesto(idRep);
+        repuesto.setNombre(nombre);
+        repuesto.setCategorias(categoria);
+        repuesto.setMarca(marca);
+        repuesto.setImagenRepuesto(foto);
+        repuesto.setPrecio(precio);
+        repuesto.setCantidad(cantidad);
     }
     //Con esta funcion guardamos imagenes en una carpeta interna del proyecto
     public int subirIMGCarpetaInterna(InputStream inputS, String nombreIMG){

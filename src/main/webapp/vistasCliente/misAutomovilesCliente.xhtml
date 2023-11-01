@@ -4,26 +4,19 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                template="/templates/plantillaIndex.xhtml">
-    <ui:define name="contenidoAdministrador">
-        <h1 class="text-center">Tabla de Registro de Carros en Venta</h1>
+                template="/templates/PlantillaIndexCliente.xhtml">
+    <ui:define name="menu">
+        <h1 class="text-center">Mis Automoviles</h1>
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
                 <h:form>
-                    <h2 class="text-center">Tabla de Registro de Carros en Venta de Usuarios</h2>
-                    <b:dataTable value="#{automovilBean.listaAutomovilesUsuarios}" var="car" id="productosTable2" styleClass="table table-striped table-bordered">
+                    <b:dataTable value="#{automovilBean.getListaAutomovilesMisAutos(session.getAttribute('idUsuario'))}" var="car" id="productosTable2" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Id de los Automoviles" />
                             </f:facet>
                             <h:outputText value="#{car.idAutomovil}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Id de los Clientes" />
-                            </f:facet>
-                            <h:outputText value="#{car.usuarioByIdClienteVenta.dui}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -86,9 +79,6 @@
                             <ui:fragment rendered="#{car.estado == 2}">
                                 <h:outputText value="Rechazado para vender" />
                             </ui:fragment>
-                            <ui:fragment rendered="#{car.estado == 3}">
-                                <h:outputText value="Automovil no disponible para vender" />
-                            </ui:fragment>
                             <ui:fragment rendered="#{car.estado == 4}">
                                 <h:outputText value="Automovil vendido" />
                             </ui:fragment>
@@ -97,18 +87,6 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones a realizar" />
                             </f:facet>
-                            <ui:fragment rendered ="#{car.estado == 0}">
-                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="primary" value="Aceptar Solicitud">
-                                    <f:ajax execute="@form" render="@form" />
-                                    <f:param name="estadoAccion" value="11"/>
-                                </b:commandButton>
-                                <br/>
-                                <br/>
-                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="primary" value="Rechazar Solicitud">
-                                    <f:ajax execute="@form" render="@form" />
-                                    <f:param name="estadoAccion" value="22"/>
-                                </b:commandButton>
-                            </ui:fragment>
                             <ui:fragment rendered ="#{car.estado == 1}">
                                 <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Cancelar Publicacion del Automovil">
                                     <f:ajax execute="@form" render="@form" />
@@ -119,26 +97,6 @@
                             </ui:fragment>
                         </h:column>
                     </b:dataTable>
-                </h:form>
-                <br/>
-                <br/>
-                <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
-                <h:form styleClass="formularioModi" style="margin-left: 700px">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Carro"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Precio del Carro"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Año del Carro"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
                 </h:form>
             </b:container>
         </b:container>

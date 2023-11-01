@@ -2,64 +2,239 @@
 
 <ui:composition
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
         xmlns:b="http://bootsfaces.net/ui"
         xmlns:f="http://xmlns.jcp.org/jsf/core"
         xmlns:p="http://primefaces.org/ui"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
         template="../templates/plantillaEmpleado.xhtml">
 
 
     <ui:define name="content">
+        <b:modal title="Agregar Nuevo Repuesto" styleClass="formValidationModalClass1" closable="false" closeOnEscape="true">
+            <b:form enctype="multipart/form-data">
+                <h:outputLabel value="Marca de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.marcaAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Modelo de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.modeloAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Año de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.yearAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Especificaciones de los Automoviles"/>
+                <br/>
+                <b:inputTextarea value="#{automovilBean.automovil.especificaciones}"/>
+                <br/>
+                <h:outputLabel value="Color de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.colorAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Precio de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Imagen de los Automoviles"/>
+                <br/>
+                <h:inputFile value="#{automovilBean.imagen}"/>
+                <br/>
+                <h:outputLabel value="Cantidad del Automoviles"/>
+                <br/>
+                <b:inputText id="cantidad" value="#{automovilBean.automovil.cantidad}" />
+                <br/>
+                <br/>
+                <b:row>
+                    <b:column>
+                        <b:button largeScreen="half"  value="Cancel"
+                                  dismiss="modal" onclick="return false;"/>
+                        <b:commandButton largeScreen="half" dismiss="modal" value="Registrar Nuevos Automoviles" styleClass="btn btn-success" action="#{automovilBean.registrarNuevoAutomovil()}" style="margin-right:15px; margin-bottom: 20px"
+                                         oncomplete="if(!validationFailed) { $('.formValidationModalClass1').modal('hide') } ">
+                            <f:ajax execute="@form" render="tablaFormAgencia"/>
+                            <f:param name="tipoAuto" value="agencia"/>
+                        </b:commandButton>
+                    </b:column>
+                </b:row>
+                <b:fetchBeanInfos />
+                <b:messages />
+            </b:form>
+        </b:modal>
 
         <div class="container">
             <div class="row">
-                <h2>Tabla de los Automoviles</h2>
-                <h:form >
-                    <h:dataTable styleClass="table" value="#{inputTextBean.text}">
+                <h1 class="text-center">Tabla de los Automoviles de Agencia</h1>
+                <h:form id="tablaFormAgencia">
+                    <h:dataTable value="#{automovilBean.listaAutomovilesAgencia}" var="car" id="productosTableA" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
-                                <h:outputLabel value="IMG"/>
+                                <h:outputText value="Id de los Automoviles" />
                             </f:facet>
-                            <h:outputText value="#{inputTextBean.text}"/>
+                            <h:outputText value="#{car.idAutomovil}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputLabel value="Marca"/>
+                                <h:outputText value="Marca de los Automoviles" />
                             </f:facet>
-                            <h:outputText value="#{inputTextBean.text}"/>
+                            <h:outputText value="#{car.marcaAutomovil}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputLabel value="Año"/>
-
+                                <h:outputText value="Modelo de los Automoviles" />
                             </f:facet>
-                            <h:outputText value="#{inputTextBean.text}"/>
+                            <h:outputText value="#{car.modeloAutomovil}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputLabel value="Precio"/>
+                                <h:outputText value="Año del Carro" />
                             </f:facet>
-                            <h:outputText value="#{inputTextBean.text}"/>
+                            <h:outputText value="#{car.yearAutomovil}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputLabel value="Cantidad Existencia"/>
+                                <h:outputText value="Especifiaciones de los Automoviles" />
                             </f:facet>
-                            <h:outputText value="#{inputTextBean.text}"/>
+                            <h:outputText value="#{car.especificaciones}" />
                         </h:column>
-
                         <h:column>
                             <f:facet name="header">
-                                <h:outputLabel value="Operacion"/>
+                                <h:outputText value="Color de los Automoviles" />
                             </f:facet>
-                            <h:commandButton value="Modificar" styleClass="btn btn-danger"
-                                             action="#{inputTextBean.text}">
-                            </h:commandButton>
+                            <h:outputText value="#{car.colorAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.precioAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Foto de los Automoviles" />
+                            </f:facet>
+                            <p:graphicImage value="/resources/imgAutomoviles/#{car.fotoAutomovil}" style="width: 200px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cantidad de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.cantidad}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de los Automoviles" />
+                            </f:facet>
+                            <ui:fragment rendered="#{car.estado == 11}">
+                                <h:outputText value="En produccion" />
+                            </ui:fragment>
+                            <ui:fragment rendered="#{car.estado == 12}">
+                                <h:outputText value="Agotados" />
+                            </ui:fragment>
                         </h:column>
                     </h:dataTable>
                 </h:form>
+                <br/>
+                <h:form id="miFormularioAgencia" enctype="multipart/form-data">
+                    <b:button onclick="$('.formValidationModalClass1').modal('show')" value="Agregar Nuevo Automoviles de Agencia" look="primary"/>
+                </h:form>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Tabla de los Automoviles Para Rentar</h1>
+                <h:form >
+                    <h:dataTable value="#{automovilBean.listaAutomovilesRentar}" var="car" id="productosTableR" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.idAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de los Clientes" />
+                            </f:facet>
+                            <h:outputText value="#{car.usuarioByIdClienteVenta.dui}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Placa de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.placaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Marca de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.marcaAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Modelo de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Año del Carro" />
+                            </f:facet>
+                            <h:outputText value="#{car.yearAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Especifiaciones de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.especificaciones}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Color de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.colorAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de los Automoviles" />
+                            </f:facet>
+                            <h:outputText value="#{car.precioAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Foto de los Automoviles" />
+                            </f:facet>
+                            <p:graphicImage value="/resources/imgAutomoviles/#{car.fotoAutomovil}" style="width: 200px"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de los Automoviles" />
+                            </f:facet>
+                            <ui:fragment rendered="#{car.estado == 0}">
+                                <h:outputText value="Disponible para Rentar" />
+                            </ui:fragment>
+                            <ui:fragment rendered="#{car.estado == 1}">
+                                <h:outputText value="Esta Rentado Actuamente" />
+                            </ui:fragment>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Accion" />
+                            </f:facet>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Automovil"/>
+                            <br/>
+                            <br/>
+                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Automovil"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                <h:form id="miFormularioRenta" enctype="multipart/form-data">
+                    <b:button onclick="$('.formValidationModalClass2').modal('show')" value="Agregar Nuevo Automoviles de Agencia" look="primary"/>
+                </h:form>
+                <br/>
+                <br/>
             </div>
         </div>
 

@@ -47,8 +47,13 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones" />
                             </f:facet>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Empleado"/>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Empleado"/>
+                            <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Cantidad de Automoviles" look="primary"
+                                             action="#{automovilBean.setterAutomovilModi(meca.dui)}">
+                                <f:ajax execute="@form" render="contenidoActualizarAuto"/>
+                            </b:commandButton>
+                            <b:commandButton action="#{automovilBean.eliminarAutomovil(meca.dui)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
                         </h:column>
                     </b:dataTable>
                 </h:form>
@@ -58,23 +63,6 @@
                 </h:form>
                 <br/>
                 <br/>
-                <h:form styleClass="formularioModi"  style="margin-left: 700px">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Empleado"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Apellidos del Empleado"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Edad del Empleado"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
-                </h:form>
             </b:container>
         </b:container>
     </ui:define>

@@ -116,7 +116,8 @@ public class AutomovilBean {
             FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Se actualizo exitosamente el Automovil", "Registrado"));
         }else {
-            JsfUtil.setErrorMessage("","Error: No se pudo actualizar el automovil");
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "No se pudo ingresar el Auto", "No registrado"));
         }
     }
 

@@ -12,7 +12,7 @@
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
-                <h:form>
+                <h:form id="tablaFormAgenciaMecanico">
                     <b:dataTable value="#{mecanicoBean.listaMecanicos}" var="meca" id="productosTable" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
@@ -48,10 +48,10 @@
                                 <h:outputText value="Acciones" />
                             </f:facet>
                             <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Cantidad de Automoviles" look="primary"
-                                             action="#{automovilBean.setterAutomovilModi(meca.dui)}">
+                                             action="#{mecanicoBean.settearMecanicoForm(meca.dui)}">
                                 <f:ajax execute="@form" render="contenidoActualizarAuto"/>
                             </b:commandButton>
-                            <b:commandButton action="#{automovilBean.eliminarAutomovil(meca.dui)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                            <b:commandButton action="#{mecanicoBean.eliminarMecanico(meca.dui)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
                                 <f:ajax render="@form" execute="@form"  />
                             </b:commandButton>
                         </h:column>
@@ -63,6 +63,28 @@
                 </h:form>
                 <br/>
                 <br/>
+                <b:modal title="Modificar Mecanico" styleClass="formValidationModalClass3"
+                         closable="false"
+                         closeOnEscape="true">
+                    <b:form id="contenidoActualizarAuto">
+                        <b:inputText type="hidden" value="#{mecanicoBean.mecanico.dui}"/>
+                        <b:inputText type="hidden" value="#{mecanicoBean.mecanico.estado}"/>
+                        <b:inputText type="hidden" value="#{mecanicoBean.mecanico.nombre}"/>
+                        <b:inputText type="hidden" value="#{mecanicoBean.mecanico.pass}"/>
+                        <h:outputText value="Correo Mecanico" />
+                        <b:inputText value="#{mecanicoBean.mecanico.correo}"/>
+                        <b:row>
+                            <b:column>
+                                <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                <b:commandButton action="#{mecanicoBean.modificarMecanico()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                                    <f:ajax execute="@form" render="tablaFormAgenciaMecanico"/>
+                                </b:commandButton>
+                            </b:column>
+                        </b:row>
+                        <b:fetchBeanInfos />
+                        <b:messages />
+                    </b:form>
+                </b:modal>
             </b:container>
         </b:container>
     </ui:define>

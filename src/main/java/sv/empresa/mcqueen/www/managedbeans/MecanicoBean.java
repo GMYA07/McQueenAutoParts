@@ -1,7 +1,9 @@
 package sv.empresa.mcqueen.www.managedbeans;
 
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import sv.empresa.mcqueen.www.models.MecanicosModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
 import sv.empresa.mcqueen.www.entities.MecanicosEntity;
@@ -37,6 +39,26 @@ public class MecanicoBean {
             JsfUtil.setErrorMessage("","Error: el dui ya existe en la plataforma");
             return "registroMecanico";
         }
+    }
+    public void modificarMecanico(){
+        if (modeloMecanico.modificarMecanico(mecanico) == 1){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Se registro el Mecanico Exitosamente", "Ingresado"));
+        }else {
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "No se pudo ingresar el mecanico", "No registrado"));
+        }
+    }
+    public void eliminarMecanico(String duiMeca){
+        if (modeloMecanico.eliminarMecanico(duiMeca) == 1){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Se registro el Mecanico Exitosamente", "Ingresado"));
+        }else {
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "No se pudo ingresar el mecanico", "No registrado"));
+        }
+    }
+
+    public void settearMecanicoForm(String duiMeca){
+        mecanico = modeloMecanico.obtenerMecanico(duiMeca);
     }
 
     //GETTER Y SETTER

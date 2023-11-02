@@ -141,18 +141,14 @@
                     </div>
                     <div class="form-group">
                         <label for="precio">Precio del vehiculo:</label>
-                        <b:inputText id="precio" name="precio" placeholder="15,000">
-                            <f:facet name="prepend">
-                                <h:outputText value="#{automovilBean.automovil.precioAutomovil}" />
-                            </f:facet>
-                        </b:inputText>
+                        <b:inputText value="#{automovilBean.automovil.precioAutomovil}" id="precio" name="precio" placeholder="15,000"/>
                     </div>
                     <div class="form-group">
                         <label for="foto">Foto del vehículo:</label>
                         <h:inputFile value="#{automovilBean.imagen}" name="foto" id="foto" />
                     </div>
                     <br/>
-                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="danger" value="Insertar Mecanico">
+                    <b:commandButton action="#{automovilBean.registrarNuevoAutomovil('soliUser')}" look="danger" value="Insertar Mecanico">
                         <f:param name="tipoAuto" value="solicitud"/>
                     </b:commandButton>
                 </h:form>

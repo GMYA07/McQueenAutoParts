@@ -10,7 +10,7 @@
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
-                <h:form>
+                <h:form id="tablaFormMisAutos">
                     <b:dataTable value="#{automovilBean.getListaAutomovilesMisAutos(session.getAttribute('idUsuario'))}" var="car" id="productosTable2" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
@@ -92,7 +92,17 @@
                                     <f:ajax execute="@form" render="@form" />
                                 </b:commandButton>
                             </ui:fragment>
-                            <ui:fragment rendered ="#{car.estado > 1}">
+                            <ui:fragment rendered ="#{car.estado == 2}">
+                                <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Editar Solicitud" look="primary"
+                                                 action="#{automovilBean.setterSoliAutomovilModi(car.idAutomovil)}">
+                                    <f:ajax execute="@form" render="contenidoActualizarAuto"/>
+                                </b:commandButton>
+                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Cancelar Solicitud">
+                                    <f:ajax execute="@form" render="@form" />
+                                    <f:param name="estadoAccion" value="777"/>
+                                </b:commandButton>
+                            </ui:fragment>
+                            <ui:fragment rendered ="#{car.estado > 2}">
                                 <h:outputText value="Sin ninguna accion" />
                             </ui:fragment>
                         </h:column>
@@ -100,5 +110,52 @@
                 </h:form>
             </b:container>
         </b:container>
+        <b:modal title="Modifica Solicitud para vender Automovil" styleClass="formValidationModalClass3" closable="false" closeOnEscape="true">
+            <b:form enctype="multipart/form-data" id="contenidoActualizarAuto">
+                <h:outputLabel value="Marca de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.marcaAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Placa del Automovil"/>
+                <br/>
+                <b:inputText  value="#{automovilBean.automovil.placaAutomovil}" />
+                <br/>
+                <h:outputLabel value="Modelo de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.modeloAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Año de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.yearAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Especificaciones de los Automoviles"/>
+                <br/>
+                <b:inputTextarea value="#{automovilBean.automovil.especificaciones}"/>
+                <br/>
+                <h:outputLabel value="Color de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.colorAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Precio de los Automoviles"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Imagen de los Automoviles"/>
+                <br/>
+                <h:inputFile value="#{automovilBean.imagen}"/>
+                <br/>
+                <b:row>
+                    <b:column>
+                        <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
+                        <b:commandButton largeScreen="half" dismiss="modal" value="Registrar Nuevos Automoviles" styleClass="btn btn-success" action="#{automovilBean.modificarAutomovil()}" style="margin-right:15px; margin-bottom: 20px"
+                                         oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                            <f:ajax execute="@form" render="tablaFormMisAutos" resetValues="true"/>
+                        </b:commandButton>
+                    </b:column>
+                </b:row>
+                <b:fetchBeanInfos />
+                <b:messages />
+            </b:form>
+        </b:modal>
     </ui:define>
 </ui:composition>

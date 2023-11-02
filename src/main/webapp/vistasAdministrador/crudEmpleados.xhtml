@@ -11,7 +11,7 @@
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
-                <h:form>
+                <h:form id="tablaFormEmple">
                     <b:dataTable value="#{empleadoBean.listaEmpleados}" var="emple" id="productosTable" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
@@ -35,8 +35,13 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones" />
                             </f:facet>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Empleado"/>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Empleado"/>
+                            <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Empleado" look="primary"
+                                             action="#{empleadoBean.settearFormEmple(emple.dui)}">
+                                <f:ajax execute="@form" render="contenidoActualizarEmple"/>
+                            </b:commandButton>
+                            <b:commandButton action="#{empleadoBean.eliminarEmpleado(emple.dui)}"  look="danger" value="Eliminar Empleado" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
                         </h:column>
                     </b:dataTable>
                 </h:form>
@@ -46,23 +51,27 @@
                 </h:form>
                 <br/>
                 <br/>
-                <h:form styleClass="formularioModi"  style="margin-left: 700px">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Empleado"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Apellidos del Empleado"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Edad del Empleado"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
-                </h:form>
+                <b:modal title="Modificar Empleado" styleClass="formValidationModalClass3"
+                         closable="false"
+                         closeOnEscape="true">
+                    <b:form id="contenidoActualizarEmple">
+                        <b:inputText type="hidden" value="#{empleadoBean.empleado.dui}"/>
+                        <b:inputText type="hidden" value="#{empleadoBean.empleado.nombre}"/>
+                        <b:inputText type="hidden" value="#{empleadoBean.empleado.pass}"/>
+                        <h:outputText value="Correo Emplado" />
+                        <b:inputText value="#{empleadoBean.empleado.correo}"/>
+                        <b:row>
+                            <b:column>
+                                <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                <b:commandButton action="#{empleadoBean.modificarEmpleado()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                                    <f:ajax execute="@form" render="tablaFormEmple"/>
+                                </b:commandButton>
+                            </b:column>
+                        </b:row>
+                        <b:fetchBeanInfos />
+                        <b:messages />
+                    </b:form>
+                </b:modal>
             </b:container>
         </b:container>
 

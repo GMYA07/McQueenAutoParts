@@ -189,13 +189,13 @@
                             <ui:fragment rendered ="#{car.estado == 0}">
                                 <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="primary" value="Aceptar Solicitud">
                                     <f:ajax execute="@form" render="@form" />
-                                    <f:param name="estadoAccion" value="11"/>
+                                    <f:param name="estadoAccion" value="111"/>
                                 </b:commandButton>
                                 <br/>
                                 <br/>
                                 <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="primary" value="Rechazar Solicitud">
                                     <f:ajax execute="@form" render="@form" />
-                                    <f:param name="estadoAccion" value="22"/>
+                                    <f:param name="estadoAccion" value="222"/>
                                 </b:commandButton>
                             </ui:fragment>
                             <ui:fragment rendered ="#{car.estado == 1}">

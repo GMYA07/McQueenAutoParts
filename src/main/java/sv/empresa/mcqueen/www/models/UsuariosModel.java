@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import sv.empresa.mcqueen.www.entities.EmpleadosEntity;
+import sv.empresa.mcqueen.www.entities.MecanicosEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;
@@ -120,6 +121,41 @@ public class UsuariosModel {
             tran.commit();
             em.close();
             return 1;
+        }catch (Exception e){
+            em.close();
+            return 0;
+        }
+    }
+
+    public int modificarUsuario(UsuarioEntity modifiUsuario){
+        EntityManager eM = JpaUtil.getEntityManager();
+        EntityTransaction traN = eM.getTransaction();
+        try {
+            traN.begin();
+            eM.merge(modifiUsuario);
+            traN.commit();
+            eM.close();
+            return 1;
+        }catch (Exception e){
+            eM.close();
+            return 0;
+        }
+    }
+    public int eliminarUsuario(String duiUser){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        int filasBorradas = 0;
+        try {
+            // Recuperando el objeto a eliminar
+            UsuarioEntity usuario = em.find(UsuarioEntity.class,duiUser);
+            if (usuario != null){
+                tran.begin();
+                em.remove(usuario);
+                tran.commit();
+                em.close();
+                filasBorradas = 1;
+            }
+            return filasBorradas;
         }catch (Exception e){
             em.close();
             return 0;

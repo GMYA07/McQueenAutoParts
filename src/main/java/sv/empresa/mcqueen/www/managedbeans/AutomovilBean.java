@@ -112,6 +112,7 @@ public class AutomovilBean {
 
     }
     public void modificarAutomovil(){
+
         if (modeloAutomovil.modificarAutomovil(automovil) > 0){
             FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
                     "Se actualizo exitosamente el Automovil", "Registrado"));
@@ -132,7 +133,7 @@ public class AutomovilBean {
         String estadoAccion = JsfUtil.getRequest().getParameter("estadoAccion");
        if (auto.getEstado() == 0){
            //evaluamos si aceptaremos rechazaremos
-           if (estadoAccion.equals("11")){
+           if (estadoAccion.equals("111")){
                auto.setEstado(1);
            }else {
                auto.setEstado(2);
@@ -142,9 +143,18 @@ public class AutomovilBean {
                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
            }
        }else if(auto.getEstado() == 1){
-           auto.setEstado(2);
+           auto.setEstado(3);
            if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+           }
+       }else if(auto.getEstado() == 2){ // si presiona el boton y esta en 2 eso significa que hace un cambio en su solicitud
+           if (estadoAccion.equals("777")){
+               modeloAutomovil.eliminarAutomovil(auto.getIdAutomovil());
+           }else {
+               auto.setEstado(0);
+               if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
+                   FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+               }
            }
        }
     }
@@ -163,6 +173,10 @@ public class AutomovilBean {
     }
     public void setterAutomovilModi(String idAuto){
         automovil = modeloAutomovil.obtenerAutomovil(idAuto);
+    }
+    public void setterSoliAutomovilModi(String idAuto){
+        automovil = modeloAutomovil.obtenerAutomovil(idAuto);
+        automovil.setEstado(0);
     }
     //Con esta funcion guardamos imagenes en una carpeta interna del proyecto
     public int subirIMGCarpetaInterna(InputStream inputS, String nombreIMG){

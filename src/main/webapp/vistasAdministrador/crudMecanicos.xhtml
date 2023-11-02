@@ -47,11 +47,11 @@
                             <f:facet name="header">
                                 <h:outputText value="Acciones" />
                             </f:facet>
-                            <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Cantidad de Automoviles" look="primary"
+                            <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Mecanico" look="primary"
                                              action="#{mecanicoBean.settearMecanicoForm(meca.dui)}">
                                 <f:ajax execute="@form" render="contenidoActualizarAuto"/>
                             </b:commandButton>
-                            <b:commandButton action="#{mecanicoBean.eliminarMecanico(meca.dui)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                            <b:commandButton action="#{mecanicoBean.eliminarMecanico(meca.dui)}"  look="danger" value="Eliminar Mecanico" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
                                 <f:ajax render="@form" execute="@form"  />
                             </b:commandButton>
                         </h:column>

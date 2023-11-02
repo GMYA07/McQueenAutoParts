@@ -11,7 +11,7 @@
       <br/>
       <b:container styleClass="contendorCrudPadre" style="width:100%">
          <b:container styleClass="contendorCrud" style="width:100%">
-            <h:form>
+            <h:form id="tablaFormUsuario">
                <b:dataTable value="#{usuarioBean.listaUsuarios}" var="user" id="productosTable" styleClass="table table-striped table-bordered">
                   <h:column>
                      <f:facet name="header">
@@ -41,30 +41,41 @@
                      <f:facet name="header">
                         <h:outputText value="Acciones" />
                      </f:facet>
-                     <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Usuario"/>
-                     <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Usuario"/>
+                     <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Usuario" look="primary"
+                                      action="#{usuarioBean.setteFormUser(user.dui)}">
+                        <f:ajax execute="@form" render="contenidoActualizarUser"/>
+                     </b:commandButton>
+                     <b:commandButton action="#{usuarioBean.eliminarUser(user.dui)}"  look="danger" value="Eliminar Usuario" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                        <f:ajax render="@form" execute="@form"  />
+                     </b:commandButton>
                   </h:column>
                </b:dataTable>
             </h:form>
             <br/>
             <br/>
-            <h:form styleClass="formularioModi"  style="margin-left: 700px">
-               <h2>Modificar Producto</h2>
-               <h:outputLabel value="Nombre del Empleado"/>
-               <br/>
-               <h:inputText value=""/>
-               <br/>
-               <h:outputLabel value="Apellidos del Empleado"/>
-               <br/>
-               <h:inputText/>
-               <br/>
-               <h:outputLabel value="Edad del Empleado"/>
-               <br/>
-               <h:inputText/>
-               <br/>
-               <br/>
-               <b:button look="danger" value="Modificar"/>
-            </h:form>
+            <b:modal title="Modificar Usuario" styleClass="formValidationModalClass3"
+                     closable="false"
+                     closeOnEscape="true">
+               <b:form id="contenidoActualizarUser">
+                  <b:inputText type="hidden" value="#{usuarioBean.usuario.dui}"/>
+                  <b:inputText type="hidden" value="#{usuarioBean.usuario.nombre}"/>
+                  <b:inputText type="hidden" value="#{usuarioBean.usuario.pass}"/>
+                  <b:inputText type="hidden" value="#{usuarioBean.usuario.licencia}"/>
+                  <h:outputText value="Correo Usuario" />
+                  <b:inputText value="#{usuarioBean.usuario.correo}"/>
+                  <b:row>
+                     <b:column>
+                        <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                        <b:commandButton action="#{usuarioBean.modificarUser()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                           <f:ajax execute="@form" render="tablaFormUsuario"/>
+                        </b:commandButton>
+                     </b:column>
+                  </b:row>
+                  <b:fetchBeanInfos />
+                  <b:messages />
+               </b:form>
+            </b:modal>
+
          </b:container>
       </b:container>
    </ui:define>

@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import sv.empresa.mcqueen.www.entities.RepuestosEntity;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
@@ -84,6 +85,19 @@ public class AutomovilesModel {
         }
     }
 
+    public AutomovilesEntity obtenerAutomovil(String idAuto){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            // Recupero el objeto desde la BD a través del método find
+            AutomovilesEntity automovil = em.find(AutomovilesEntity.class, idAuto);
+            em.close();
+            return automovil;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+
     public int cambiarEstadoAutomovil(AutomovilesEntity autoCambiarEstado){
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -109,6 +123,41 @@ public class AutomovilesModel {
             tran.commit();
             em.close();
             return 1;
+        }catch (Exception e){
+            em.close();
+            return 0;
+        }
+    }
+    public int modificarAutomovil(AutomovilesEntity actuAuto){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        try {
+            tran.begin();
+            em.merge(actuAuto);
+            tran.commit();
+            em.close();
+            return 1;
+        }catch (Exception e){
+            em.close();
+            return  0;
+        }
+    }
+
+    public int eliminarAutomovil(String idAutomovil){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        int filasBorradas = 0;
+        try {
+            // Recuperando el objeto a eliminar
+            AutomovilesEntity automovil = em.find(AutomovilesEntity.class,idAutomovil);
+            if (automovil != null){
+                tran.begin();
+                em.remove(automovil);
+                tran.commit();
+                em.close();
+                filasBorradas = 1;
+            }
+            return filasBorradas;
         }catch (Exception e){
             em.close();
             return 0;

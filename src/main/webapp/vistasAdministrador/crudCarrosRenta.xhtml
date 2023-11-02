@@ -88,32 +88,14 @@
                             <f:facet name="header">
                                 <h:outputText value="Accion" />
                             </f:facet>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Automovil"/>
-                            <br/>
-                            <br/>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Automovil"/>
+                            <b:commandButton action="#{automovilBean.eliminarAutomovil(car.idAutomovil)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
                         </h:column>
                     </b:dataTable>
                 </h:form>
                 <br/>
                 <br/>
-                <h:form styleClass="formularioModi" style="margin-left: 750px">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Carro"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Precio del Carro"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Año del Carro"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
-                </h:form>
             </b:container>
         </b:container>
     </ui:define>

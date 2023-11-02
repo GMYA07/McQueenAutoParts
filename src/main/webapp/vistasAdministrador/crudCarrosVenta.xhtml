@@ -11,7 +11,7 @@
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
-                <h:form>
+                <h:form id="tablaFormAgenciaAuto">
                     <b:dataTable value="#{automovilBean.listaAutomovilesAgencia}" var="car" id="productosTable" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
@@ -77,6 +77,18 @@
                             <ui:fragment rendered="#{car.estado == 12}">
                                 <h:outputText value="Agotados" />
                             </ui:fragment>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones" />
+                            </f:facet>
+                            <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Cantidad de Automoviles" look="primary"
+                                             action="#{automovilBean.setterAutomovilModi(car.idAutomovil)}">
+                                <f:ajax execute="@form" render="contenidoActualizarAuto"/>
+                            </b:commandButton>
+                            <b:commandButton action="#{automovilBean.eliminarAutomovil(car.idAutomovil)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
                         </h:column>
                     </b:dataTable>
                 </h:form>
@@ -199,24 +211,35 @@
                 </h:form>
                 <br/>
                 <br/>
-                <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
-                <h:form styleClass="formularioModi" style="margin-left: 700px">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Nombre del Carro"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Precio del Carro"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Año del Carro"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
-                </h:form>
+                <b:modal title="Number game" styleClass="formValidationModalClass3"
+                         closable="false"
+                         closeOnEscape="true">
+                    <b:form id="contenidoActualizarAuto">
+                        <h:outputText value="Cantidad de Automoviles" />
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.idAutomovil}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.modeloAutomovil}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.estado}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.fotoAutomovil}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.colorAutomovil}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.especificaciones}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.yearAutomovil}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.estado}"/>
+                        <b:inputText type="hidden" value="#{automovilBean.automovil.marcaAutomovil}"/>
+                        <b:inputText value="#{automovilBean.automovil.cantidad}"/>
+                        <h:outputText value="Precio Automovil" />
+                        <b:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
+                        <b:row>
+                            <b:column>
+                                <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                <b:commandButton action="#{automovilBean.modificarAutomovil()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                                    <f:ajax execute="@form" render="tablaFormAgenciaAuto"/>
+                                </b:commandButton>
+                            </b:column>
+                        </b:row>
+                        <b:fetchBeanInfos />
+                        <b:messages />
+                    </b:form>
+                </b:modal>
             </b:container>
         </b:container>
     </ui:define>

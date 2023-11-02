@@ -23,7 +23,6 @@ import java.util.Random;
 @ManagedBean
 @RequestScoped
 public class AutomovilBean {
-
     private AutomovilesEntity automovil;
     public String duiSolicitante;
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
@@ -43,11 +42,11 @@ public class AutomovilBean {
 
     //Variables para guardar IMG
 
-    public String  registrarNuevoAutomovil() throws IOException {
-        String tipoAuto = JsfUtil.getRequest().getParameter("tipoAuto");
+    public void  registrarNuevoAutomovil(String tipo) throws IOException {
+
         automovil.setFotoAutomovil(imagen.getSubmittedFileName());
 
-        if (tipoAuto.equals("agencia")){
+        if (tipo.equals("agencia")){
             //Usamos Funcion para crear el ID del Automovil
             crearIDAutomovil(1);
             //le colocamos un estado al Carro para poder saber su disponiblidad
@@ -55,16 +54,17 @@ public class AutomovilBean {
             //ACCIONES PARA INSERTARLO EN LA BDD
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevos Automoviles de Agencia");
-                return "registroAutomovilesAgencia";
+
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                    return "addAutomoviles";
+                    FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Se registro exitosamente el Automovil", "Registrado"));
                 }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
-                    return "registroAutomovilesAgencia";
+
                 }
             }
-        }else if (tipoAuto.equals("renta")){
+        }else if (tipo.equals("renta")){
             //Usamos Funcion para crear el ID del Automovil
             crearIDAutomovil(0);
             //le colocamos un estado al Carro para poder saber su disponiblidad
@@ -72,13 +72,13 @@ public class AutomovilBean {
             //ACCIONES PARA INSERTARLO EN LA BDD
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevo Automovil de Renta");
-                return "registroAutomovilesParaRenta";
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                    return "addAutomoviles";
+                    FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Se registro exitosamente el Automovil", "Registrado"));
                 }else {
                     JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
-                    return "registroAutomovilesParaRenta";
+
                 }
             }
 
@@ -94,21 +94,37 @@ public class AutomovilBean {
                 //ACCIONES PARA INSERTARLO EN LA BDD
                 if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                     JsfUtil.setErrorMessage("","Error: No se inserto los nuevo Automovil de Renta");
-                    return "SolicitarVenta";
+
                 }else {
                     if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
-                        return "indexCliente";
+                        FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                "Se registro exitosamente el Automovil", "Registrado"));
                     }else {
                         JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
-                        return "SolicitarVenta";
+
                     }
                 }
             }else {
                 JsfUtil.setErrorMessage("","Error: No se encuentra el dui del usuario registrado");
-                return "SolicitarVenta";
+
             }
         }
 
+    }
+    public void modificarAutomovil(){
+        if (modeloAutomovil.modificarAutomovil(automovil) > 0){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Se actualizo exitosamente el Automovil", "Registrado"));
+        }else {
+            JsfUtil.setErrorMessage("","Error: No se pudo actualizar el automovil");
+        }
+    }
+
+    public void eliminarAutomovil(String idAutomovil){
+        if (modeloAutomovil.eliminarAutomovil(idAutomovil) > 0){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "Se elimino el automovil", "Eliminado"));
+        }
     }
 
     public void cambiarEstadoAuto(AutomovilesEntity auto){
@@ -143,6 +159,9 @@ public class AutomovilBean {
        }else {
            automovil.setIdAutomovil("ATS"+numeroAleatorio);
        }
+    }
+    public void setterAutomovilModi(String idAuto){
+        automovil = modeloAutomovil.obtenerAutomovil(idAuto);
     }
     //Con esta funcion guardamos imagenes en una carpeta interna del proyecto
     public int subirIMGCarpetaInterna(InputStream inputS, String nombreIMG){
@@ -216,4 +235,5 @@ public class AutomovilBean {
     public void setDuiSolicitante(String duiSolicitante) {
         this.duiSolicitante = duiSolicitante;
     }
+
 }

@@ -12,8 +12,9 @@
 
 
     <ui:define name="content">
-        <b:modal title="Agregar Nuevo Repuesto" styleClass="formValidationModalClass1" closable="false" closeOnEscape="true">
-            <b:form enctype="multipart/form-data">
+        <!-- INICIO VENTANA MODAL PARA PODER INGRESAR AUTOMOVILES DE AGENCIA-->
+        <b:modal title="Agregar Nuevo Automoviles de Agencia" styleClass="formValidationModalClass1" closable="false" closeOnEscape="true">
+            <b:form enctype="multipart/form-data" id="formAgencia">
                 <h:outputLabel value="Marca de los Automoviles"/>
                 <br/>
                 <b:inputText value="#{automovilBean.automovil.marcaAutomovil}"/>
@@ -49,12 +50,10 @@
                 <br/>
                 <b:row>
                     <b:column>
-                        <b:button largeScreen="half"  value="Cancel"
-                                  dismiss="modal" onclick="return false;"/>
-                        <b:commandButton largeScreen="half" dismiss="modal" value="Registrar Nuevos Automoviles" styleClass="btn btn-success" action="#{automovilBean.registrarNuevoAutomovil()}" style="margin-right:15px; margin-bottom: 20px"
+                        <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
+                        <b:commandButton largeScreen="half" dismiss="modal" value="Registrar Nuevos Automoviles" styleClass="btn btn-success" action="#{automovilBean.registrarNuevoAutomovil('agencia')}" style="margin-right:15px; margin-bottom: 20px"
                                          oncomplete="if(!validationFailed) { $('.formValidationModalClass1').modal('hide') } ">
-                            <f:ajax execute="@form" render="tablaFormAgencia"/>
-                            <f:param name="tipoAuto" value="agencia"/>
+                            <f:ajax execute="@form" render="tablaFormAgenciaAuto" resetValues="true"/>
                         </b:commandButton>
                     </b:column>
                 </b:row>
@@ -62,12 +61,12 @@
                 <b:messages />
             </b:form>
         </b:modal>
-
+        <!-- FIN VENTANA MODAL PARA PODER INGRESAR AUTOMOVILES DE AGENCIA-->
         <div class="container">
             <div class="row">
                 <h1 class="text-center">Tabla de los Automoviles de Agencia</h1>
-                <h:form id="tablaFormAgencia">
-                    <h:dataTable value="#{automovilBean.listaAutomovilesAgencia}" var="car" id="productosTableA" styleClass="table table-striped table-bordered">
+                <h:form id="tablaFormAgenciaAuto">
+                    <h:dataTable value="#{automovilBean.listaAutomovilesAgencia}" var="car" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Id de los Automoviles" />
@@ -133,32 +132,94 @@
                                 <h:outputText value="Agotados" />
                             </ui:fragment>
                         </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones" />
+                            </f:facet>
+                            <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Modificar Cantidad de Automoviles" look="primary"
+                                             action="#{automovilBean.setterAutomovilModi(car.idAutomovil)}">
+                                <f:ajax execute="@form" render="contenidoActualizarAuto"/>
+                            </b:commandButton>
+                            <b:commandButton action="#{automovilBean.eliminarAutomovil(car.idAutomovil)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
+                        </h:column>
                     </h:dataTable>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                    <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred" />
                 </h:form>
                 <br/>
+                <!-- INICIO BOTON PARA PODER ACTIVAR EL MODAL DE AGENCIA-->
                 <h:form id="miFormularioAgencia" enctype="multipart/form-data">
                     <b:button onclick="$('.formValidationModalClass1').modal('show')" value="Agregar Nuevo Automoviles de Agencia" look="primary"/>
                 </h:form>
+                <!-- FIN BOTON PARA PODER ACTIVAR EL MODAL DE AGENCIA-->
             </div>
         </div>
         <br/>
         <br/>
+        <!-- INICIO VENTANA MODAL PARA PODER INGRESAR AUTOMOVILES RENTADOS-->
+        <b:modal title="Agregar Nuevo Automoviles para Poder Rentar" styleClass="formValidationModalClass2" closable="false" closeOnEscape="true">
+            <b:form enctype="multipart/form-data" id="formRenta">
+                <h:outputLabel value="Marca del Automovil"/>
+                <br/>
+                <b:inputText  value="#{automovilBean.automovil.marcaAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Modelo del Automovil"/>
+                <br/>
+                <b:inputText value="#{automovilBean.automovil.modeloAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Año del Automovil"/>
+                <br/>
+                <b:inputText  value="#{automovilBean.automovil.yearAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Especificaciones del Automovil"/>
+                <br/>
+                <p:inputTextarea value="#{automovilBean.automovil.especificaciones}"/>
+                <br/>
+                <h:outputLabel value="Color del Automovil"/>
+                <br/>
+                <b:inputText  value="#{automovilBean.automovil.colorAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Precio del Automovil"/>
+                <br/>
+                <b:inputText  value="#{automovilBean.automovil.precioAutomovil}"/>
+                <br/>
+                <h:outputLabel value="Imagen del Automovil"/>
+                <br/>
+                <h:inputFile value="#{automovilBean.imagen}"/>
+                <br/>
+                <h:outputLabel value="Placa del Automovil"/>
+                <br/>
+                <b:inputText  value="#{automovilBean.automovil.placaAutomovil}" />
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <b:row>
+                    <b:column>
+                        <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
+                        <b:commandButton largeScreen="half" dismiss="modal" value="Registrar Nuevo Automovil" styleClass="btn btn-success" action="#{automovilBean.registrarNuevoAutomovil('renta')}" style="margin-right:15px; margin-bottom: 20px"
+                                         oncomplete="if(!validationFailed) { $('.formValidationModalClass2').modal('hide') } ">
+                            <f:ajax execute="@form" render="tablaFormRentaAuto" resetValues="true"/>
+                        </b:commandButton>
+                    </b:column>
+                </b:row>
+                <b:fetchBeanInfos />
+                <b:messages />
+            </b:form>
+        </b:modal>
+        <!-- FIN VENTANA MODAL PARA PODER INGRESAR AUTOMOVILES RENTADOS-->
         <div class="container">
             <div class="row">
                 <h1 class="text-center">Tabla de los Automoviles Para Rentar</h1>
-                <h:form >
+                <h:form id="tablaFormRentaAuto">
                     <h:dataTable value="#{automovilBean.listaAutomovilesRentar}" var="car" id="productosTableR" styleClass="table table-striped table-bordered">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Id de los Automoviles" />
                             </f:facet>
                             <h:outputText value="#{car.idAutomovil}" />
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Id de los Clientes" />
-                            </f:facet>
-                            <h:outputText value="#{car.usuarioByIdClienteVenta.dui}" />
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -223,21 +284,50 @@
                             <f:facet name="header">
                                 <h:outputText value="Accion" />
                             </f:facet>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}" look="primary" value="Modificar Automovil"/>
-                            <br/>
-                            <br/>
-                            <b:commandButton action="#{automovilBean.registrarNuevoAutomovil()}"  look="danger" value="Eliminar Automovil"/>
+                            <b:commandButton action="#{automovilBean.eliminarAutomovil(car.idAutomovil)}"  look="danger" value="Eliminar Automovil" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
                         </h:column>
                     </h:dataTable>
                 </h:form>
+                <!-- INICIO BOTON PARA PODER ACTIVAR LA VENTA MODAL DE AUTOS RENTADOS-->
                 <h:form id="miFormularioRenta" enctype="multipart/form-data">
                     <b:button onclick="$('.formValidationModalClass2').modal('show')" value="Agregar Nuevo Automoviles de Agencia" look="primary"/>
                 </h:form>
+                <!-- FIN BOTON PARA PODER ACTIVAR LA VENTA MODAL DE AUTOS RENTADOS-->
                 <br/>
                 <br/>
             </div>
         </div>
-
+        <b:modal title="Number game" styleClass="formValidationModalClass3"
+                 closable="false"
+                 closeOnEscape="true">
+            <b:form id="contenidoActualizarAuto">
+                <h:outputText value="Cantidad de Automoviles" />
+                <b:inputText type="hidden" value="#{automovilBean.automovil.idAutomovil}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.modeloAutomovil}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.estado}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.fotoAutomovil}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.colorAutomovil}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.especificaciones}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.yearAutomovil}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.estado}"/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.marcaAutomovil}"/>
+                <b:inputText value="#{automovilBean.automovil.cantidad}"/>
+                <h:outputText value="Precio Automovil" />
+                <b:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
+                <b:row>
+                    <b:column>
+                        <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                        <b:commandButton action="#{automovilBean.modificarAutomovil()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                            <f:ajax execute="@form" render="tablaFormAgenciaAuto"/>
+                        </b:commandButton>
+                    </b:column>
+                </b:row>
+                <b:fetchBeanInfos />
+                <b:messages />
+            </b:form>
+        </b:modal>
     </ui:define>
 
 </ui:composition>

@@ -140,14 +140,20 @@
                 <br/>
                 <b:inputText value="#{automovilBean.automovil.precioAutomovil}"/>
                 <br/>
-                <h:outputLabel value="Imagen de los Automoviles"/>
+                <h:outputLabel value="Imagen del Automovil (es obligatorio volver a subir la imagen del auto"/>
                 <br/>
-                <h:inputFile value="#{automovilBean.imagen}"/>
+                <h:inputFile value="#{automovilBean.imagen}" required="true" />
+                <br/>
+                <b:inputText type="hidden" value="#{automovilBean.automovil.idAutomovil}"/>
+                <h:outputLabel value="Digita tu dui para poder realizar la solicitud"/>
+                <br/>
+                <b:inputText value="#{automovilBean.duiSolicitante}"/>
+                <br/>
                 <br/>
                 <b:row>
                     <b:column>
                         <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
-                        <b:commandButton largeScreen="half" dismiss="modal" value="Registrar Nuevos Automoviles" styleClass="btn btn-success" action="#{automovilBean.modificarAutomovil()}" style="margin-right:15px; margin-bottom: 20px"
+                        <b:commandButton largeScreen="half" dismiss="modal" value="Enviar Solicitud" styleClass="btn btn-success" action="#{automovilBean.solicitarDenuevoPublicAuto()}" style="margin-right:15px; margin-bottom: 20px"
                                          oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
                             <f:ajax execute="@form" render="tablaFormMisAutos" resetValues="true"/>
                         </b:commandButton>

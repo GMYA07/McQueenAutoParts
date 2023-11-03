@@ -122,6 +122,26 @@ public class AutomovilBean {
         }
     }
 
+    public void solicitarDenuevoPublicAuto() throws IOException {
+
+        automovil.setFotoAutomovil(imagen.getSubmittedFileName());
+        automovil.setUsuarioByIdClienteVenta(modeloUsuario.obtenerUsuario(duiSolicitante));
+        automovil.setEstado(0);
+
+        if (modeloAutomovil.modificarAutomovil(automovil) > 0){
+            if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
+                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Se registro exitosamente el Automovil", "Registrado"));
+            }else {
+                JsfUtil.setErrorMessage("","Error: Ocurrio un error al guardar la img");
+
+            }
+        }else {
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    "No se pudo ingresar el Auto", "No registrado"));
+        }
+    }
+
     public void eliminarAutomovil(String idAutomovil){
         if (modeloAutomovil.eliminarAutomovil(idAutomovil) > 0){
             FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,

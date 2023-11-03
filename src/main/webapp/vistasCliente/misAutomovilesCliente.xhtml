@@ -82,6 +82,9 @@
                             <ui:fragment rendered="#{car.estado == 4}">
                                 <h:outputText value="Automovil vendido" />
                             </ui:fragment>
+                            <ui:fragment rendered="#{car.estado == 5}">
+                                <h:outputText value="Hay una persona interesada en el automovil" />
+                            </ui:fragment>
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -102,7 +105,12 @@
                                     <f:param name="estadoAccion" value="777"/>
                                 </b:commandButton>
                             </ui:fragment>
-                            <ui:fragment rendered ="#{car.estado > 2}">
+                            <ui:fragment rendered ="#{car.estado == 5}">
+                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Notificar como Vendido">
+                                    <f:ajax execute="@form" render="@form" />
+                                </b:commandButton>
+                            </ui:fragment>
+                            <ui:fragment rendered ="#{car.estado == 4}">
                                 <h:outputText value="Sin ninguna accion" />
                             </ui:fragment>
                         </h:column>

@@ -176,6 +176,11 @@ public class AutomovilBean {
                    FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
                }
            }
+       }else if (auto.getEstado() == 5){
+           auto.setEstado(4);
+           if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
+               FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+           }
        }
     }
 

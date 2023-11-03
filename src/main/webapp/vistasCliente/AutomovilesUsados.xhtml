@@ -6,33 +6,37 @@
             xmlns:f="http://xmlns.jcp.org/jsf/core"
             template="../templates/PlantillaIndexCliente.xhtml">
         <ui:define name="menu">
-            <h1 class="text-center"> Venta De Automoviles Usados</h1>
+            <h1 class="text-center">Venta De Automoviles Usados</h1>
             <br/>
             <br/>
             <div class="hero">
                 <div class="container2">
                     <div class="contenedor3">
                         <ui:repeat value="#{automovilBean.listaAutomovilesUsuarios}" var="car">
-                            <div class="card">
-                                <b:carousel id="parque2" style="width:400px" disabled="true">
-                                    <b:carouselItem>
-                                        <h:graphicImage library="imgAutomoviles" name="#{car.fotoAutomovil}" alt="" />
-                                    </b:carouselItem>
-                                </b:carousel>
-                                <h2>#{car.marcaAutomovil} #{car.modeloAutomovil}</h2>
-                                <p>#{car.especificaciones}</p>
-                                <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                           <ui:fragment rendered ="#{car.estado == 1}">
+                               <h:form>
+                                   <div class="card">
+                                       <b:carousel id="parque2" style="width:400px" disabled="true">
+                                           <b:carouselItem>
+                                               <h:graphicImage library="imgAutomoviles" name="#{car.fotoAutomovil}" alt="" />
+                                           </b:carouselItem>
+                                       </b:carousel>
+                                       <h2>#{car.marcaAutomovil} #{car.modeloAutomovil}</h2>
+                                       <p>#{car.especificaciones}</p>
+                                       <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
                                 <span style="display: flex; align-items: center;">
                                     <b:iconAwesome value="fa-calendar" />
                                     <span style="margin-left: 5px;">#{car.yearAutomovil}</span>
                                 </span>
-                                    <span style="display: flex; align-items: center;">
+                                           <span style="display: flex; align-items: center;">
                                     <b:iconAwesome value="fa-cart-plus" />
                                     <span style="margin-left: 5px;">$#{car.precioAutomovil}</span>
                                 </span>
-                                </div>
-                                <b:button value="Comprar" look="primary" style="width: 100%; margin-top: 20px;" />
-                            </div>
+                                       </div>
+                                       <b:button value="Comprar" look="primary" style="width: 100%; margin-top: 20px;" />
+                                   </div>
+                               </h:form>
+                           </ui:fragment>
                         </ui:repeat>
                     </div>
                 </div>

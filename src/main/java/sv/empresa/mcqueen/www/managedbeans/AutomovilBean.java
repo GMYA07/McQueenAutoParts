@@ -6,10 +6,10 @@ import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.models.AutomovilesModel;
-import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
+import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
 
 import java.io.FileOutputStream;

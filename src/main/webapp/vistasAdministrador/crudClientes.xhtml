@@ -21,9 +21,9 @@
                   </h:column>
                   <h:column>
                      <f:facet name="header">
-                        <h:outputText value="Licencia del Empleado" />
+                        <h:outputText value="Telefono del Cliente" />
                      </f:facet>
-                     <h:outputText value="#{user.licencia}" />
+                     <h:outputText value="#{user.telefono}" />
                   </h:column>
                   <h:column>
                      <f:facet name="header">
@@ -60,7 +60,7 @@
                   <b:inputText type="hidden" value="#{usuarioBean.usuario.dui}"/>
                   <b:inputText type="hidden" value="#{usuarioBean.usuario.nombre}"/>
                   <b:inputText type="hidden" value="#{usuarioBean.usuario.pass}"/>
-                  <b:inputText type="hidden" value="#{usuarioBean.usuario.licencia}"/>
+                  <b:inputText type="hidden" value="#{usuarioBean.usuario.telefono}"/>
                   <h:outputText value="Correo Usuario" />
                   <b:inputText value="#{usuarioBean.usuario.correo}"/>
                   <b:row>

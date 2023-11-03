@@ -3,7 +3,7 @@ package sv.empresa.mcqueen.www.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ventasauto", schema = "mcqueenautoparts")
+@Table(name = "ventasauto", schema = "mcqueenautoparts", catalog = "")
 public class VentasautoEntity {
     @Id
     @Column(name = "idVenta", nullable = false, length = 6)
@@ -14,6 +14,9 @@ public class VentasautoEntity {
     @Basic
     @Column(name = "precio", nullable = false)
     private int precio;
+    @Basic
+    @Column(name = "mensajeVenta", nullable = true, length = 100)
+    private String mensajeVenta;
     @ManyToOne
     @JoinColumn(name = "idCarro", referencedColumnName = "idAutomovil", nullable = false)
     private AutomovilesEntity automovilesByIdCarro;
@@ -45,6 +48,14 @@ public class VentasautoEntity {
         this.precio = precio;
     }
 
+    public String getMensajeVenta() {
+        return mensajeVenta;
+    }
+
+    public void setMensajeVenta(String mensajeVenta) {
+        this.mensajeVenta = mensajeVenta;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,6 +66,7 @@ public class VentasautoEntity {
         if (estado != that.estado) return false;
         if (precio != that.precio) return false;
         if (idVenta != null ? !idVenta.equals(that.idVenta) : that.idVenta != null) return false;
+        if (mensajeVenta != null ? !mensajeVenta.equals(that.mensajeVenta) : that.mensajeVenta != null) return false;
 
         return true;
     }
@@ -64,6 +76,7 @@ public class VentasautoEntity {
         int result = idVenta != null ? idVenta.hashCode() : 0;
         result = 31 * result + estado;
         result = 31 * result + precio;
+        result = 31 * result + (mensajeVenta != null ? mensajeVenta.hashCode() : 0);
         return result;
     }
 

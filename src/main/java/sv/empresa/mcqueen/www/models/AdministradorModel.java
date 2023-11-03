@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.AdministradoresEntity;
+
 public class AdministradorModel {
     //Funcion para poder Un administrador
     public AdministradoresEntity obtenerAdministrador(int idAdmin){

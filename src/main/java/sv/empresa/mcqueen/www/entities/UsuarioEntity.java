@@ -5,14 +5,14 @@ import jakarta.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(name = "usuario", schema = "mcqueenautoparts")
+@Table(name = "usuario", schema = "mcqueenautoparts", catalog = "")
 public class UsuarioEntity {
     @Id
     @Column(name = "dui", nullable = false, length = 10)
     private String dui;
     @Basic
-    @Column(name = "licencia", nullable = false, length = 10)
-    private String licencia;
+    @Column(name = "telefono", nullable = false, length = 10)
+    private String telefono;
     @Basic
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -39,12 +39,12 @@ public class UsuarioEntity {
         this.dui = dui;
     }
 
-    public String getLicencia() {
-        return licencia;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setLicencia(String licencia) {
-        this.licencia = licencia;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getNombre() {
@@ -79,7 +79,7 @@ public class UsuarioEntity {
         UsuarioEntity that = (UsuarioEntity) o;
 
         if (dui != null ? !dui.equals(that.dui) : that.dui != null) return false;
-        if (licencia != null ? !licencia.equals(that.licencia) : that.licencia != null) return false;
+        if (telefono != null ? !telefono.equals(that.telefono) : that.telefono != null) return false;
         if (nombre != null ? !nombre.equals(that.nombre) : that.nombre != null) return false;
         if (correo != null ? !correo.equals(that.correo) : that.correo != null) return false;
         if (pass != null ? !pass.equals(that.pass) : that.pass != null) return false;
@@ -90,7 +90,7 @@ public class UsuarioEntity {
     @Override
     public int hashCode() {
         int result = dui != null ? dui.hashCode() : 0;
-        result = 31 * result + (licencia != null ? licencia.hashCode() : 0);
+        result = 31 * result + (telefono != null ? telefono.hashCode() : 0);
         result = 31 * result + (nombre != null ? nombre.hashCode() : 0);
         result = 31 * result + (correo != null ? correo.hashCode() : 0);
         result = 31 * result + (pass != null ? pass.hashCode() : 0);

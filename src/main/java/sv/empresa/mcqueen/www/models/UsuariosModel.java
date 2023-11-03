@@ -3,8 +3,6 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-import sv.empresa.mcqueen.www.entities.EmpleadosEntity;
-import sv.empresa.mcqueen.www.entities.MecanicosEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import java.util.List;

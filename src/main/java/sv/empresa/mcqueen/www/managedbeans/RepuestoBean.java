@@ -6,8 +6,8 @@ import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
-import sv.empresa.mcqueen.www.entities.RepuestosEntity;
 import sv.empresa.mcqueen.www.models.RepuestosModel;
+import sv.empresa.mcqueen.www.entities.RepuestosEntity;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
 
 import java.io.FileOutputStream;

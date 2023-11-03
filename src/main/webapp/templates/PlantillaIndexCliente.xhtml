@@ -12,8 +12,8 @@
 </h:head>
 <h:body>
     <p:menubar style="    background: black ;height: 80px;width: 100%;" >
-        <p:menuitem >
-            <b:image outcome="indexCliente" name="img/logo.png" style=" height: 50px;"></b:image>
+        <p:menuitem outcome="indexCliente" >
+            <b:image name="img/logo.png" style=" height: 50px;"></b:image>
         </p:menuitem>
 
 
@@ -30,8 +30,7 @@
 
 
     </p:menubar>
-
-    <div class="col-md-11 col-sm-11">
+    <div class="col-md-11 col-sm-11" style="width: 100%">
         <ui:insert name="menu">Aqui ira contenido de todo usuario no logeado</ui:insert>
     </div>
 </h:body>

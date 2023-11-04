@@ -15,9 +15,9 @@
                        <h:form>
                            <ui:repeat value="#{automovilBean.listaAutomovilesUsuarios}" var="car">
                                <ui:fragment rendered ="#{car.estado == 1}">
-                                   <h:form id="formVentasCard">
+                                   <h:form>
                                        <div class="card">
-                                           <b:carousel id="parque2" style="width:400px" disabled="true">
+                                           <b:carousel style="width:400px" disabled="true">
                                                <b:carouselItem>
                                                    <h:graphicImage library="imgAutomoviles" name="#{car.fotoAutomovil}" alt="" />
                                                </b:carouselItem>
@@ -47,17 +47,34 @@
                     </div>
                 </div>
             </div>
-            <b:modal title="Venta de Automovil" styleClass="formValidationModalClass3"
+            <b:modal title="Automovil" styleClass="formValidationModalClass3"
                      closable="false"
                      closeOnEscape="true" style="text-aling:center;">
                 <b:form id="formProcesoVenta">
-
-                    <h:outputText value="#{ventasAutoBean.automovil.marcaAutomovil}" />
+                    <h:outputLabel style="font-size: 25px" value="#{ventasAutoBean.automovil.marcaAutomovil} #{ventasAutoBean.automovil.modeloAutomovil}"/>
+                    <br/>
+                    <br/>
+                    <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.idVenta}"/>
+                    <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.estado}"/>
+                    <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.usuarioByIdCliente}"/>
+                    <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.automovilesByIdCarro}"/>
+                    <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.precio}"/>
+                    <h:outputLabel value="Escribir Mensaje al vendedor"/>
+                    <b:inputTextarea value="#{ventasAutoBean.ventaAuto.mensajeVenta}"/>
+                    <h:outputLabel value="Correo del Propietario del automovil: #{ventasAutoBean.automovil.usuarioByIdClienteVenta.correo}" />
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Telefono del Propietario del automovil: #{ventasAutoBean.automovil.usuarioByIdClienteVenta.telefono}"/>
+                    <br/>
+                    <br/>
                     <b:row>
                         <b:column>
                             <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
-                            <b:commandButton action="#{automovilBean.modificarAutomovil()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                            <b:commandButton action="#{ventasAutoBean.registrarVentaUsuario()}" largeScreen="half"  dismiss="modal" value="Enviar Mensaje" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
                                 <f:ajax execute="@form" render="@form"/>
+                                <f:param name="idAuto" value="#{ventasAutoBean.automovil.idAutomovil}"/>
+                                <f:param name="idComprador" value="#{session.getAttribute('idUsuario')}"/>
+                                <f:param name="precioVenta" value="#{ventasAutoBean.automovil.precioAutomovil}"/>
                             </b:commandButton>
                         </b:column>
                     </b:row>

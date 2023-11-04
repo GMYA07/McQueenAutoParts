@@ -91,6 +91,10 @@
                                 <h:outputText value="Acciones a realizar" />
                             </f:facet>
                             <ui:fragment rendered ="#{car.estado == 1}">
+                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="primary" value="Notificar como Vendido">
+                                    <f:ajax execute="@form" render="@form" />
+                                    <f:param name="estadoAccion" value="222"/>
+                                </b:commandButton>
                                 <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Cancelar Publicacion del Automovil">
                                     <f:ajax execute="@form" render="@form" />
                                 </b:commandButton>
@@ -103,11 +107,6 @@
                                 <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Cancelar Solicitud">
                                     <f:ajax execute="@form" render="@form" />
                                     <f:param name="estadoAccion" value="777"/>
-                                </b:commandButton>
-                            </ui:fragment>
-                            <ui:fragment rendered ="#{car.estado == 5}">
-                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Notificar como Vendido">
-                                    <f:ajax execute="@form" render="@form" />
                                 </b:commandButton>
                             </ui:fragment>
                             <ui:fragment rendered ="#{car.estado == 4}">

@@ -155,8 +155,6 @@ public class AutomovilBean {
            //evaluamos si aceptaremos rechazaremos
            if (estadoAccion.equals("111")){
                auto.setEstado(1);
-           }else if(estadoAccion.equals("222")){
-               auto.setEstado(4);
            }else {
                auto.setEstado(2);
            }
@@ -165,7 +163,12 @@ public class AutomovilBean {
                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
            }
        }else if(auto.getEstado() == 1){
-           auto.setEstado(3);
+
+           if(estadoAccion.equals("222")){
+               auto.setEstado(4);
+           }else {
+               auto.setEstado(3);
+           }
            if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
            }

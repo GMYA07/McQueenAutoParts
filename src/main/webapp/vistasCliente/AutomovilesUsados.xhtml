@@ -12,34 +12,58 @@
             <div class="hero">
                 <div class="container2">
                     <div class="contenedor3">
-                        <ui:repeat value="#{automovilBean.listaAutomovilesUsuarios}" var="car">
-                           <ui:fragment rendered ="#{car.estado == 1}">
-                               <h:form>
-                                   <div class="card">
-                                       <b:carousel id="parque2" style="width:400px" disabled="true">
-                                           <b:carouselItem>
-                                               <h:graphicImage library="imgAutomoviles" name="#{car.fotoAutomovil}" alt="" />
-                                           </b:carouselItem>
-                                       </b:carousel>
-                                       <h2>#{car.marcaAutomovil} #{car.modeloAutomovil}</h2>
-                                       <p>#{car.especificaciones}</p>
-                                       <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
-                                <span style="display: flex; align-items: center;">
-                                    <b:iconAwesome value="fa-calendar" />
-                                    <span style="margin-left: 5px;">#{car.yearAutomovil}</span>
-                                </span>
-                                           <span style="display: flex; align-items: center;">
-                                    <b:iconAwesome value="fa-cart-plus" />
-                                    <span style="margin-left: 5px;">$#{car.precioAutomovil}</span>
-                                </span>
+                       <h:form>
+                           <ui:repeat value="#{automovilBean.listaAutomovilesUsuarios}" var="car">
+                               <ui:fragment rendered ="#{car.estado == 1}">
+                                   <h:form id="formVentasCard">
+                                       <div class="card">
+                                           <b:carousel id="parque2" style="width:400px" disabled="true">
+                                               <b:carouselItem>
+                                                   <h:graphicImage library="imgAutomoviles" name="#{car.fotoAutomovil}" alt="" />
+                                               </b:carouselItem>
+                                           </b:carousel>
+                                           <h2>#{car.marcaAutomovil} #{car.modeloAutomovil}</h2>
+                                           <p>#{car.especificaciones}</p>
+                                           <p>#{car.idAutomovil}</p>
+                                           <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                                            <span style="display: flex; align-items: center;">
+                                                <b:iconAwesome value="fa-calendar" />
+                                                <span style="margin-left: 5px;">#{car.yearAutomovil}</span>
+                                             </span>
+                                               <span style="display: flex; align-items: center;">
+                                                    <b:iconAwesome value="fa-cart-plus" />
+                                                    <span style="margin-left: 5px;">$#{car.precioAutomovil}</span>
+                                                </span>
+                                           </div>
+                                           <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Comprar Automovil" look="primary"
+                                                            action="#{ventasAutoBean.settearFormVentas(car.idAutomovil)}">
+                                               <f:ajax execute="@form" render="formProcesoVenta"/>
+                                           </b:commandButton>
                                        </div>
-                                       <b:button value="Comprar" look="primary" style="width: 100%; margin-top: 20px;" />
-                                   </div>
-                               </h:form>
-                           </ui:fragment>
-                        </ui:repeat>
+                                   </h:form>
+                               </ui:fragment>
+                           </ui:repeat>
+                       </h:form>
                     </div>
                 </div>
             </div>
+            <b:modal title="Venta de Automovil" styleClass="formValidationModalClass3"
+                     closable="false"
+                     closeOnEscape="true" style="text-aling:center;">
+                <b:form id="formProcesoVenta">
+
+                    <h:outputText value="#{ventasAutoBean.automovil.marcaAutomovil}" />
+                    <b:row>
+                        <b:column>
+                            <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                            <b:commandButton action="#{automovilBean.modificarAutomovil()}" largeScreen="half"  dismiss="modal" value="Guardar Cambios" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                                <f:ajax execute="@form" render="@form"/>
+                            </b:commandButton>
+                        </b:column>
+                    </b:row>
+                    <b:fetchBeanInfos />
+                    <b:messages />
+                </b:form>
+            </b:modal>
         </ui:define>
     </ui:composition>

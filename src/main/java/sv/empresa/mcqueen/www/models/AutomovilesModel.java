@@ -34,6 +34,23 @@ public class AutomovilesModel {
             return null;
         }
     }
+    public List<AutomovilesEntity> listarAutomovilesRenta(){
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM AutomovilesEntity e WHERE e.idAutomovil LIKE 'ATR%'");
+
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<AutomovilesEntity> lista = consulta.getResultList();
+
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
     public List<AutomovilesEntity> listarAutomovilesUsuarios(){
         // Obtengo una instancia de EntityManager
         EntityManager em = JpaUtil.getEntityManager();

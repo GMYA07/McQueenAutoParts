@@ -30,11 +30,12 @@ public class AutomovilBean {
     private UsuariosModel modeloUsuario = new UsuariosModel();
     private VentasAutoModel modeloVentaAuto = new VentasAutoModel();
     //Listas de diferentes tipos para cada crud que sea necesario
-    List<AutomovilesEntity> listaAutomoviles;
+    private List<AutomovilesEntity> listaAutomoviles;
     private List<AutomovilesEntity> listaAutomovilesAgencia;
     private List<AutomovilesEntity> listaAutomovilesUsuarios;
     private List<AutomovilesEntity> listaAutomovilesRentar;
     private List<AutomovilesEntity> listaAutomovilesMisAutos; //esta lista es para un usuario especifico
+    private List<AutomovilesEntity> listaAutomovilesRentados;
 
     //Variables para guardar la img
     private Part imagen;
@@ -254,6 +255,10 @@ public class AutomovilBean {
 
     public List<AutomovilesEntity> getListaAutomovilesAgencia() {
         return modeloAutomovil.listarAutomovilesAgencia();
+    }
+
+    public List<AutomovilesEntity> getListaAutomovilesRentados() {
+        return modeloAutomovil.listarAutomovilesRenta();
     }
 
     public AutomovilesEntity getAutomovil() {

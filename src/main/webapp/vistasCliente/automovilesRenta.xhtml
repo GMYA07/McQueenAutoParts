@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        template="../templates/PlantillaIndexCliente.xhtml">
+    <ui:define name="menu">
+        <br/>
+        <h1 class="text-center">Renta de Automoviles</h1>
+        <br/>
+        <br/>
+        <div class="hero">
+            <div class="container2">
+                <div class="contenedor3">
+                    <h:form>
+                        <ui:repeat value="#{automovilBean.listaAutomovilesRentar}" var="car">
+                            <ui:fragment rendered ="#{car.estado == 21}">
+                                <h:form>
+                                    <div class="card">
+                                        <b:carousel style="width:400px" disabled="true">
+                                            <b:carouselItem>
+                                                <h:graphicImage library="imgAutomoviles" name="#{car.fotoAutomovil}" alt="" />
+                                            </b:carouselItem>
+                                        </b:carousel>
+                                        <h2>#{car.marcaAutomovil} #{car.modeloAutomovil}</h2>
+                                        <p>#{car.especificaciones}</p>
+                                        <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                                            <span style="display: flex; align-items: center;">
+                                                <b:iconAwesome value="fa-calendar" />
+                                                <span style="margin-left: 5px;">#{car.yearAutomovil}</span>
+                                             </span>
+                                            <span style="display: flex; align-items: center;">
+                                                    <b:iconAwesome value="fa-cart-plus" />
+                                                    <span style="margin-left: 5px;">$#{car.precioAutomovil}</span>
+                                                </span>
+                                            <span style="display: flex; align-items: center;">
+                                                    <b:iconAwesome value="fa-eyedropper" />
+                                                    <span style="margin-left: 5px;">#{car.colorAutomovil}</span>
+                                                </span>
+                                        </div>
+                                        <b:commandButton value="Alquilar Automovil" look="primary" action="#{rentaBean.guardarRenta(car)}">
+                                        </b:commandButton>
+                                    </div>
+                                </h:form>
+                            </ui:fragment>
+                        </ui:repeat>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

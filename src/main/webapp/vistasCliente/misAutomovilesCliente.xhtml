@@ -91,10 +91,6 @@
                                 <h:outputText value="Acciones a realizar" />
                             </f:facet>
                             <ui:fragment rendered ="#{car.estado == 1}">
-                                <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="primary" value="Notificar como Vendido">
-                                    <f:ajax execute="@form" render="@form" />
-                                    <f:param name="estadoAccion" value="222"/>
-                                </b:commandButton>
                                 <b:commandButton action="#{automovilBean.cambiarEstadoAuto(car)}" look="danger" value="Cancelar Publicacion del Automovil">
                                     <f:ajax execute="@form" render="@form" />
                                 </b:commandButton>
@@ -111,6 +107,59 @@
                             </ui:fragment>
                             <ui:fragment rendered ="#{car.estado == 4}">
                                 <h:outputText value="Sin ninguna accion" />
+                            </ui:fragment>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+            </b:container>
+        </b:container>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form id="tablaFormMensajesVenta">
+                    <b:dataTable value="#{ventasAutoBean.getListaMensajesVentas(session.getAttribute('idUsuario'))}" var="venta" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Usuario Interasado" />
+                            </f:facet>
+                            <h:outputText value="#{venta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Mensaje" />
+                            </f:facet>
+                            <h:outputText value="#{venta.mensajeVenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Correo / Telefono" />
+                            </f:facet>
+                            <h:outputText value="#{venta.usuarioByIdCliente.correo} / #{venta.usuarioByIdCliente.telefono}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Automovil al que esta interesado" />
+                            </f:facet>
+                            <h:outputText value="#{venta.automovilesByIdCarro.marcaAutomovil}  #{venta.automovilesByIdCarro.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones a realizar" />
+                            </f:facet>
+                            <ui:fragment rendered ="#{venta.estado == 11}">
+                                <b:commandButton action="#{ventasAutoBean.cambiarEstadoVenta(venta)}" look="primary" value="Venta realizada">
+                                    <f:ajax execute="@form" render="@all" />
+                                    <f:param name="estadoAccion" value="222"/>
+                                </b:commandButton>
+                                <b:commandButton action="#{ventasAutoBean.cambiarEstadoVenta(venta)}" look="danger" value="Venta Cancelada">
+                                    <f:ajax execute="@form" render="@all" />
+                                    <f:param name="estadoAccion" value="333"/>
+                                </b:commandButton>
+                            </ui:fragment>
+                            <ui:fragment rendered ="#{venta.estado == 12}">
+                                <h:outputText value="Venta Exitosa" />
+                            </ui:fragment>
+                            <ui:fragment rendered ="#{venta.estado == 13}">
+                                <h:outputText value="Venta Fallida" />
                             </ui:fragment>
                         </h:column>
                     </b:dataTable>

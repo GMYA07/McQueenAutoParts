@@ -24,6 +24,7 @@ public class VentasAutoBean {
     private UsuariosModel modeloUsuario = new UsuariosModel();
 
     private List<VentasautoEntity> listaVentas;
+    private List<VentasautoEntity> listaMensajesVentas;
 
     public VentasAutoBean(){ventaAuto = new VentasautoEntity(); automovil = new AutomovilesEntity();}
 
@@ -31,8 +32,8 @@ public class VentasAutoBean {
         //settearemos los demas campos que requiere la venta
         ventaAuto.setUsuarioByIdCliente(modeloUsuario.obtenerUsuario(JsfUtil.getRequest().getParameter("idComprador")));
         ventaAuto.setAutomovilesByIdCarro(modeloAutomovil.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto")));
-        ventaAuto.setEstado(12);
-        ventaAuto.setPrecio(123);
+        ventaAuto.setEstado(11);
+        ventaAuto.setPrecio((int)Float.parseFloat(JsfUtil.getRequest().getParameter("precioVenta")));
         //crearemos el id para la venta
         crearIDVentaAuto(1);
         //registraremos la venta
@@ -40,6 +41,38 @@ public class VentasAutoBean {
             FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingresado la venta Exitosamente", "Registrado"));
         }else {
             FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Error al enviar la venta ", "Error"));
+        }
+    }
+
+    public void cambiarEstadoVenta(VentasautoEntity venta){
+        String estadoAccion = JsfUtil.getRequest().getParameter("estadoAccion");
+
+        if (venta.getEstado() == 11){ //si el estado esta en 11 que significa q la venta esta en modo de conversacion con el usuario interesado pasara dado caso sea asi pues pasa
+            //evaluamos si aceptaremos o rechazaremos
+            if (estadoAccion.equals("222")){
+                venta.setEstado(12);
+            }else {
+                venta.setEstado(13);
+            }
+            if (venta.getEstado() == 12){ // aqui verificamos si es una cancelacion de venta por si no llegaron a un acuerdo
+                if (modeloVenta.cambiarEstadoVenta(venta) == 1){ // validamos si cambia el estado
+
+                    //Obtenemos el automovil para poder cambiar el estado a vendido para poder sacarlo de publicacin
+                    automovil = modeloAutomovil.obtenerAutomovil(venta.getAutomovilesByIdCarro().getIdAutomovil());
+                    automovil.setEstado(4);
+                    if (modeloAutomovil.cambiarEstadoAutomovil(automovil) == 1){ // validamos que se cambie el estado
+                       if (modeloVenta.borrarVentasFallidas(venta.getAutomovilesByIdCarro().getIdAutomovil()) == 1){ // aqui borramos las demas conversaciones de venta que hubieron anteriormente
+                           FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ventao Exitosa", "Venta"));
+                       }
+                    }
+                }
+
+            }else {
+                if (modeloVenta.cambiarEstadoVenta(venta) == 1){ //dado caso la venta fue cancelada validamos que se cambie el estado a 13 q es venta fallida
+                    FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ventao Cancelada", "Venta"));
+
+                }
+            }
         }
     }
 
@@ -61,6 +94,9 @@ public class VentasAutoBean {
     //GETTER Y SETTER
     public List<VentasautoEntity> getListaVentas() {
         return modeloVenta.listarVentas();
+    }
+    public List<VentasautoEntity> getListaMensajesVentas(String dui) {
+        return modeloVenta.listaMensajesVentaUser(dui);
     }
 
     public VentasautoEntity getVentaAuto() {

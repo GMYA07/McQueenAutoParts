@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/PlantillaIndexCliente.xhtml">
+    <ui:define name="menu">
+        <br/>
+        <h1 class="text-center">Automoviles de Agencia Comprados Por Mi</h1>
+        <br/>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form id="tablaFormMensajesVenta">
+                    <b:dataTable value="#{ventasAutoBean.getListaVentaAutoAgencia(session.getAttribute('idUsuario'))}" var="venta" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Automovil comprado" />
+                            </f:facet>
+                            <h:outputText value="#{venta.automovilesByIdCarro.marcaAutomovil}  #{venta.automovilesByIdCarro.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Codigo a Canjear para Retiro de Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{venta.mensajeVenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado del Codigo" />
+                            </f:facet>
+                            <ui:fragment rendered ="#{venta.estado == 0}">
+                                <h:outputText value="No se a canjeado el codigo" />
+                            </ui:fragment>
+                            <ui:fragment rendered ="#{venta.estado == 1}">
+                                <h:outputText value="Codigo Canjeado y Automovil Retirado" />
+                            </ui:fragment>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+            </b:container>
+        </b:container>
+    </ui:define>
+</ui:composition>

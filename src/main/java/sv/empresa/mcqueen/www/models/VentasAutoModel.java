@@ -18,7 +18,23 @@ public class VentasAutoModel {
         // Obtengo una instancia de EntityManager
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            Query consulta = em.createQuery("SELECT e FROM VentasautoEntity e WHERE e.usuarioByIdCliente.dui = :dui ");
+            Query consulta = em.createQuery("SELECT e FROM VentasautoEntity e WHERE e.usuarioByIdCliente.dui = :dui AND e.automovilesByIdCarro.idAutomovil LIKE 'ATS%'");
+            consulta.setParameter("dui",dui);
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<VentasautoEntity> lista = consulta.getResultList();
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+    public List<VentasautoEntity>listaMensajesVentaAgencia(String dui){
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM VentasautoEntity e WHERE e.usuarioByIdCliente.dui = :dui AND e.idVenta LIKE 'VTA%'");
             consulta.setParameter("dui",dui);
             // El método getResultList() de la clase Query permite obtener
             // la lista de resultados de una consulta de selección
@@ -82,4 +98,18 @@ public class VentasAutoModel {
             return 0;
         }
     }
+    public int registrarVentaAutomovilAgencia(VentasautoEntity newVenta){
+        EntityManager eM = JpaUtil.getEntityManager();
+        EntityTransaction tran = eM.getTransaction();
+        try {
+            tran.begin();
+            eM.persist(newVenta);
+            tran.commit();
+            return 1;
+        }catch (Exception e){
+            eM.close();
+            return 0;
+        }
+    }
+
 }

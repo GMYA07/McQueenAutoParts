@@ -24,6 +24,7 @@ public class VentasAutoBean {
     private UsuariosModel modeloUsuario = new UsuariosModel();
 
     private List<VentasautoEntity> listaVentas;
+    private List<VentasautoEntity> listaVentaAutoAgencia;
     private List<VentasautoEntity> listaMensajesVentas;
 
     public VentasAutoBean(){ventaAuto = new VentasautoEntity(); automovil = new AutomovilesEntity();}
@@ -36,11 +37,27 @@ public class VentasAutoBean {
         ventaAuto.setPrecio((int)Float.parseFloat(JsfUtil.getRequest().getParameter("precioVenta")));
         //crearemos el id para la venta
         crearIDVentaAuto(1);
-        //registraremos la venta
+        //registraremos la venta de usuario
         if (modeloVenta.registrarVentaAutomovilUsuario(ventaAuto) == 1){
             FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingresado la venta Exitosamente", "Registrado"));
         }else {
-            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Error al enviar la venta ", "Error"));
+            JsfUtil.setErrorMessage(null, "No se pudo registrar la venta");
+        }
+    }
+    public void registrarVentaAutoAgencia(){
+        //settearemos los demas campos que requiere la venta
+        ventaAuto.setUsuarioByIdCliente(modeloUsuario.obtenerUsuario(JsfUtil.getRequest().getParameter("idComprador")));
+        ventaAuto.setAutomovilesByIdCarro(modeloAutomovil.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto")));
+        ventaAuto.setEstado(0);
+        ventaAuto.setMensajeVenta(crearCodigoCanje());
+        ventaAuto.setPrecio((int)Float.parseFloat(JsfUtil.getRequest().getParameter("precioVenta")));
+        //crearemos el id para la venta
+        crearIDVentaAuto(2);
+        //registramos la venta de agencia
+        if (modeloVenta.registrarVentaAutomovilAgencia(ventaAuto) == 1){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Ingresado la venta Exitosamente", "Registrado"));
+        }else {
+            JsfUtil.setErrorMessage(null, "No se pudo registrar la venta");
         }
     }
 
@@ -85,18 +102,48 @@ public class VentasAutoBean {
             ventaAuto.setIdVenta("VTA"+numeroAleatorio);
         }
     }
+    public String crearCodigoCanje(){
+
+        // Definir las letras disponibles
+        String letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        // Crear un objeto Random
+        Random random = new Random();
+
+        StringBuilder codigoAleatorio = new StringBuilder();
+
+        // Generar 3 letras aleatorias
+        for (int i = 0; i < 3; i++) {
+            int indice = random.nextInt(letras.length());
+            codigoAleatorio.append(letras.charAt(indice));
+        }
+
+        // Generar 3 números aleatorios
+        for (int i = 0; i < 3; i++) {
+            int numeroAleatorio = random.nextInt(10);
+            codigoAleatorio.append(numeroAleatorio);
+        }
+
+        return codigoAleatorio.toString();
+    }
 
     public void settearFormVentas(String idAuto){
         automovil = modeloAutomovil.obtenerAutomovil(idAuto);
     }
 
 
+
+
     //GETTER Y SETTER
+
     public List<VentasautoEntity> getListaVentas() {
         return modeloVenta.listarVentas();
     }
     public List<VentasautoEntity> getListaMensajesVentas(String dui) {
         return modeloVenta.listaMensajesVentaUser(dui);
+    }
+    public List<VentasautoEntity> getListaVentaAutoAgencia(String dui) {
+        return modeloVenta.listaMensajesVentaAgencia(dui);
     }
 
     public VentasautoEntity getVentaAuto() {

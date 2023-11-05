@@ -46,6 +46,21 @@ public class VentasAutoModel {
             return null;
         }
     }
+    public List<VentasautoEntity> listaAllVentasAgencia(){
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM VentasautoEntity e WHERE e.idVenta LIKE 'VTA%'");
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<VentasautoEntity> lista = consulta.getResultList();
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
     public int cambiarEstadoVenta(VentasautoEntity ventaCambiarEstado){
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -83,6 +98,41 @@ public class VentasAutoModel {
         }catch (Exception e){
             eM.close();
             return 0;
+        }
+    }
+    public int borrarVentasPorDeleteDeAuto(String idCar){
+        EntityManager eM = JpaUtil.getEntityManager();
+        EntityTransaction tran = eM.getTransaction();
+        try {
+
+            tran.begin();
+            Query consulta = eM.createQuery("DELETE FROM VentasautoEntity e WHERE e.automovilesByIdCarro.idAutomovil = :idCarro");
+            consulta.setParameter("idCarro",idCar);
+            int rowCount = consulta.executeUpdate();
+            tran.commit();
+
+            if (rowCount == 1){
+                eM.close();
+                return rowCount;
+            }else {
+                return 0;
+            }
+
+        }catch (Exception e){
+            eM.close();
+            return 0;
+        }
+    }
+    public VentasautoEntity obtenerVenta(String idVenta){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            // Recupero el objeto desde la BD a través del método find
+            VentasautoEntity venta = em.find(VentasautoEntity.class, idVenta);
+            em.close();
+            return venta;
+        } catch (Exception e) {
+            em.close();
+            return null;
         }
     }
     public int registrarVentaAutomovilUsuario(VentasautoEntity newVenta){

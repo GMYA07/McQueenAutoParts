@@ -6,57 +6,95 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/templates/plantillaIndex.xhtml">
     <ui:define name="contenidoAdministrador">
-        <h1 class="text-center">Tabla de registro de rentas</h1>
+        <h1 class="text-center">Tabla de Ventas de Autoviles de Agencia</h1>
         <br/>
         <br/>
-        <b:container styleClass="contendorCrudPadre">
-            <b:container styleClass="contendorCrud">
-                <b:dataTable value="#{null}" var="productos"
-                             id="productosTable"
-                             styleClass="table table-striped table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Carro Rentado" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Persona que renta" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tiempo de Renta" />
-                        </f:facet>
-                        <h:outputText value="#{null}" />
-                    </h:column>
-                </b:dataTable>
-                <h:form>
-                    <b:button value="Añadir nuevo Automovil" look="primary" outcome="registroAutomovilesParaRenta"/>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form id="tablaFormVentasAgencia">
+                    <b:dataTable value="#{ventasAutoBean.listaTodasVentasAutosAgencias}" var="venta" id="productosTable" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="DUI del Cliente Comprador" />
+                            </f:facet>
+                            <h:outputText value="#{venta.usuarioByIdCliente.dui}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre del Cliente Comprador" />
+                            </f:facet>
+                            <h:outputText value="#{venta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Automovil que el Cliente Compro" />
+                            </f:facet>
+                            <h:outputText value="#{venta.automovilesByIdCarro.marcaAutomovil} #{venta.automovilesByIdCarro.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Codigo de canjeo de Retiro" />
+                            </f:facet>
+                            <h:outputText value="#{venta.mensajeVenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de Venta" />
+                            </f:facet>
+                            <ui:fragment rendered="#{venta.estado == 0}">
+                                <h:outputText value="Aun no canjeado" />
+                            </ui:fragment>
+                            <ui:fragment rendered="#{venta.estado == 1}">
+                                <h:outputText value="Codigo canjeado" />
+                            </ui:fragment>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acciones" />
+                            </f:facet>
+                            <ui:fragment rendered="#{venta.estado == 0}">
+                                <b:commandButton onclick="$('.formValidationModalClass3').modal('show')" value="Canjear Codigo" look="primary"
+                                                 action="#{ventasAutoBean.settearFormCanjeoCod(venta.idVenta)}">
+                                    <f:ajax execute="@form" render="formCanjearCodigo"/>
+                                </b:commandButton>
+                            </ui:fragment>
+                            <ui:fragment rendered="#{venta.estado == 1}">
+                                <h:outputText value="Sin ninguna accion" />
+                            </ui:fragment>
+                        </h:column>
+                    </b:dataTable>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                    <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred" />
                 </h:form>
-            </b:container>
-            <b:container styleClass="contendorCrud">
-
-                <h:form styleClass="formularioModi">
-                    <h2>Modificar Producto</h2>
-                    <h:outputLabel value="Carro Rentado"/>
-                    <br/>
-                    <h:inputText value=""/>
-                    <br/>
-                    <h:outputLabel value="Persona que renta"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <h:outputLabel value="Tiempo de Renta"/>
-                    <br/>
-                    <h:inputText/>
-                    <br/>
-                    <br/>
-                    <b:button look="danger" value="Modificar"/>
-                </h:form>
+                <br/>
+                <br/>
+                <b:modal title="Canjear Codigo" styleClass="formValidationModalClass3"
+                         closable="false"
+                         closeOnEscape="true">
+                    <b:form id="formCanjearCodigo">
+                        <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.idVenta}"/>
+                        <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.mensajeVenta}"/>
+                        <b:inputText type="hidden" value="#{ventasAutoBean.ventaAuto.precio}"/>
+                        <h:outputText value="Escriba el codigo para canjear la venta" />
+                        <br/>
+                        <br/>
+                        <b:inputText value="#{ventasAutoBean.codigoVentaMoment}"/>
+                        <b:row>
+                            <b:column>
+                                <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
+                                <b:commandButton action="#{ventasAutoBean.canjearCodigoVenta()}" largeScreen="half"  dismiss="modal" value="Canjear Codigo" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') } ">
+                                    <f:param name="idAuto" value="#{ventasAutoBean.ventaAuto.automovilesByIdCarro.idAutomovil}"/>
+                                    <f:param name="idComprador" value="#{ventasAutoBean.ventaAuto.usuarioByIdCliente.dui}"/>
+                                    <f:ajax execute="@form" render="tablaFormVentasAgencia"/>
+                                </b:commandButton>
+                            </b:column>
+                        </b:row>
+                        <b:fetchBeanInfos />
+                        <b:messages />
+                    </b:form>
+                </b:modal>
             </b:container>
         </b:container>
+
     </ui:define>
 </ui:composition>

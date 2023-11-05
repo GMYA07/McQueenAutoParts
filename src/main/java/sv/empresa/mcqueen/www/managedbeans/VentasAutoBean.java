@@ -18,6 +18,7 @@ import java.util.Random;
 @RequestScoped
 public class VentasAutoBean {
     private VentasautoEntity ventaAuto;
+    private String codigoVentaMoment;
     private AutomovilesEntity automovil;
     private VentasAutoModel modeloVenta = new VentasAutoModel();
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
@@ -26,6 +27,7 @@ public class VentasAutoBean {
     private List<VentasautoEntity> listaVentas;
     private List<VentasautoEntity> listaVentaAutoAgencia;
     private List<VentasautoEntity> listaMensajesVentas;
+    private List<VentasautoEntity> listaTodasVentasAutosAgencias;
 
     public VentasAutoBean(){ventaAuto = new VentasautoEntity(); automovil = new AutomovilesEntity();}
 
@@ -61,15 +63,35 @@ public class VentasAutoBean {
         }
     }
 
+    public void canjearCodigoVenta(){
+
+        if (codigoVentaMoment.equals(ventaAuto.getMensajeVenta())){
+            ventaAuto.setEstado(1);
+            ventaAuto.setUsuarioByIdCliente(modeloUsuario.obtenerUsuario(JsfUtil.getRequest().getParameter("idComprador")));
+            ventaAuto.setAutomovilesByIdCarro(modeloAutomovil.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto")));
+           if (modeloVenta.cambiarEstadoVenta(ventaAuto) == 1){
+               //Obtenemos el objeto y luego de eso le restamos un automovil puesto q este fue canjeado
+               automovil = modeloAutomovil.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto"));
+               automovil.setCantidad(automovil.getCantidad() - 1);
+
+               if (modeloAutomovil.modificarAutomovil(automovil) == 1){
+                   FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Codigo Canjeado Exitosamente", "Registrado"));
+               }
+           }
+        }else {
+            JsfUtil.setErrorMessage(null, "No se pudo canjear la comprar");
+        }
+    }
+
     public void cambiarEstadoVenta(VentasautoEntity venta){
         String estadoAccion = JsfUtil.getRequest().getParameter("estadoAccion");
 
         if (venta.getEstado() == 11){ //si el estado esta en 11 que significa q la venta esta en modo de conversacion con el usuario interesado pasara dado caso sea asi pues pasa
             //evaluamos si aceptaremos o rechazaremos
             if (estadoAccion.equals("222")){
-                venta.setEstado(12);
+                venta.setEstado(12); //si es 12 es por q si c completo la venta
             }else {
-                venta.setEstado(13);
+                venta.setEstado(13);//si es 13 es por q no c completo la venta
             }
             if (venta.getEstado() == 12){ // aqui verificamos si es una cancelacion de venta por si no llegaron a un acuerdo
                 if (modeloVenta.cambiarEstadoVenta(venta) == 1){ // validamos si cambia el estado
@@ -131,6 +153,9 @@ public class VentasAutoBean {
         automovil = modeloAutomovil.obtenerAutomovil(idAuto);
     }
 
+    public void settearFormCanjeoCod(String idVenta){
+        ventaAuto = modeloVenta.obtenerVenta(idVenta);
+    }
 
 
 
@@ -144,6 +169,10 @@ public class VentasAutoBean {
     }
     public List<VentasautoEntity> getListaVentaAutoAgencia(String dui) {
         return modeloVenta.listaMensajesVentaAgencia(dui);
+    }
+
+    public List<VentasautoEntity> getListaTodasVentasAutosAgencias() {
+        return modeloVenta.listaAllVentasAgencia();
     }
 
     public VentasautoEntity getVentaAuto() {
@@ -160,5 +189,13 @@ public class VentasAutoBean {
 
     public void setAutomovil(AutomovilesEntity automovil) {
         this.automovil = automovil;
+    }
+
+    public String getCodigoVentaMoment() {
+        return codigoVentaMoment;
+    }
+
+    public void setCodigoVentaMoment(String codigoVentaMoment) {
+        this.codigoVentaMoment = codigoVentaMoment;
     }
 }

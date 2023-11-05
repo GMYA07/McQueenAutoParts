@@ -10,6 +10,7 @@ import sv.empresa.mcqueen.www.models.AutomovilesModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
 import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
+import sv.empresa.mcqueen.www.models.VentasAutoModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
 
 import java.io.FileOutputStream;
@@ -27,6 +28,7 @@ public class AutomovilBean {
     public String duiSolicitante;
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
     private UsuariosModel modeloUsuario = new UsuariosModel();
+    private VentasAutoModel modeloVentaAuto = new VentasAutoModel();
     //Listas de diferentes tipos para cada crud que sea necesario
     List<AutomovilesEntity> listaAutomoviles;
     private List<AutomovilesEntity> listaAutomovilesAgencia;
@@ -163,15 +165,17 @@ public class AutomovilBean {
                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
            }
        }else if(auto.getEstado() == 1){
+               auto.setEstado(3);   //si ingresa a este apartado es por q si no se vendio el vehiculo y este quiere ser quitado de publicacion
+               if (modeloVentaAuto.borrarVentasPorDeleteDeAuto(auto.getIdAutomovil()) == 1){
+                   if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
+                       FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+                   }
+               }else { // se coloca esto por si acaso no haya ningun interes de compra pues siempre cambiara su estado
+                   if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
+                       FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
+                   }
+               }
 
-           if(estadoAccion.equals("222")){
-               auto.setEstado(4);
-           }else {
-               auto.setEstado(3);
-           }
-           if (modeloAutomovil.cambiarEstadoAutomovil(auto) > 0){
-               FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Actualizado el Estado Exitosamente", "Actualizado"));
-           }
        }else if(auto.getEstado() == 2){ // si presiona el boton y esta en 2 eso significa que hace un cambio en su solicitud
            if (estadoAccion.equals("777")){
                modeloAutomovil.eliminarAutomovil(auto.getIdAutomovil());

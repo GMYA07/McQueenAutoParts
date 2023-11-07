@@ -9,10 +9,10 @@ public class RentasEntity {
     @Column(name = "idRenta", nullable = false, length = 6)
     private String idRenta;
     @Basic
-    @Column(name = "FechaInicio", nullable = false, length = 25)
+    @Column(name = "FechaInicio", nullable = false, length = 50)
     private String fechaInicio;
     @Basic
-    @Column(name = "FechaFinal", nullable = false, length = 25)
+    @Column(name = "FechaFinal", nullable = false, length = 50)
     private String fechaFinal;
     @Basic
     @Column(name = "precioRenta", nullable = false)

@@ -12,6 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
     <title>Solicitud de Venta de Vehículo</title>
@@ -101,29 +102,27 @@
         <h:graphicImage library="img" name="logo.png" style="max-width: 100%; margin: 10px auto; display: block;"/>
         <h:form>
             <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <b:inputText value="#{rentaBean.autoRentar.modeloAutomovil}" placeholder="Nombre:" id="nombre" name="nombre"/>
-            </div>
-            <div class="form-group">
-                <label for="apellido">Apellido:</label>
-                <b:inputText value="" placeholder="Apellido:" id="apellido" name="apellido"/>
-            </div>
-            <div class="form-group">
                 <label for="dui">DUI:</label>
-                <b:inputText value="" placeholder="12345678-9" id="dui" name="dui"/>
+                <b:inputText value="#{rentaBean.duiUserRenta}" placeholder="12345678-9" id="dui" name="dui"/>
+                <b:inputText type="hidden" value="#{rentaBean.idAuto}"/>
             </div>
             <div class="form-group">
-                <label for="licencia">Licencia:</label>
-                <b:inputText type="file" name="licencia" id="licencia" />
+                <label >Fecha de entrega del automovil:</label>
+                <b:datepicker  id="fechaI" value="#{rentaBean.rentaAuto.fechaInicio}" pattern="dd/MM/yyyy" />
             </div>
-            <br/>
             <div class="form-group">
-                <label for="foto">Comprobante salarial:</label>
-                <b:inputText type="file" name="foto" id="foto" />
+                <label >Fecha de devolucion del automovil:</label>
+                <b:datepicker id="fechaF" value="#{rentaBean.rentaAuto.fechaFinal}" pattern="dd/MM/yyyy" />
             </div>
             <br/>
-            <b:button type="submit" value="Enviar Solicitud"></b:button>
+            <br/>
+            <b:commandButton value="Alquilar Automovil" look="primary" action="#{rentaBean.registrarRenta()}">
+                <f:param name="idAutomovil" value="#{rentaBean.autoRentar.idAutomovil}"/>
+            </b:commandButton>
+            <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+            <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred" />
         </h:form>
     </div>
+
 </h:body>
 </html>

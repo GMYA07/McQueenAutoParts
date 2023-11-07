@@ -13,6 +13,9 @@ import sv.empresa.mcqueen.www.utils.JsfUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -45,28 +48,53 @@ public class RentaBean {
         autoRentar = modeloAuto.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAutomovil"));
         rentaAuto.setUsuarioByIdCliente(modeloUser.obtenerUsuario(duiUserRenta));
         rentaAuto.setAutomovilesByIdCarro(autoRentar);
-        rentaAuto.setPrecioRenta((int)autoRentar.getPrecioAutomovil());
-        rentaAuto.setEstado(31);
+        rentaAuto.setEstado(41);
         //Arreglando el formato de la fecha
         rentaAuto.setFechaInicio(convertirFormato(rentaAuto.getFechaInicio()));
         rentaAuto.setFechaFinal(convertirFormato(rentaAuto.getFechaFinal()));
+
+        //hacemos el calculo de los dias q rentara el auto y dependiendo del precio de renta por dia asi se le multiplicara
+        int fechasDeLaRenta = calcularDiferenciaDias(rentaAuto.getFechaInicio(),rentaAuto.getFechaFinal());
+        rentaAuto.setPrecioRenta((fechasDeLaRenta * (int)autoRentar.getPrecioAutomovil()));
+
         //creando ID para renta
         crearIDRenta();
 
-        if (compararFechas(rentaAuto.getFechaInicio(),rentaAuto.getFechaFinal())){
-            if (modeloRenta.registrarRenta(rentaAuto) == 1){
-                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Renta Ingresada", "Registrado"));
-                return "indexCliente";
-            }else {
-                JsfUtil.setErrorMessage(null, "No se pudo canjear la comprar");
-                return "FAlquiler";
-            }
-        }else {
-            JsfUtil.setErrorMessage(null, "Las Fechas de inicio es mayor a la final");
-            return "FAlquiler";
-        }
+       if (compararFechaConHoy(rentaAuto.getFechaInicio())){
+           if (compararFechas(rentaAuto.getFechaInicio(),rentaAuto.getFechaFinal())){
+               listaRentas = modeloRenta.solicitudesRentas(JsfUtil.getRequest().getParameter("idAutomovil"));
+
+               boolean exitSoli = false;
+
+               for (RentasEntity solicitudes : listaRentas) {
+                   exitSoli = verificarFechaEnRango(rentaAuto.getFechaInicio(),solicitudes.getFechaInicio(),solicitudes.getFechaFinal());
+                   if (exitSoli == true){
+                       break;
+                   }
+               }
+               if (exitSoli == false){
+                   if (modeloRenta.registrarRenta(rentaAuto) == 1){
+                       FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Renta Ingresada", "Registrado"));
+                       return "indexCliente";
+                   }else {
+                       JsfUtil.setErrorMessage(null, "No se pudo canjear la comprar");
+                       return "FAlquiler";
+                   }
+               }else {
+                   JsfUtil.setErrorMessage(null, "Ya hay una solicitud entre en rango de esa fecha");
+                   return "FAlquiler";
+               }
+           }else {
+               JsfUtil.setErrorMessage(null, "Las Fechas de inicio es mayor a la final");
+               return "FAlquiler";
+           }
+       }else {
+           JsfUtil.setErrorMessage(null, "Las Fechas de inicio debe ser un dia despues de la fecha actual ");
+           return "FAlquiler";
+       }
 
     }
+    //INICIO DE FUNCIONES PARA COMPARAR FECHAS
     public static String convertirFormato(String fechaOriginal) {
         try {
             // Formato del patrón original
@@ -85,6 +113,45 @@ public class RentaBean {
             return null; // Devuelve null en caso de error
         }
     }
+    public boolean compararFechaConHoy(String fechaInicioStr) throws ParseException {
+        // Obtener la fecha actual (hoy)
+        Date fechaHoy = new Date();
+
+        // Crear un formato de fecha para analizar la fecha de inicio
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Convertir la fecha de inicio en un objeto Date
+        Date fechaInicio = sdf.parse(fechaInicioStr);
+
+        // Comparar la fecha de inicio con la fecha actual
+        return !fechaInicio.before(fechaHoy);
+    }
+
+    public static int calcularDiferenciaDias(String fechaInicioStr, String fechaFinalStr) {
+        // Crear un formateador de fecha personalizado para el formato "dd/MM/yyyy"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        // Convertir las cadenas de fecha en objetos LocalDate utilizando el formateador
+        LocalDate fechaInicio = LocalDate.parse(fechaInicioStr, formatter);
+        LocalDate fechaFinal = LocalDate.parse(fechaFinalStr, formatter);
+
+        // Calcular la diferencia en días y convertirla a int
+        int diferenciaDias = (int) ChronoUnit.DAYS.between(fechaInicio, fechaFinal);
+
+        return diferenciaDias; //se le agrega un mas 1 para contar el dia de la fecha de inicio
+    }
+    public boolean verificarFechaEnRango(String fechaUsuarioStr, String fechaInicioStr, String fechaFinalStr) throws ParseException {
+        // Crear un formato de fecha para analizar las cadenas
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Convertir las cadenas en objetos Date
+        Date fechaInicio = sdf.parse(fechaInicioStr);
+        Date fechaFinal = sdf.parse(fechaFinalStr);
+        Date fechaUsuario = sdf.parse(fechaUsuarioStr);
+
+        // Verificar si la fecha del usuario está dentro del rango
+        return (fechaUsuario.after(fechaInicio) && fechaUsuario.before(fechaFinal));
+    }
     public boolean compararFechas(String fechaInicioStr, String fechaFinalStr) throws ParseException {
         // Crear un formato de fecha para analizar las cadenas
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -96,8 +163,12 @@ public class RentaBean {
         // Comparar las fechas utilizando el método after
         // Si fechaInicio es posterior a fechaFinal, se devuelve false (error)
         // Si fechaInicio no es posterior a fechaFinal, se devuelve true (válido)
-        return !fechaInicio.after(fechaFinal);
+        return !fechaInicio.after(fechaFinal); //se le coloca ! para poder negar el if del condicional de la funcion de registrar por q si es true pues necesitamos q se niege haya para no pasar
     }
+
+    //FIN DE FUNCIONES PARA COMPARAR FECHAS
+
+
     public void crearIDRenta(){
         Random rand = new Random();
         int numeroAleatorio = rand.nextInt(900) + 100;

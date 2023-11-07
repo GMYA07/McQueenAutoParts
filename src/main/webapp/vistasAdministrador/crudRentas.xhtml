@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="/templates/plantillaIndex.xhtml">
+    <ui:define name="contenidoAdministrador">
+        <h1 class="text-center">Tabla de Registro de Carros Para Poder Rentar</h1>
+        <br/>
+        <br/>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <br/>
+                <br/>
+                <h2 class="text-center">Solicitudes de Renta</h2>
+                <br/>
+                <br/>
+                <h:form>
+                    <b:dataTable value="#{rentaBean.getListaRentas(41)}" var="renta" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Renta" />
+                            </f:facet>
+                            <h:outputText value="#{renta.idRenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui Cliente / Nombres Cliente" />
+                            </f:facet>
+                            <h:outputText value="#{renta.usuarioByIdCliente.dui} / #{renta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Automovil Rentado" />
+                            </f:facet>
+                            <h:outputText value="#{renta.automovilesByIdCarro.marcaAutomovil} #{renta.automovilesByIdCarro.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Entrega del Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{renta.fechaInicio}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Devolucion del Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{renta.fechaFinal}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de la Renta total" />
+                            </f:facet>
+                            <h:outputText value="#{renta.precioRenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de la renta" />
+                            </f:facet>
+                            <h:outputText value="Solicitud Renta" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Accion" />
+                            </f:facet>
+                            <b:commandButton action="#{rentaBean.aceptarSolicitudRenta()}"  look="primary" value="Iniciar Renta" onclick="return confirm('¿Está seguro de que desea aceptar la solicitud?');">
+                                <f:ajax render="@form" execute="@form"  />
+                                <f:param name="idRenta" value="#{renta.idRenta}"/>
+                                <f:param name="idAuto" value="#{renta.automovilesByIdCarro.idAutomovil}"/>
+                                <f:param name="idRentador" value="#{renta.usuarioByIdCliente.dui}"/>
+                            </b:commandButton>
+                            <b:commandButton action="#{rentaBean.registrarRenta()}"  look="danger" value="Borrar Solicitud de Renta" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
+                        </h:column>
+                    </b:dataTable>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                    <h:messages id="errorMessage" infoStyle="color:darkgreen" globalOnly="true" errorStyle="color:darkred" />
+                </h:form>
+                <br/>
+                <br/>
+                <h2 class="text-center">Rentas activas</h2>
+                <br/>
+                <br/>
+                <h:form>
+                    <b:dataTable value="#{rentaBean.getListaRentas(42)}" var="renta" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Renta" />
+                            </f:facet>
+                            <h:outputText value="#{renta.idRenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui Cliente / Nombres Cliente" />
+                            </f:facet>
+                            <h:outputText value="#{renta.usuarioByIdCliente.dui} / #{renta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Automovil Rentado" />
+                            </f:facet>
+                            <h:outputText value="#{renta.automovilesByIdCarro.marcaAutomovil} #{renta.automovilesByIdCarro.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Entrega del Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{renta.fechaInicio}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Devolucion del Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{renta.fechaFinal}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de la Renta total" />
+                            </f:facet>
+                            <h:outputText value="#{renta.precioRenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de la renta" />
+                            </f:facet>
+                            <h:outputText value="Renta Activa" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Accion" />
+                            </f:facet>
+                            <b:commandButton action="#{rentaBean.registrarRenta()}"  look="danger" value="Iniciar Renta" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
+                        </h:column>
+
+                    </b:dataTable>
+                </h:form>
+                <br/>
+                <br/>
+                <h2 class="text-center">Rentas Finalizadas</h2>
+                <br/>
+                <br/>
+                <h:form>
+                    <b:dataTable value="#{rentaBean.getListaRentas(43)}" var="renta" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Renta" />
+                            </f:facet>
+                                <h:outputText value="#{renta.idRenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui Cliente / Nombres Cliente" />
+                            </f:facet>
+                            <h:outputText value="#{renta.usuarioByIdCliente.dui} / #{renta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Automovil Rentado" />
+                            </f:facet>
+                                <h:outputText value="#{renta.automovilesByIdCarro.marcaAutomovil} #{renta.automovilesByIdCarro.modeloAutomovil}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Entrega del Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{renta.fechaInicio}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Fecha de Devolucion del Automovil" />
+                            </f:facet>
+                            <h:outputText value="#{renta.fechaFinal}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de la Renta total" />
+                            </f:facet>
+                            <h:outputText value="#{renta.precioRenta}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado de la renta" />
+                            </f:facet>
+                            <h:outputText value="Renta Finalizada" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Accion" />
+                            </f:facet>
+                            <b:commandButton action="#{rentaBean.registrarRenta()}"  look="danger" value="Iniciar Renta" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                                <f:ajax render="@form" execute="@form"  />
+                            </b:commandButton>
+                        </h:column>
+
+                    </b:dataTable>
+                </h:form>
+                <br/>
+                <br/>
+            </b:container>
+        </b:container>
+    </ui:define>
+</ui:composition>

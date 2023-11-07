@@ -6,6 +6,7 @@ import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
 import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 import sv.empresa.mcqueen.www.entities.RentasEntity;
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.models.AutomovilesModel;
 import sv.empresa.mcqueen.www.models.RentasModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
@@ -94,6 +95,26 @@ public class RentaBean {
        }
 
     }
+    public void aceptarSolicitudRenta(){
+        autoRentar = modeloAuto.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto"));
+        if (autoRentar.getEstado() == 30){
+            autoRentar.setEstado(31);
+            rentaAuto = modeloRenta.obtenerRenta(JsfUtil.getRequest().getParameter("idRenta"));
+            rentaAuto.setEstado(42);
+
+            if (modeloAuto.modificarAutomovil(autoRentar) == 1){
+                if (modeloRenta.modificarRenta(rentaAuto) == 1){
+                    FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Renta Aceptada", "Registrado"));
+                }else{
+                    JsfUtil.setErrorMessage(null, "No se pudo aceptar ");
+                }
+            }else {
+                JsfUtil.setErrorMessage(null, "No se pudo Cambiar de estado el automovil ");
+            }
+        }else {
+            JsfUtil.setErrorMessage(null, "No se pudo Rentar el auto por que esta siendo rentado ");
+        }
+    }
     //INICIO DE FUNCIONES PARA COMPARAR FECHAS
     public static String convertirFormato(String fechaOriginal) {
         try {
@@ -178,8 +199,8 @@ public class RentaBean {
 
     //GETTER AND SETTER
 
-    public List<RentasEntity> getListaRentas() {
-        return modeloRenta.listarRentas();
+    public List<RentasEntity> getListaRentas(int tipoRenta) {
+        return modeloRenta.listarRentas(tipoRenta);
     }
 
     public RentasEntity getRentaAuto() {

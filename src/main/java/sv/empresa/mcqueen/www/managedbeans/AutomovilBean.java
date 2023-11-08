@@ -71,7 +71,7 @@ public class AutomovilBean {
             //Usamos Funcion para crear el ID del Automovil
             crearIDAutomovil(0);
             //le colocamos un estado al Carro para poder saber su disponiblidad
-            automovil.setEstado(21);
+            automovil.setEstado(30);
             //ACCIONES PARA INSERTARLO EN LA BDD
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevo Automovil de Renta");

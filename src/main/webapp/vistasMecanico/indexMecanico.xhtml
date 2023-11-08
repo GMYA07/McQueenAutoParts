@@ -19,8 +19,8 @@
 
 
          <b:carousel id="tiovivo" style="width:800px" interval="2500">
-            <b:carouselItem >
-               <h:graphicImage  name="img/carousel.jpg" alt="Valladolid" style="width: 800px; height: 500px" />
+            <b:carouselItem style="width: 100%; height: 500px">
+               <h:graphicImage  name="img/carousel.jpg" alt="Valladolid" style="width: 100%; height: 500px" />
                <b:carouselCaption>
                   <h2>Confiamos en tu labor!</h2>
                </b:carouselCaption>
@@ -32,6 +32,60 @@
 
          </b:carousel>
 
+      </div>
+      <br/>
+      <br/>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <h1 class="text-center">Mis Citas</h1>
+            </div>
+         </div>
+         <div class="row">
+            <h:form id="tablaForm">
+               <h:dataTable styleClass="table" value="#{citasMecBean.getCitasMeca(session.getAttribute('idUsuario'))}" var="citas" style="width: 100%">
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Id de la Cita" />
+                     </f:facet>
+                     <h:outputText value="#{citas.idCita}" />
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Dui del Cliente / Nombre del Usuario" />
+                     </f:facet>
+                     <h:outputText value="#{citas.usuarioByIdCliente.dui} / #{citas.usuarioByIdCliente.nombre}" />
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Descripcion de la Cita" />
+                     </f:facet>
+                     <h:outputText value="#{citas.descripcionCita}" />
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Mecanico Asignado" />
+                     </f:facet>
+                     <h:outputText value="#{citas.mecanicosByIdMecanico.nombre}" />
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Estado Cita" />
+                     </f:facet>
+                     <h:outputText value="Cita Activa" />
+                  </h:column>
+                  <h:column>
+                     <f:facet name="header">
+                        <h:outputText value="Acciones" />
+                     </f:facet>
+                     <b:commandButton value="Modificar Usuario" look="danger" action="#{citasMecBean.finalizarCita(citas)}">
+                        <f:ajax execute="@form" render="@form"/>
+                     </b:commandButton>
+                  </h:column>
+               </h:dataTable>
+               <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+            </h:form>
+         </div>
       </div>
 
 

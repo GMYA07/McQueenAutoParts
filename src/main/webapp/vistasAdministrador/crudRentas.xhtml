@@ -70,8 +70,9 @@
                                 <f:param name="idAuto" value="#{renta.automovilesByIdCarro.idAutomovil}"/>
                                 <f:param name="idRentador" value="#{renta.usuarioByIdCliente.dui}"/>
                             </b:commandButton>
-                            <b:commandButton action="#{rentaBean.registrarRenta()}"  look="danger" value="Borrar Solicitud de Renta" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                            <b:commandButton action="#{rentaBean.eliminarRenta()}"  look="danger" value="Eliminar Solicitud de Renta" onclick="return confirm('¿Está seguro de que desea eliminar la solicitud?');">
                                 <f:ajax render="@form" execute="@form"  />
+                                <f:param name="idRenta" value="#{renta.idRenta}"/>
                             </b:commandButton>
                         </h:column>
                     </b:dataTable>
@@ -131,8 +132,11 @@
                             <f:facet name="header">
                                 <h:outputText value="Accion" />
                             </f:facet>
-                            <b:commandButton action="#{rentaBean.registrarRenta()}"  look="danger" value="Iniciar Renta" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
+                            <b:commandButton action="#{rentaBean.finalizarRentaRenta()}"  look="warning" value="Finalizar Renta" onclick="return confirm('¿Está seguro de que desea finalizar la renta?');">
                                 <f:ajax render="@form" execute="@form"  />
+                                <f:param name="idRenta" value="#{renta.idRenta}"/>
+                                <f:param name="idAuto" value="#{renta.automovilesByIdCarro.idAutomovil}"/>
+                                <f:param name="idRentador" value="#{renta.usuarioByIdCliente.dui}"/>
                             </b:commandButton>
                         </h:column>
 
@@ -187,15 +191,6 @@
                             </f:facet>
                             <h:outputText value="Renta Finalizada" />
                         </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Accion" />
-                            </f:facet>
-                            <b:commandButton action="#{rentaBean.registrarRenta()}"  look="danger" value="Iniciar Renta" onclick="return confirm('¿Está seguro de que desea eliminar esto?');">
-                                <f:ajax render="@form" execute="@form"  />
-                            </b:commandButton>
-                        </h:column>
-
                     </b:dataTable>
                 </h:form>
                 <br/>

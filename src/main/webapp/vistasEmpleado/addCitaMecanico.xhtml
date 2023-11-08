@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        template="../templates/plantillaEmpleado.xhtml">>
+
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages />
+        </h:panelGroup>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Registro de Repuestos automovilisticos</h1>
+                </div>
+            </div>
+            <b:modal title="Agregar Nueva Cita" styleClass="formValidationModalClass" closable="false" closeOnEscape="true">
+                <b:form enctype="multipart/form-data">
+                    <h:outputLabel value="Dui del Cliente Solicitante"/>
+                    <br/>
+                    <b:inputText value="#{citasMecBean.duiCliente}"/>
+                    <br/>
+                    <h:outputLabel value="Descripcion de la Cita"/>
+                    <br/>
+                    <b:inputTextarea value="#{citasMecBean.citaCliente.descripcionCita}"/>
+                    <br/>
+                    <b:selectOneMenu value="#{citasMecBean.idMecanico}">
+                        <f:selectItems value="#{mecanicoBean.listaMecanicos}" var="mecanico" itemValue="#{mecanico.dui}" itemLabel="#{mecanico.nombre}"/>
+                    </b:selectOneMenu>
+                    <b:row>
+                        <b:column>
+                            <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
+                            <b:commandButton largeScreen="half" dismiss="modal" value="Almacenar" styleClass="btn btn-success" action="#{citasMecBean.registrarCita()}" style="margin-right:15px; margin-bottom: 20px"
+                                             oncomplete="if(!validationFailed) { $('.formValidationModalClass').modal('hide') } ">
+                                <f:ajax execute="@form" render="tablaForm"/>
+                            </b:commandButton>
+                        </b:column>
+                    </b:row>
+                    <b:fetchBeanInfos />
+                    <b:messages />
+                </b:form>
+            </b:modal>
+            <div class="row">
+                <h:form id="tablaForm">
+                    <h:dataTable styleClass="table" value="#{citasMecBean.getListaCitas(51)}" var="citas" style="width: 100%">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Cita" />
+                            </f:facet>
+                            <h:outputText value="#{citas.idCita}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui del Cliente / Nombre del Usuario" />
+                            </f:facet>
+                            <h:outputText value="#{citas.usuarioByIdCliente.dui} / #{citas.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descripcion de la Cita" />
+                            </f:facet>
+                            <h:outputText value="#{citas.descripcionCita}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Mecanico Asignado" />
+                            </f:facet>
+                            <h:outputText value="#{citas.mecanicosByIdMecanico.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado Cita" />
+                            </f:facet>
+                            <h:outputText value="Cita Activa" />
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                </h:form>
+                <h:form id="miFormulario" enctype="multipart/form-data">
+                    <b:button onclick="$('.formValidationModalClass').modal('show')" value="Agregar Nueva Cita" look="primary"/>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

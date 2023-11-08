@@ -85,4 +85,24 @@ public class RentasModel {
             return  0;
         }
     }
+    public int eliminarRenta(String idRenta){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        int filasBorradas = 0;
+        try {
+            // Recuperando el objeto a eliminar
+            RentasEntity rentaDelete = em.find(RentasEntity.class,idRenta);
+            if (rentaDelete != null){
+                tran.begin();
+                em.remove(rentaDelete);
+                tran.commit();
+                em.close();
+                filasBorradas = 1;
+            }
+            return filasBorradas;
+        }catch (Exception e){
+            em.close();
+            return 0;
+        }
+    }
 }

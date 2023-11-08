@@ -97,7 +97,7 @@ public class RentaBean {
     }
     public void aceptarSolicitudRenta(){
         autoRentar = modeloAuto.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto"));
-        if (autoRentar.getEstado() == 30){
+        if (autoRentar.getEstado() == 30){ // se coloca para verificar que el automvil este en un estado de actividad
             autoRentar.setEstado(31);
             rentaAuto = modeloRenta.obtenerRenta(JsfUtil.getRequest().getParameter("idRenta"));
             rentaAuto.setEstado(42);
@@ -113,6 +113,29 @@ public class RentaBean {
             }
         }else {
             JsfUtil.setErrorMessage(null, "No se pudo Rentar el auto por que esta siendo rentado ");
+        }
+    }
+    public void eliminarRenta(){
+        if (modeloRenta.eliminarRenta(JsfUtil.getRequest().getParameter("idRenta")) == 1){
+            FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Solicitud de Renta Eliminada", "Eliminar"));
+        }else {
+            JsfUtil.setErrorMessage(null, "No se Borrar la Solicitud ");
+        }
+    }
+    public void finalizarRentaRenta(){
+        autoRentar = modeloAuto.obtenerAutomovil(JsfUtil.getRequest().getParameter("idAuto"));
+        autoRentar.setEstado(30);
+        rentaAuto = modeloRenta.obtenerRenta(JsfUtil.getRequest().getParameter("idRenta"));
+        rentaAuto.setEstado(43);
+
+        if (modeloAuto.modificarAutomovil(autoRentar) == 1){
+            if (modeloRenta.modificarRenta(rentaAuto) == 1){
+                FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Renta Finalizada", "Registrado"));
+            }else{
+                    JsfUtil.setErrorMessage(null, "No se pudo finalizar ");
+            }
+        }else {
+                JsfUtil.setErrorMessage(null, "No se pudo Cambiar de estado el automovil ");
         }
     }
     //INICIO DE FUNCIONES PARA COMPARAR FECHAS

@@ -3,11 +3,8 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
-import sv.empresa.mcqueen.www.entities.EmpleadosEntity;
-import sv.empresa.mcqueen.www.entities.RentasEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
-
+import sv.empresa.mcqueen.www.entities.RentasEntity;
 import java.util.List;
 
 public class RentasModel {

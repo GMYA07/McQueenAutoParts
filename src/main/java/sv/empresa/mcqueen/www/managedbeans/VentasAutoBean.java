@@ -4,13 +4,13 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
-import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
-import sv.empresa.mcqueen.www.entities.VentasautoEntity;
 import sv.empresa.mcqueen.www.models.AutomovilesModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
 import sv.empresa.mcqueen.www.models.VentasAutoModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
 
+import sv.empresa.mcqueen.www.entities.VentasautoEntity;
+import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 import java.util.List;
 import java.util.Random;
 

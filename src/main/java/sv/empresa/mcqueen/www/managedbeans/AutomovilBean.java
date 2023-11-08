@@ -8,10 +8,10 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import sv.empresa.mcqueen.www.models.AutomovilesModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
-import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.models.VentasAutoModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
+import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

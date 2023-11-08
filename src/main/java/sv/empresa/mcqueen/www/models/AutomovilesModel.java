@@ -8,7 +8,6 @@ import jakarta.persistence.Query;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.AutomovilesEntity;
 import sv.empresa.mcqueen.www.entities.UsuarioEntity;
-
 public class AutomovilesModel {
 
     public List<AutomovilesEntity> listarAutomoviles(){

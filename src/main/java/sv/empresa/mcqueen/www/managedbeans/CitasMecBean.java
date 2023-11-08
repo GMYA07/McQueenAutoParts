@@ -4,13 +4,13 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
-import sv.empresa.mcqueen.www.entities.CitasmecEntity;
-import sv.empresa.mcqueen.www.entities.MecanicosEntity;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.models.CitasmecModel;
 import sv.empresa.mcqueen.www.models.MecanicosModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
+import sv.empresa.mcqueen.www.entities.CitasmecEntity;
+import sv.empresa.mcqueen.www.entities.MecanicosEntity;
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 
 import java.util.List;
 

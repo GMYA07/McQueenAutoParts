@@ -2,6 +2,8 @@ package sv.empresa.mcqueen.www.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
 @Table(name = "repuestos", schema = "mcqueenautoparts", catalog = "")
 public class RepuestosEntity {
@@ -26,6 +28,8 @@ public class RepuestosEntity {
     @Basic
     @Column(name = "marca", nullable = false, length = 15)
     private String marca;
+    @OneToMany(mappedBy = "repuestosByIdProducto")
+    private Collection<CarritoEntity> carritosByIdRepuesto;
 
     public String getIdRepuesto() {
         return idRepuesto;
@@ -115,5 +119,13 @@ public class RepuestosEntity {
         result = 31 * result + cantidad;
         result = 31 * result + (marca != null ? marca.hashCode() : 0);
         return result;
+    }
+
+    public Collection<CarritoEntity> getCarritosByIdRepuesto() {
+        return carritosByIdRepuesto;
+    }
+
+    public void setCarritosByIdRepuesto(Collection<CarritoEntity> carritosByIdRepuesto) {
+        this.carritosByIdRepuesto = carritosByIdRepuesto;
     }
 }

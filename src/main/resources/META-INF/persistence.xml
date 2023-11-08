@@ -8,6 +8,7 @@
       <class>sv.empresa.mcqueen.www.entities.AdministradoresEntity</class>
       <class>sv.empresa.mcqueen.www.entities.AutomovilesEntity</class>
       <class>sv.empresa.mcqueen.www.entities.CitasmecEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.CarritoEntity</class>
       <class>sv.empresa.mcqueen.www.entities.EmpleadosEntity</class>
       <class>sv.empresa.mcqueen.www.entities.MecanicosEntity</class>
       <class>sv.empresa.mcqueen.www.entities.RentasEntity</class>

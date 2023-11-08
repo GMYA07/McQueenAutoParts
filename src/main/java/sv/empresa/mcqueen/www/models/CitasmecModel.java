@@ -3,11 +3,8 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
-import sv.empresa.mcqueen.www.entities.CitasmecEntity;
-import sv.empresa.mcqueen.www.entities.RentasEntity;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
-
+import sv.empresa.mcqueen.www.entities.CitasmecEntity;
 import java.util.List;
 
 public class CitasmecModel {

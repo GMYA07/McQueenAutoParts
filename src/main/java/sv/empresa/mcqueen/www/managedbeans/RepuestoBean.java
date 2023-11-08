@@ -7,8 +7,8 @@ import jakarta.faces.context.FacesContext;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import sv.empresa.mcqueen.www.models.RepuestosModel;
-import sv.empresa.mcqueen.www.entities.RepuestosEntity;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
+import sv.empresa.mcqueen.www.entities.RepuestosEntity;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Random;
+
 
 @MultipartConfig
 @ManagedBean

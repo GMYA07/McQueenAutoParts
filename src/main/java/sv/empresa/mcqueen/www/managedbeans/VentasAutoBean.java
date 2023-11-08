@@ -75,7 +75,15 @@ public class VentasAutoBean {
                automovil.setCantidad(automovil.getCantidad() - 1);
 
                if (modeloAutomovil.modificarAutomovil(automovil) == 1){
-                   FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Codigo Canjeado Exitosamente", "Registrado"));
+                  if(automovil.getCantidad() > 0){
+                      FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Codigo Canjeado Exitosamente", "Registrado"));
+                  }else {
+                      //cambiaremos el estado si ese fue el ultimo automovil vendido
+                      automovil.setEstado(12);
+                      if (modeloAutomovil.modificarAutomovil(automovil) == 1){
+                          FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Codigo Canjeado Exitosamente", "Registrado"));
+                      }
+                  }
                }
            }
         }else {

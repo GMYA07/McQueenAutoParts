@@ -12,52 +12,27 @@
 
             <div class="hero">
                 <div class="container2">
-
-                    <div class="card">
-
-                        <img  alt="Generic placeholder thumbnail" src="../resources/img/alternadorl200.jpg"/>
-                        <h4>Alternador Mitsubishi</h4>
-                        <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
-                        <b:button value="Comprar" look="primary"/>
+                    <div class="contenedor3">
+                        <h:form>
+                            <ui:repeat value="#{repuestoBean.listaRepuestos}" var="repuesto">
+                                <ui:fragment rendered ="#{repuesto.cantidad > 0}">
+                                    <h:form>
+                                        <div class="card">
+                                            <b:carousel style="width:400px" disabled="true">
+                                                <b:carouselItem>
+                                                    <h:graphicImage library="imgAutomoviles" name="#{repuesto.imagenRepuesto}" alt="" />
+                                                </b:carouselItem>
+                                            </b:carousel>
+                                            <h2>#{repuesto.nombre} - #{repuesto.marca}</h2>
+                                            <p>Categoria del repuesto: #{repuesto.categorias}</p>
+                                            <b:commandButton action="#{ventasAutoBean.settearFormVentas(repuesto.idRepuesto)}" value="Añadir al Carrito" look="primary">
+                                            </b:commandButton>
+                                        </div>
+                                    </h:form>
+                                </ui:fragment>
+                            </ui:repeat>
+                        </h:form>
                     </div>
-
-                    <div class="card">
-                        <img  alt="Generic placeholder thumbnail" src="../resources/img/alternadorl200.jpg"/>
-                        <h4>Alternador Mitsubishi</h4>
-                        <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
-                        <b:button value="Comprar" look="primary"/>
-                    </div>
-
-                    <div class="card">
-                        <img  alt="Generic placeholder thumbnail" src="../resources/img/alternadorl200.jpg"/>
-                        <h4>Alternador Mitsubishi</h4>
-                        <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
-                        <b:button value="Comprar" look="primary"/>
-                    </div>
-
-                    <div class="card">
-
-                        <img  alt="Generic placeholder thumbnail" src="../resources/img/alternadorl200.jpg"/>
-                        <h4>Alternador Mitsubishi</h4>
-                        <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
-                        <b:button value="Comprar" look="primary"/>
-                    </div>
-
-                    <div class="card">
-                        <img  alt="Generic placeholder thumbnail" src="../resources/img/alternadorl200.jpg"/>
-                        <h4>Alternador Mitsubishi</h4>
-                        <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
-                        <b:button value="Comprar" look="primary"/>
-                    </div>
-
-                    <div class="card">
-                        <img  alt="Generic placeholder thumbnail" src="../resources/img/alternadorl200.jpg"/>
-                        <h4>Alternador Mitsubishi</h4>
-                        <p>Alternador para Pick Up Mitsubishi, compatible desde el año 2020-2023</p>
-                        <b:button value="Comprar" look="primary"/>
-                    </div>
-                    <br/>
-
                 </div>
             </div>
         </ui:define>

@@ -3,11 +3,11 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
-
+import sv.empresa.mcqueen.www.entities.CarritoEntity;
 import java.util.List;
 
 public class CarritoModel {
-    /*public List<CarritoEntity> listarCarrito(){
+    public List<CarritoEntity> listarCarrito(){
         EntityManager Em = JpaUtil.getEntityManager();
         try {
             Query consulta = Em.createQuery("SELECT e FROM CarritoEntity e");
@@ -22,5 +22,5 @@ public class CarritoModel {
             Em.close();
             return null;
         }
-    }*/
+    }
 }

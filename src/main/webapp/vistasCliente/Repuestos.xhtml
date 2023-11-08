@@ -25,7 +25,7 @@
                                             </b:carousel>
                                             <h2>#{repuesto.nombre} - #{repuesto.marca}</h2>
                                             <p>Categoria del repuesto: #{repuesto.categorias}</p>
-                                            <b:commandButton action="#{ventasAutoBean.settearFormVentas(repuesto.idRepuesto)}" value="Añadir al Carrito" look="primary">
+                                            <b:commandButton action="#{carritoBean.addCarrito(repuesto)}" value="Añadir al Carrito" look="primary">
                                             </b:commandButton>
                                         </div>
                                     </h:form>

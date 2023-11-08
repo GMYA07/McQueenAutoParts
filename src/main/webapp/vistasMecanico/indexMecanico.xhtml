@@ -78,7 +78,7 @@
                      <f:facet name="header">
                         <h:outputText value="Acciones" />
                      </f:facet>
-                     <b:commandButton value="Modificar Usuario" look="danger" action="#{citasMecBean.finalizarCita(citas)}">
+                     <b:commandButton value="Finalizar Cita" look="danger" action="#{citasMecBean.finalizarCita(citas)}">
                         <f:ajax execute="@form" render="@form"/>
                      </b:commandButton>
                   </h:column>
@@ -87,8 +87,8 @@
             </h:form>
          </div>
       </div>
-
-
+      <br/>
+      <br/>
    </ui:define>
 
 </ui:composition>

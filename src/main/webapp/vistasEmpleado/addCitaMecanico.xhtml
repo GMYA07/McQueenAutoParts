@@ -17,11 +17,14 @@
             <h:messages />
         </h:panelGroup>
         <div class="container">
+            <br/>
+            <br/>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="text-center">Registro de Repuestos automovilisticos</h1>
+                    <h1 class="text-center">Citas Activas</h1>
                 </div>
             </div>
+            <br/>
             <b:modal title="Agregar Nueva Cita" styleClass="formValidationModalClass" closable="false" closeOnEscape="true">
                 <b:form enctype="multipart/form-data">
                     <h:outputLabel value="Dui del Cliente Solicitante"/>
@@ -32,9 +35,16 @@
                     <br/>
                     <b:inputTextarea value="#{citasMecBean.citaCliente.descripcionCita}"/>
                     <br/>
-                    <b:selectOneMenu value="#{citasMecBean.idMecanico}">
-                        <f:selectItems value="#{mecanicoBean.listaMecanicos}" var="mecanico" itemValue="#{mecanico.dui}" itemLabel="#{mecanico.nombre}"/>
-                    </b:selectOneMenu>
+                    <c:choose>
+                        <c:when test="#{empty mecanicoBean.listaMecanicosLibres}">
+                            <p>Todos los mecánicos están ocupados en este momento.</p>
+                        </c:when>
+                        <c:otherwise>
+                            <b:selectOneMenu value="#{citasMecBean.idMecanico}">
+                                <f:selectItems value="#{mecanicoBean.listaMecanicosLibres}" var="mecanico" itemValue="#{mecanico.dui}" itemLabel="#{mecanico.nombre}"/>
+                            </b:selectOneMenu>
+                        </c:otherwise>
+                    </c:choose>
                     <b:row>
                         <b:column>
                             <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
@@ -88,7 +98,53 @@
                     <b:button onclick="$('.formValidationModalClass').modal('show')" value="Agregar Nueva Cita" look="primary"/>
                 </h:form>
             </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Citas Finalizadas</h1>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <h:form id="tablaForm2">
+                    <h:dataTable styleClass="table" value="#{citasMecBean.getListaCitas(52)}" var="citas" style="width: 100%">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Cita" />
+                            </f:facet>
+                            <h:outputText value="#{citas.idCita}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui del Cliente / Nombre del Usuario" />
+                            </f:facet>
+                            <h:outputText value="#{citas.usuarioByIdCliente.dui} / #{citas.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descripcion de la Cita" />
+                            </f:facet>
+                            <h:outputText value="#{citas.descripcionCita}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Mecanico Asignado" />
+                            </f:facet>
+                            <h:outputText value="#{citas.mecanicosByIdMecanico.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado Cita" />
+                            </f:facet>
+                            <h:outputText value="Cita Finalizadas" />
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages id="successMessage2" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                </h:form>
+            </div>
         </div>
+
     </ui:define>
 
 </ui:composition>

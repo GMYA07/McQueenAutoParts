@@ -25,6 +25,23 @@ public class MecanicosModel {
             return null;
         }
     }
+    public List<MecanicosEntity> listarMecanicosLibres(){
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM MecanicosEntity e WHERE e.estado = :estado");
+            consulta.setParameter("estado",0);
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<MecanicosEntity> lista = consulta.getResultList();
+
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
     public String iniciarSesionMecanico(String correoUsuario,String passUsuario){
         //declaramos una entyManager para manejar las consultas y un idAdmin que regresaremos
         EntityManager entyManager = JpaUtil.getEntityManager();

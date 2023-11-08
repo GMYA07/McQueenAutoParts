@@ -16,6 +16,7 @@ public class MecanicoBean {
     private MecanicosEntity mecanico;
     private MecanicosModel modeloMecanico = new MecanicosModel();
     List<MecanicosEntity> listaMecanicos;
+    List<MecanicosEntity> listaMecanicosLibres;
 
     public MecanicoBean(){ mecanico = new MecanicosEntity();}
 
@@ -73,5 +74,9 @@ public class MecanicoBean {
 
     public List<MecanicosEntity> getListaMecanicos() {
         return modeloMecanico.listarMecanicos();
+    }
+
+    public List<MecanicosEntity> getListaMecanicosLibres() {
+        return modeloMecanico.listarMecanicosLibres();
     }
 }

@@ -13,7 +13,7 @@
             <div class="hero">
                 <div class="container2">
                     <div class="contenedor3">
-                        <h:form>
+                        <h:form id="productosItems">
                             <ui:repeat value="#{repuestoBean.listaRepuestos}" var="repuesto">
                                 <ui:fragment rendered ="#{repuesto.cantidad > 0}">
                                     <h:form>
@@ -25,7 +25,8 @@
                                             </b:carousel>
                                             <h2>#{repuesto.nombre} - #{repuesto.marca}</h2>
                                             <p>Categoria del repuesto: #{repuesto.categorias}</p>
-                                            <b:commandButton action="#{carritoBean.addCarrito(repuesto)}" value="Añadir al Carrito" look="primary">
+                                            <b:commandButton action="#{carritoBean.addCarrito(repuesto)}" value="Añadir al Carrito" look="primary" >
+                                                <f:ajax execute="@form" render="formCarrito"/>
                                             </b:commandButton>
                                         </div>
                                     </h:form>

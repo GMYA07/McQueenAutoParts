@@ -87,18 +87,15 @@ public class IniciarSesionBean {
         }
     }
 
-    public String cerrarSesion(){
+    public String cerrarSesion(HttpSession sessionS){
         // Obtener el contexto de JSF actual el cual es el que nos posibilita acceso a la funcionalidad y la información específica de JSF en el entorno de una solicitud web.
         FacesContext context = FacesContext.getCurrentInstance();
-
         // Obtener el contexto externo que proporciona acceso a los objetos subyacentes de Servlet, en otras palabra obtenemos funcionalidades de servlets
         ExternalContext externalContext = context.getExternalContext();
-
         // Obtener la sesión actual del usuario; si no existe una sesión, devuelve devuelve algo (true)
-        HttpSession session = (HttpSession) externalContext.getSession(true);
-        session.setAttribute("idUsuario","");
-
-        return "index";
+        sessionS= (HttpSession) externalContext.getSession(true);
+        sessionS.setAttribute("idUsuario","");
+        return "/index";
     }
 
 

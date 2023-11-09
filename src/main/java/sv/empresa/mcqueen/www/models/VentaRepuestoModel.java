@@ -43,6 +43,23 @@ public class VentaRepuestoModel {
             return null;
         }
     }
+    public List<VentasrepuestosEntity>listarVentaCliente(String duiCliente){
+        // Obtengo una instancia de EntityManager
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            Query consulta = em.createQuery("SELECT e FROM VentasrepuestosEntity e WHERE e.usuarioByIdCliente.dui = :dui");
+            consulta.setParameter("dui",duiCliente);
+            // El método getResultList() de la clase Query permite obtener
+            // la lista de resultados de una consulta de selección
+            List<VentasrepuestosEntity> lista = consulta.getResultList();
+
+            em.close(); // Cerrando el EntityManager
+            return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
     public int insertarVentaRep(VentasrepuestosEntity newVenta){
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction tran = em.getTransaction();

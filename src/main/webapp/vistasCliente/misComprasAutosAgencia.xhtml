@@ -7,7 +7,7 @@
                 template="/templates/PlantillaIndexCliente.xhtml">
     <ui:define name="menu">
         <br/>
-        <h1 class="text-center">Automoviles de Agencia Comprados Por Mi</h1>
+        <h1 class="text-center">Historial de compras de automoviles</h1>
         <br/>
         <b:container styleClass="contendorCrudPadre" style="width:100%">
             <b:container styleClass="contendorCrud" style="width:100%">
@@ -34,6 +34,40 @@
                             </ui:fragment>
                             <ui:fragment rendered ="#{venta.estado == 1}">
                                 <h:outputText value="Codigo Canjeado y Automovil Retirado" />
+                            </ui:fragment>
+                        </h:column>
+                    </b:dataTable>
+                </h:form>
+            </b:container>
+        </b:container>
+        <br/>
+        <h1 class="text-center">Historial de compras de repuestos</h1>
+        <br/>
+        <b:container styleClass="contendorCrudPadre" style="width:100%">
+            <b:container styleClass="contendorCrud" style="width:100%">
+                <h:form id="tablaFormMensajesVenta2">
+                    <b:dataTable value="#{ventasRepuestoBean.getListaVentasRepuestoCliente(session.getAttribute('idUsuario'))}" var="venta" id="productosTable2" styleClass="table table-striped table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID de la Venta" />
+                            </f:facet>
+                            <h:outputText value="#{venta.idVentaRepuesto}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de la Venta" />
+                            </f:facet>
+                            <h:outputText value="#{venta.precioVentaRep}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado del Codigo" />
+                            </f:facet>
+                            <ui:fragment rendered ="#{venta.estadoVenta == 61}">
+                                <h:outputText value="productos sin Retirar" />
+                            </ui:fragment>
+                            <ui:fragment rendered ="#{venta.estadoVenta == 62}">
+                                <h:outputText value="Productos Retirados" />
                             </ui:fragment>
                         </h:column>
                     </b:dataTable>

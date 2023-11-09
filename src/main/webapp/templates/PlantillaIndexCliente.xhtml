@@ -26,17 +26,23 @@
                 <p:submenu label="Mis Acciones" style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;">
                     <p:menuitem value="Solicitar Venta de carro" outcome="SolicitarVenta" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" />
                     <p:menuitem value="Mis Automoviles"  outcome="misAutomovilesCliente" style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" />
-                    <p:menuitem value="Automoviles Comprados Por Mi"  outcome="misComprasAutosAgencia" style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" />
-                    <p:menuitem value="Carrito de compras" style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" onclick="$('.formValidationModalClass3').modal('show')"/>
+                    <p:menuitem value="Historial Compras"  outcome="misComprasAutosAgencia" style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" />
                 </p:submenu>
             </li>
-            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"> <p:menuitem action="#{iniciarSesionBean.cerrarSesion()}" value="Cerrar Sesion" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li>
+                <p:menuitem outcome="/index"  value="Cerrar Sesion" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" />
+            </li>
+            <li>
+                <p:menuitem  style="  color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" onclick="$('.formValidationModalClass6').modal('show')">
+                    <b:iconAwesome value="fa-shopping-cart" size="2x" />
+                </p:menuitem>
+            </li>
         </ul>
     </p:menubar>
     <div class="col-md-11 col-sm-11" style="width: 100%">
         <ui:insert name="menu">Aqui ira contenido de todo usuario no logeado</ui:insert>
     </div>
-    <b:modal title="Mi Carrito" styleClass="formValidationModalClass3"
+    <b:modal title="Mi Carrito" styleClass="formValidationModalClass6"
              closable="false"
              closeOnEscape="true" style="text-aling:center;">
         <b:form id="formCarrito">

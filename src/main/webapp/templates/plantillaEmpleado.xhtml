@@ -24,7 +24,9 @@
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"><p:menuitem value="Repuestos" outcome="addRepuestos" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"><p:menuitem value="Ventas de Repuestos" outcome="validarVentaRepuesto" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
             <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"><p:menuitem value="Citas Mecanicos" outcome="addCitaMecanico" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
-            <li style=" display: inline-block;line-height: 80px;margin: 0 5px;"><p:menuitem action="#{iniciarSesionBean.cerrarSesion()}" value="Cerrar Sesion" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" /></li>
+            <li>
+                <p:menuitem outcome="/index"  value="Cerrar Sesion" style=" color: #fff;font-size: 18px;padding: 7px 13px;border-radius: 3px;text-transform: uppercase;" />
+            </li>
         </ul>
     </p:menubar>
     <div class="col-md-11 col-sm-11" style="width: 100%">

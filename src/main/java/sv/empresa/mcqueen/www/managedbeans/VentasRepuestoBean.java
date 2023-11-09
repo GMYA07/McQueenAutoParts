@@ -26,6 +26,7 @@ public class VentasRepuestoBean {
     private CarritoModel modeloCarrito = new CarritoModel();
     private List<VentasrepuestosEntity> listaVentasRepuesto;
     private List<VentasrepuestosEntity> listaVentasRepuestoTipo;
+    private List<VentasrepuestosEntity> listaVentasRepuestoCliente;
     private List<CarritoEntity> listaCarrito;
     public VentasRepuestoBean(){ventaRepuesto = new VentasrepuestosEntity();}
     public void registrarVenta(String duiCliente){
@@ -99,6 +100,11 @@ public class VentasRepuestoBean {
     public List<VentasrepuestosEntity> getListaVentasRepuestoTipo(int tipo) {
         return modeloVentaRepuesto.listarVentaTipo(tipo);
     }
+
+    public List<VentasrepuestosEntity> getListaVentasRepuestoCliente(String duiC) {
+        return modeloVentaRepuesto.listarVentaCliente(duiC);
+    }
+
     public List<CarritoEntity> getListaCarrito() {
         return listaCarrito;
     }

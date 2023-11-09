@@ -63,19 +63,24 @@ public class VentasRepuestoBean {
             JsfUtil.setErrorMessage("","Error: No se pudo hacer la venta CARRITO VACIO");
         }
     }
-    public void retirarProductos(VentasrepuestosEntity venta){
+    public void retirarProductos(){
         int verificarUsers = modeloUsuario.verificarDui(idClienteValidarVenta);
 
-        if (verificarUsers == 0){
-            JsfUtil.setErrorMessage("","Error: El dui proporcionado es erroneo");
-        }else {
-            ventaRepuesto = venta;
-            ventaRepuesto.setEstadoVenta(62);
-            if (modeloVentaRepuesto.modificarVentaRep(ventaRepuesto) == 1){
-                FacesContext.getCurrentInstance().addMessage("successMessage2", new FacesMessage(FacesMessage.SEVERITY_INFO, "Productos Retirados", "Retirado"));
-            }else {
-                JsfUtil.setErrorMessage("","Error: No se Retiro la Venta");
+        if(!ventaRepuesto.getIdVentaRepuesto().isEmpty()) {
+            if (verificarUsers == 0) {
+                JsfUtil.setErrorMessage("", "Error: El dui proporcionado es erroneo");
+            } else {
+                ventaRepuesto.setUsuarioByIdCliente(modeloUsuario.obtenerUsuario(idClienteValidarVenta));
+                ventaRepuesto.setEstadoVenta(62);
+                if (modeloVentaRepuesto.modificarVentaRep(ventaRepuesto) == 1) {
+                    FacesContext.getCurrentInstance().addMessage("successMessage2", new FacesMessage(FacesMessage.SEVERITY_INFO, "Productos Retirados", "Retirado"));
+                } else {
+                    JsfUtil.setErrorMessage("", "Error: No se Retiro la Venta");
+
+                }
             }
+        }else {
+            JsfUtil.setErrorMessage("", "Error: Vacio el objeto");
         }
     }
     public void settearVentaTemp(VentasrepuestosEntity venta){

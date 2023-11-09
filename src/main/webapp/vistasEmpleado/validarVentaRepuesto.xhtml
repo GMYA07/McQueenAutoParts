@@ -48,12 +48,16 @@
                     <h:outputLabel value="Propietario de la Targeta" style="font-size: 20px; text-align: center;"/>
                     <br/>
                     <b:inputText placeholder="Cristiano Dos Santos" />
+                    <b:inputText type="hidden" value="#{ventasRepuestoBean.ventaRepuesto.idVentaRepuesto}"/>
+                    <b:inputText type="hidden" value="#{ventasRepuestoBean.ventaRepuesto.estadoVenta}"/>
+                    <b:inputText type="hidden" value="#{ventasRepuestoBean.ventaRepuesto.precioVentaRep}"/>
                     <b:row>
                         <b:column>
                             <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
-                            <b:commandButton largeScreen="half" dismiss="modal" value="Retirar Productos" styleClass="btn btn-success" action="#{ventasRepuestoBean.retirarProductos(ventasRepuestoBean.ventaRepuesto)}" style="margin-right:15px; margin-bottom: 20px"
+                            <b:commandButton largeScreen="half" dismiss="modal" value="Retirar Productos" styleClass="btn btn-success" action="#{ventasRepuestoBean.retirarProductos()}" style="margin-right:15px; margin-bottom: 20px"
                                              oncomplete="if(!validationFailed) { $('.formValidationModalClass').modal('hide') } ">
                                 <f:ajax execute="@form" render="tablaForm2"/>
+                                <f:ajax execute="@form" render="tablaForm"/>
                             </b:commandButton>
                         </b:column>
                     </b:row>

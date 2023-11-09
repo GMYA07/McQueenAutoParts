@@ -30,6 +30,8 @@ public class UsuarioEntity {
     private Collection<RentasEntity> rentasByDui;
     @OneToMany(mappedBy = "usuarioByIdCliente")
     private Collection<VentasautoEntity> ventasautosByDui;
+    @OneToMany(mappedBy = "usuarioByIdCliente")
+    private Collection<VentasrepuestosEntity> ventasrepuestosByDui;
 
     public String getDui() {
         return dui;
@@ -127,5 +129,13 @@ public class UsuarioEntity {
 
     public void setVentasautosByDui(Collection<VentasautoEntity> ventasautosByDui) {
         this.ventasautosByDui = ventasautosByDui;
+    }
+
+    public Collection<VentasrepuestosEntity> getVentasrepuestosByDui() {
+        return ventasrepuestosByDui;
+    }
+
+    public void setVentasrepuestosByDui(Collection<VentasrepuestosEntity> ventasrepuestosByDui) {
+        this.ventasrepuestosByDui = ventasrepuestosByDui;
     }
 }

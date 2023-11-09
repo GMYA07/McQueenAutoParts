@@ -15,6 +15,7 @@
       <class>sv.empresa.mcqueen.www.entities.RepuestosEntity</class>
       <class>sv.empresa.mcqueen.www.entities.UsuarioEntity</class>
       <class>sv.empresa.mcqueen.www.entities.VentasautoEntity</class>
+      <class>sv.empresa.mcqueen.www.entities.VentasrepuestosEntity</class>
       <properties>
           <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/mcqueenautoparts"/>
           <property name="toplink.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

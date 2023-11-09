@@ -3,6 +3,7 @@ package sv.empresa.mcqueen.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import sv.empresa.mcqueen.www.entities.UsuarioEntity;
 import sv.empresa.mcqueen.www.utils.JpaUtil;
 import sv.empresa.mcqueen.www.entities.RepuestosEntity;
 import java.util.List;
@@ -20,6 +21,18 @@ public class RepuestosModel {
 
             em.close(); // Cerrando el EntityManager
             return lista;
+        } catch (Exception e) {
+            em.close();
+            return null;
+        }
+    }
+    public RepuestosEntity obtenerRepuesto(String dui){
+        EntityManager em = JpaUtil.getEntityManager();
+        try {
+            // Recupero el objeto desde la BD a través del método find
+            RepuestosEntity repuesto = em.find(RepuestosEntity.class, dui);
+            em.close();
+            return repuesto;
         } catch (Exception e) {
             em.close();
             return null;

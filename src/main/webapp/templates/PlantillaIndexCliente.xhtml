@@ -59,12 +59,20 @@
                     </f:facet>
                     <h:outputText value="#{carrito.cantidad}" />
                 </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Accion" />
+                    </f:facet>
+                    <b:commandButton action="#{carritoBean.borrarItemCarrito(carrito)}" value="Restar" look="warning" >
+                        <f:ajax execute="@form" render="@form"/>
+                    </b:commandButton>
+                </h:column>
             </h:dataTable>
             <b:row>
                 <b:column>
                     <b:button largeScreen="half"  value="Cancelar" dismiss="modal" onclick="return false;"/>
-                    <b:commandButton action="#{ventasAutoBean.registrarVentaAutoAgencia()}" largeScreen="half"  dismiss="modal" value="Comprar Automovil" look="success" oncomplete="if(!validationFailed) { $('.formValidationModalClass3').modal('hide') }">
-
+                    <b:commandButton action="#{ventasRepuestoBean.registrarVenta(session.getAttribute('idUsuario'))}" largeScreen="half"  dismiss="modal" value="Comprar Automovil" look="success" >
+                        <f:ajax execute="@form" render="@form"/>
                     </b:commandButton>
                 </b:column>
             </b:row>

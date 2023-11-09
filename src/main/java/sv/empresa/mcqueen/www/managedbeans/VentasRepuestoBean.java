@@ -19,10 +19,13 @@ import java.util.Random;
 @RequestScoped
 public class VentasRepuestoBean {
     private VentasrepuestosEntity ventaRepuesto;
+    private String idClienteValidarVenta = "";
+    private int idVentaTemp = 0;
     private VentaRepuestoModel modeloVentaRepuesto = new VentaRepuestoModel();
     private UsuariosModel modeloUsuario = new UsuariosModel();
     private CarritoModel modeloCarrito = new CarritoModel();
     private List<VentasrepuestosEntity> listaVentasRepuesto;
+    private List<VentasrepuestosEntity> listaVentasRepuestoTipo;
     private List<CarritoEntity> listaCarrito;
     public VentasRepuestoBean(){ventaRepuesto = new VentasrepuestosEntity();}
     public void registrarVenta(String duiCliente){
@@ -60,6 +63,24 @@ public class VentasRepuestoBean {
             JsfUtil.setErrorMessage("","Error: No se pudo hacer la venta CARRITO VACIO");
         }
     }
+    public void retirarProductos(VentasrepuestosEntity venta){
+        int verificarUsers = modeloUsuario.verificarDui(idClienteValidarVenta);
+
+        if (verificarUsers == 0){
+            JsfUtil.setErrorMessage("","Error: El dui proporcionado es erroneo");
+        }else {
+            ventaRepuesto = venta;
+            ventaRepuesto.setEstadoVenta(62);
+            if (modeloVentaRepuesto.modificarVentaRep(ventaRepuesto) == 1){
+                FacesContext.getCurrentInstance().addMessage("successMessage2", new FacesMessage(FacesMessage.SEVERITY_INFO, "Productos Retirados", "Retirado"));
+            }else {
+                JsfUtil.setErrorMessage("","Error: No se Retiro la Venta");
+            }
+        }
+    }
+    public void settearVentaTemp(VentasrepuestosEntity venta){
+        ventaRepuesto = venta;
+    }
     public void crearIDVentaRep(){
         Random rand = new Random();
         int numeroAleatorio = rand.nextInt(900) + 100;
@@ -70,6 +91,9 @@ public class VentasRepuestoBean {
         return modeloVentaRepuesto.listarVentas();
     }
 
+    public List<VentasrepuestosEntity> getListaVentasRepuestoTipo(int tipo) {
+        return modeloVentaRepuesto.listarVentaTipo(tipo);
+    }
     public List<CarritoEntity> getListaCarrito() {
         return listaCarrito;
     }
@@ -80,5 +104,21 @@ public class VentasRepuestoBean {
 
     public void setVentaRepuesto(VentasrepuestosEntity ventaRepuesto) {
         this.ventaRepuesto = ventaRepuesto;
+    }
+
+    public String getIdClienteValidarVenta() {
+        return idClienteValidarVenta;
+    }
+
+    public void setIdClienteValidarVenta(String idClienteValidarVenta) {
+        this.idClienteValidarVenta = idClienteValidarVenta;
+    }
+
+    public int getIdVentaTemp() {
+        return idVentaTemp;
+    }
+
+    public void setIdVentaTemp(int idVentaTemp) {
+        this.idVentaTemp = idVentaTemp;
     }
 }

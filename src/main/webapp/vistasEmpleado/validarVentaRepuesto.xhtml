@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        template="../templates/plantillaEmpleado.xhtml">>
+
+
+    <ui:define name="content">
+        <h:panelGroup layout="block" styleClass="alert alert-danger"
+                      rendered="#{not empty facesContext.messageList}">
+            <h:messages />
+        </h:panelGroup>
+        <div class="container">
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Ventas Sin Retirar</h1>
+                </div>
+            </div>
+            <br/>
+            <b:modal title="Entregar Repuestos" styleClass="formValidationModalClass" closable="false" closeOnEscape="true">
+                <b:form enctype="multipart/form-data" id="formRetirar">
+                    <h:outputLabel value="Dui del Cliente" style="font-size: 20px; text-align: center;"/>
+                    <b:inputText value="#{ventasRepuestoBean.idClienteValidarVenta}"/>
+                    <br/>
+                    <h:outputLabel value="Numero de Targeta de Credito" style="font-size: 20px; text-align: center;"/>
+                    <br/>
+                    <b:inputText placeholder="1234 1234 456 789"/>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="CCV" style="font-size: 20px; text-align: center;"/>
+                    <br/>
+                    <b:inputText placeholder="123"/>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Fecha de Vencimiento" style="font-size: 20px; text-align: center;"/>
+                    <br/>
+                    <b:inputText placeholder="10/2025"/>
+                    <br/>
+                    <br/>
+                    <h:outputLabel value="Propietario de la Targeta" style="font-size: 20px; text-align: center;"/>
+                    <br/>
+                    <b:inputText placeholder="Cristiano Dos Santos" />
+                    <b:row>
+                        <b:column>
+                            <b:button largeScreen="half"  value="Cancel" dismiss="modal" onclick="return false;"/>
+                            <b:commandButton largeScreen="half" dismiss="modal" value="Retirar Productos" styleClass="btn btn-success" action="#{ventasRepuestoBean.retirarProductos(ventasRepuestoBean.ventaRepuesto)}" style="margin-right:15px; margin-bottom: 20px"
+                                             oncomplete="if(!validationFailed) { $('.formValidationModalClass').modal('hide') } ">
+                                <f:ajax execute="@form" render="tablaForm2"/>
+                            </b:commandButton>
+                        </b:column>
+                    </b:row>
+                    <b:fetchBeanInfos />
+                    <b:messages />
+                </b:form>
+            </b:modal>
+            <div class="row">
+                <h:form id="tablaForm">
+                    <h:dataTable styleClass="table" value="#{ventasRepuestoBean.getListaVentasRepuestoTipo(61)}" var="venta" style="width: 100%">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Venta" />
+                            </f:facet>
+                            <h:outputText value="#{venta.idVentaRepuesto}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui del Cliente / Nombre del Usuario" />
+                            </f:facet>
+                            <h:outputText value="#{venta.usuarioByIdCliente.dui} / #{venta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de la Venta" />
+                            </f:facet>
+                            <h:outputText value="#{venta.precioVentaRep}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado Venta" />
+                            </f:facet>
+                            <h:outputText value="Productos Sin Retirar" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Accion" />
+                            </f:facet>
+                            <b:commandButton onclick="$('.formValidationModalClass').modal('show')" value="Iniciar Retiro" look="primary" action="#{ventasRepuestoBean.settearVentaTemp(venta)}">
+                                <f:ajax execute="@form" render="formRetirar"/>
+                            </b:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages id="successMessage" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                </h:form>
+            </div>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Ventas Retiradas</h1>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <h:form id="tablaForm2">
+                    <h:dataTable styleClass="table" value="#{ventasRepuestoBean.getListaVentasRepuestoTipo(62)}" var="venta" style="width: 100%">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Id de la Venta" />
+                            </f:facet>
+                            <h:outputText value="#{venta.idVentaRepuesto}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Dui del Cliente / Nombre del Usuario" />
+                            </f:facet>
+                            <h:outputText value="#{venta.usuarioByIdCliente.dui} / #{venta.usuarioByIdCliente.nombre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Precio de la Venta" />
+                            </f:facet>
+                            <h:outputText value="#{venta.precioVentaRep}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Estado Venta" />
+                            </f:facet>
+                            <h:outputText value="Retirados" />
+                        </h:column>
+                    </h:dataTable>
+                    <h:messages id="successMessage2" infoStyle="color:darkgreen" errorStyle="color:darkred" />
+                </h:form>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

@@ -68,6 +68,16 @@
                 </h:form>
                 <br/>
                 <br/>
+                <h1 class="text-center">Grafica da las ventas de cada Auto</h1>
+                <br/>
+                <br/>
+                <b:container styleClass="contendorCrudPadre" style="width:100%">
+                    <b:container styleClass="contendorCrud" style="width:100%">
+                        <p:chart id="chartBar" type="bar" model="#{ventasAutoBean.tablaAuto}"/>
+                    </b:container>
+                </b:container>
+                <br/>
+                <br/>
                 <b:modal title="Canjear Codigo" styleClass="formValidationModalClass3"
                          closable="false"
                          closeOnEscape="true">

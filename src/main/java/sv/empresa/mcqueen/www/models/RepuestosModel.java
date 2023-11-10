@@ -38,7 +38,6 @@ public class RepuestosModel {
             return null;
         }
     }
-
     public int insertarRepuestos(RepuestosEntity newRepuesto){
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction tran = em.getTransaction();

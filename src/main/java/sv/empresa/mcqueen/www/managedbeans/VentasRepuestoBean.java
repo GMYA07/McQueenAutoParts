@@ -4,10 +4,11 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
-import sv.empresa.mcqueen.www.entities.CarritoEntity;
-import sv.empresa.mcqueen.www.entities.UsuarioEntity;
-import sv.empresa.mcqueen.www.entities.VentasrepuestosEntity;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+import sv.empresa.mcqueen.www.entities.*;
 import sv.empresa.mcqueen.www.models.CarritoModel;
+import sv.empresa.mcqueen.www.models.RepuestosModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
 import sv.empresa.mcqueen.www.models.VentaRepuestoModel;
 import sv.empresa.mcqueen.www.utils.JsfUtil;
@@ -20,15 +21,33 @@ import java.util.Random;
 public class VentasRepuestoBean {
     private VentasrepuestosEntity ventaRepuesto;
     private String idClienteValidarVenta = "";
+    private BarChartModel tablaRepuestos;
     private int idVentaTemp = 0;
     private VentaRepuestoModel modeloVentaRepuesto = new VentaRepuestoModel();
+    private RepuestosModel modeloRepuestos = new RepuestosModel();
     private UsuariosModel modeloUsuario = new UsuariosModel();
     private CarritoModel modeloCarrito = new CarritoModel();
     private List<VentasrepuestosEntity> listaVentasRepuesto;
     private List<VentasrepuestosEntity> listaVentasRepuestoTipo;
     private List<VentasrepuestosEntity> listaVentasRepuestoCliente;
     private List<CarritoEntity> listaCarrito;
-    public VentasRepuestoBean(){ventaRepuesto = new VentasrepuestosEntity();}
+    public VentasRepuestoBean(){ventaRepuesto = new VentasrepuestosEntity(); crearGrafica();}
+
+    public void crearGrafica(){
+
+        tablaRepuestos = new  BarChartModel();
+        ChartSeries datosGrafica = new ChartSeries();
+
+        List<RepuestosEntity> listaR = modeloRepuestos.listaRepuestos();
+
+        for (RepuestosEntity repuesto : listaR){
+            datosGrafica.set(repuesto.getNombre() +" "+ repuesto.getMarca(),repuesto.getCantidad());
+        }
+        tablaRepuestos.addSeries(datosGrafica);
+        tablaRepuestos.setTitle("Ventas por Cada Repuesto");
+    }
+
+
     public void registrarVenta(String duiCliente){
         listaCarrito = modeloCarrito.listarCarrito();
         if (!listaCarrito.isEmpty()){
@@ -131,5 +150,21 @@ public class VentasRepuestoBean {
 
     public void setIdVentaTemp(int idVentaTemp) {
         this.idVentaTemp = idVentaTemp;
+    }
+
+    public VentaRepuestoModel getModeloVentaRepuesto() {
+        return modeloVentaRepuesto;
+    }
+
+    public void setModeloVentaRepuesto(VentaRepuestoModel modeloVentaRepuesto) {
+        this.modeloVentaRepuesto = modeloVentaRepuesto;
+    }
+
+    public BarChartModel getTablaRepuestos() {
+        return tablaRepuestos;
+    }
+
+    public void setTablaRepuestos(BarChartModel tablaRepuestos) {
+        this.tablaRepuestos = tablaRepuestos;
     }
 }

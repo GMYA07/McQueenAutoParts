@@ -134,6 +134,22 @@ public class VentasAutoModel {
             return null;
         }
     }
+    public int obtenerCantidadVentasDeUnAuto(String idCarro){
+        EntityManager em = JpaUtil.getEntityManager();
+        EntityTransaction tran = em.getTransaction();
+        try {
+            Query consulta = em.createQuery("SELECT COUNT(e) FROM VentasautoEntity e WHERE e.automovilesByIdCarro.idAutomovil = :auto AND e.estado = :estado");
+            consulta.setParameter("auto", idCarro);
+            consulta.setParameter("estado",1);
+            Long cantidadObjetos = (Long) consulta.getSingleResult();
+            int cantidadVentas = cantidadObjetos.intValue();
+
+            return cantidadVentas;
+        }catch (Exception e){
+            em.close();
+            return 0;
+        }
+    }
     public int registrarVentaAutomovilUsuario(VentasautoEntity newVenta){
         EntityManager eM = JpaUtil.getEntityManager();
         EntityTransaction tran = eM.getTransaction();

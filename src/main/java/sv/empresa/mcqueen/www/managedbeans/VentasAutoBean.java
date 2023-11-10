@@ -4,6 +4,8 @@ import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
 import jakarta.faces.context.FacesContext;
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
 import sv.empresa.mcqueen.www.models.AutomovilesModel;
 import sv.empresa.mcqueen.www.models.UsuariosModel;
 import sv.empresa.mcqueen.www.models.VentasAutoModel;
@@ -19,6 +21,7 @@ import java.util.Random;
 public class VentasAutoBean {
     private VentasautoEntity ventaAuto;
     private String codigoVentaMoment;
+    private BarChartModel tablaAuto;
     private AutomovilesEntity automovil;
     private VentasAutoModel modeloVenta = new VentasAutoModel();
     private AutomovilesModel modeloAutomovil = new AutomovilesModel();
@@ -29,7 +32,21 @@ public class VentasAutoBean {
     private List<VentasautoEntity> listaMensajesVentas;
     private List<VentasautoEntity> listaTodasVentasAutosAgencias;
 
-    public VentasAutoBean(){ventaAuto = new VentasautoEntity(); automovil = new AutomovilesEntity();}
+    public VentasAutoBean(){ventaAuto = new VentasautoEntity(); automovil = new AutomovilesEntity(); crearGrafica();}
+
+    public void crearGrafica(){
+        tablaAuto = new BarChartModel();
+        ChartSeries datosGrafica = new ChartSeries();
+
+        List<AutomovilesEntity> listaA = modeloAutomovil.listarAutomovilesAgencia();
+
+        for (AutomovilesEntity auto : listaA){
+            int cantidad = modeloVenta.obtenerCantidadVentasDeUnAuto(auto.getIdAutomovil());
+            datosGrafica.set(auto.getMarcaAutomovil() +" "+ auto.getModeloAutomovil(),cantidad);
+        }
+        tablaAuto.addSeries(datosGrafica);
+        tablaAuto.setTitle("Ventas por cada auto");
+    }
 
     public void registrarVentaUsuario(){
         //settearemos los demas campos que requiere la venta
@@ -205,5 +222,13 @@ public class VentasAutoBean {
 
     public void setCodigoVentaMoment(String codigoVentaMoment) {
         this.codigoVentaMoment = codigoVentaMoment;
+    }
+
+    public BarChartModel getTablaAuto() {
+        return tablaAuto;
+    }
+
+    public void setTablaAuto(BarChartModel tablaAuto) {
+        this.tablaAuto = tablaAuto;
     }
 }

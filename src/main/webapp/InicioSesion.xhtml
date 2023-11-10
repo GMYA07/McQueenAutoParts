@@ -31,7 +31,7 @@
                         </div>
                         <div class="group">
                             <h:outputLabel for="IncioSession:contra" value="contraseña:"></h:outputLabel>
-                            <b:inputText placeholder="Contraseña:"  value="#{iniciarSesionBean.passUsuario}"  id="contra" name="contra" styleClass="input" />
+                            <b:inputText type="password" placeholder="Contraseña:"  value="#{iniciarSesionBean.passUsuario}"  id="contra" name="contra" styleClass="input" />
                         </div>
                         <div class="group">
                             <h:commandButton  action="#{iniciarSesionBean.iniciarSesion()}" type="submit" name="inicioSesion" class="button" value="Iniciar Sesion">

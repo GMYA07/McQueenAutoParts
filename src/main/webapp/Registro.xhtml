@@ -25,25 +25,25 @@
                     <b:image name="img/logo.png" styleClass="imagen"></b:image>
                     <div class="group">
                         <h:outputLabel for="Registro:nombre" value="Nombre Completo:"></h:outputLabel>
-                        <b:inputText placeholder="Nombre Completo:" value="#{usuarioBean.usuario.nombre}"  id="nombre" name="nombre" styleClass="input" />
+                        <b:inputText required="true" placeholder="Nombre Completo:" value="#{usuarioBean.usuario.nombre}"  id="nombre" name="nombre" styleClass="input" />
 
                     </div>
                     <div class="group">
                         <h:outputLabel for="Registro:DUI" value="DUI:"></h:outputLabel>
-                        <b:inputText placeholder="DUI:" value="#{usuarioBean.usuario.dui}"  id="dui" name="dui" styleClass="input" />
+                        <b:inputText required="true" placeholder="DUI:" value="#{usuarioBean.usuario.dui}"  id="dui" name="dui" styleClass="input" />
                     </div>
                     <div class="group">
-                        <h:outputLabel for="Registro:Licencia" value="Licencia:"></h:outputLabel>
-                        <b:inputText placeholder="Licencia:" value="#{usuarioBean.usuario.telefono}"  id="licencia" name="licencia" styleClass="input" />
+                        <h:outputLabel for="Registro:Licencia" value="Numero de telefono:"></h:outputLabel>
+                        <b:inputText required="true" placeholder="Licencia:" value="#{usuarioBean.usuario.telefono}"  id="licencia" name="licencia" styleClass="input" />
                     </div>
                     <div class="group">
                         <h:outputLabel for="Registro:correo" value="Correo electronico:"></h:outputLabel>
-                        <b:inputText placeholder="Correo Electronico:" value="#{usuarioBean.usuario.correo}"  id="correo" name="correo" styleClass="input" />
+                        <b:inputText required="true" placeholder="Correo Electronico:" value="#{usuarioBean.usuario.correo}"  id="correo" name="correo" styleClass="input" />
 
                     </div>
                     <div class="group">
                         <h:outputLabel for="Registro:contra" value="Contraseña:"></h:outputLabel>
-                        <b:inputText placeholder="Contraseña:"  value="#{usuarioBean.usuario.pass}"  id="contra" name="contra" styleClass="input" />
+                        <b:inputText required="true" placeholder="Contraseña:"  value="#{usuarioBean.usuario.pass}"  id="contra" name="contra" styleClass="input" />
                     </div>
                     <div class="group">
                         <h:commandButton  action="#{usuarioBean.registarUsuario()}" type="submit" name="registrar" class="button" value="Registrarse">

@@ -57,7 +57,6 @@ public class AutomovilBean {
             //ACCIONES PARA INSERTARLO EN LA BDD
             if (modeloAutomovil.insertarAutomovil(automovil) != 1){
                 JsfUtil.setErrorMessage("","Error: No se inserto los nuevos Automoviles de Agencia");
-
             }else {
                 if (subirIMGCarpetaInterna(imagen.getInputStream(),imagen.getSubmittedFileName()) == 1){
                     FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO,

@@ -35,7 +35,7 @@ public class CarritoBean {
                 }
             }
             if(exitSoli == false){
-                newItemCarrito.setCantidad(newItemCarrito.getCantidad() - 1); //restamos 1 a la cantidad de items
+                newItemCarrito.setCantidad(newItemCarrito.getCantidad() - 1); //restamos 1 a la cantidad de items de la tabla de repuestos
                 if (modeloRepuesto.modificarRepuestos(newItemCarrito) == 1){ //restamos un item de la cantidad que exiten e nla tabla de repuestos
                     carrito.setRepuestosByIdProducto(newItemCarrito);
                     carrito.setCantidad(1);

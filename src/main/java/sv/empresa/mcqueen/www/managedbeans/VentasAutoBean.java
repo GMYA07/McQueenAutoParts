@@ -98,7 +98,7 @@ public class VentasAutoBean {
                       //cambiaremos el estado si ese fue el ultimo automovil vendido
                       automovil.setEstado(12);
                       if (modeloAutomovil.modificarAutomovil(automovil) == 1){
-                          FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Codigo Canjeado Exitosamente", "Registrado"));
+                          FacesContext.getCurrentInstance().addMessage("successMessage", new FacesMessage(FacesMessage.SEVERITY_INFO, "Codigo Canjeado Exitosamente pero tiene q esperar existencias", "Registrado"));
                       }
                   }
                }
@@ -118,7 +118,7 @@ public class VentasAutoBean {
             }else {
                 venta.setEstado(13);//si es 13 es por q no c completo la venta
             }
-            if (venta.getEstado() == 12){ // aqui verificamos si es una cancelacion de venta por si no llegaron a un acuerdo
+            if (venta.getEstado() == 12){ // aqui verificamos si es una cancelacion de venta por si llegaron a un acuerdo
                 if (modeloVenta.cambiarEstadoVenta(venta) == 1){ // validamos si cambia el estado
 
                     //Obtenemos el automovil para poder cambiar el estado a vendido para poder sacarlo de publicacin

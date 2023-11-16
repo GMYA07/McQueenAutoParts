@@ -17,7 +17,7 @@ public class VentasAutoModel {
         // Obtengo una instancia de EntityManager
         EntityManager em = JpaUtil.getEntityManager();
         try {
-            Query consulta = em.createQuery("SELECT e FROM VentasautoEntity e WHERE e.usuarioByIdCliente.dui = :dui AND e.automovilesByIdCarro.idAutomovil LIKE 'ATS%'");
+            Query consulta = em.createQuery("SELECT e FROM VentasautoEntity e WHERE e.usuarioByIdCliente.dui != :dui AND e.automovilesByIdCarro.usuarioByIdClienteVenta.dui = :dui AND e.automovilesByIdCarro.idAutomovil LIKE 'ATS%'");
             consulta.setParameter("dui",dui);
             // El método getResultList() de la clase Query permite obtener
             // la lista de resultados de una consulta de selección
